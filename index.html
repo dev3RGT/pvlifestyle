@@ -37,7 +37,9 @@
     --orange:#e18a3f;
     --orange-light:#f3a663;
     --orange-dark:#b96a26;
+    --orange-sat:#e87f1c;
     --charcoal:#3f4749;
+    --charcoal-sat:#2c4247;
     --charcoal-deep:#262b2c;
     --charcoal-deeper:#181b1c;
     --gray:#9aa3a3;
@@ -96,6 +98,10 @@
     box-shadow: 0 10px 30px -14px rgba(0,0,0,.5);
     padding: .85rem clamp(1rem, 4vw, 3rem);
   }
+  @media (prefers-reduced-motion:no-preference){
+    @keyframes headerSlideDown{ from{ transform:translateY(-100%); opacity:0; } to{ transform:translateY(0); opacity:1; } }
+    .site-header{ animation: headerSlideDown .85s cubic-bezier(.22,.8,.25,1) both; }
+  }
   .header-inner{
     max-width:1280px; margin-inline:auto;
     display:flex; align-items:center; justify-content:space-between; gap:1rem;
@@ -109,7 +115,7 @@
     box-shadow:0 10px 24px -12px rgba(0,0,0,.55);
     flex-shrink:0;
   }
-  .brand-chip img{ height:34px; width:auto; }
+  .brand-chip img{ height:41px; width:auto; }
 
   .pill-nav{
     background:rgba(24,27,28,.55);
@@ -203,33 +209,12 @@
   }
   .btn-outline:hover{ border-color:var(--orange); background:rgba(225,138,63,.15); transform:translateY(-3px); }
 
-  .hero-info{
-    display:flex; flex-wrap:wrap; gap:1.75rem; margin-top:2.75rem;
-    padding-top:1.75rem; border-top:1px solid rgba(247,242,234,.18);
-    opacity:1;
-  }
-  .hero-info-item{ display:flex; align-items:center; gap:.55rem; color:var(--cream); font-size:.88rem; font-weight:600; }
-  .hero-info-item svg{ width:17px; height:17px; color:var(--orange-light); flex-shrink:0; }
-  .hero-info-item a:hover{ color:var(--orange-light); }
-
   @media (prefers-reduced-motion:no-preference){
     @keyframes heroFade{ from{ opacity:0; transform:translateY(28px); } to{ opacity:1; transform:translateY(0); } }
     .hero-eyebrow{ opacity:0; animation:heroFade .9s ease .15s forwards; }
     .hero-title{ opacity:0; animation:heroFade 1s ease .32s forwards; }
     .hero-subhead{ opacity:0; animation:heroFade 1s ease .5s forwards; }
     .hero-actions{ opacity:0; animation:heroFade 1s ease .68s forwards; }
-    .hero-info{ opacity:0; animation:heroFade 1s ease .85s forwards; }
-  }
-
-  .scroll-cue{
-    position:absolute; z-index:2; left:50%; bottom:1.4rem; transform:translateX(-50%);
-    display:flex; flex-direction:column; align-items:center; gap:.4rem;
-    color:var(--cream); opacity:.75; font-size:.68rem; letter-spacing:.2em; text-transform:uppercase;
-  }
-  .scroll-cue svg{ width:16px; height:16px; }
-  @media (prefers-reduced-motion:no-preference){
-    .scroll-cue svg{ animation:bob 1.8s ease-in-out infinite; }
-    @keyframes bob{ 0%,100%{ transform:translateY(0);} 50%{ transform:translateY(6px);} }
   }
 
   /* ===== Angled dividers (signature motif) ===== */
@@ -237,12 +222,12 @@
   .angle-divider::before{ content:''; position:absolute; inset:0; }
   .angle-divider::after{ content:''; position:absolute; inset:0; clip-path:polygon(0 100%, 100% 0, 100% 100%); }
   .angle-one::before{ background:var(--charcoal-deeper); }
-  .angle-one::after{ background:var(--orange); }
-  .angle-two::before{ background:var(--orange); }
-  .angle-two::after{ background:var(--charcoal); }
+  .angle-one::after{ background:var(--orange-sat); }
+  .angle-two::before{ background:var(--orange-sat); }
+  .angle-two::after{ background:var(--charcoal-sat); }
 
   /* ===== EVENTS / CAROUSEL ===== */
-  .section-events{ background:var(--orange); padding-block:var(--sect-pad); scroll-margin-top:90px; }
+  .section-events{ background:var(--orange-sat); padding-block:var(--sect-pad); scroll-margin-top:90px; }
   .events-head{ display:flex; flex-wrap:wrap; align-items:flex-end; justify-content:space-between; gap:1.5rem; margin-bottom:2.75rem; }
   .section-events .eyebrow{ color:var(--charcoal-deeper); }
   .events-head h2{ color:var(--charcoal-deeper); font-size:clamp(2.4rem,6vw,4rem); margin-top:.35rem; }
@@ -254,33 +239,61 @@
   .dot-cluster span:nth-child(2){ width:9px; height:9px; }
   .dot-cluster span:nth-child(3){ width:13px; height:13px; opacity:.9; }
 
-  .carousel-viewport{ overflow:hidden; width:100%; }
-  .carousel-track{
-    display:flex; width:max-content;
-    animation: marquee 34s linear infinite;
+  .coverflow{ position:relative; width:100%; padding-inline:clamp(3.5rem, 8vw, 6rem); }
+  .coverflow-track{
+    position:relative; width:100%;
+    height:clamp(320px, 42vw, 460px);
+    perspective:1400px;
   }
-  .carousel-viewport:hover .carousel-track{ animation-play-state:paused; }
-  @keyframes marquee{ from{ transform:translateX(0); } to{ transform:translateX(-50%); } }
-  @media (prefers-reduced-motion:reduce){ .carousel-track{ animation:none; } }
-
-  .carousel-tile{
-    position:relative; flex:0 0 auto;
-    width:clamp(210px, 26vw, 330px); aspect-ratio:1/1;
-    margin-right:clamp(1rem,2vw,1.5rem);
-    overflow:hidden; border:3px solid var(--charcoal-deeper);
+  .coverflow-slide{
+    position:absolute; top:50%; left:50%;
+    width:clamp(200px, 27vw, 300px); aspect-ratio:3/4;
+    border-radius:22px; overflow:hidden;
+    box-shadow:0 30px 55px -18px rgba(24,27,28,.55);
+    transition: transform .65s cubic-bezier(.22,.8,.25,1), opacity .65s ease, filter .55s ease;
+    will-change:transform;
   }
-  .carousel-tile img{ width:100%; height:100%; object-fit:cover; }
-  .carousel-cap{
+  .coverflow-slide img{ width:100%; height:100%; object-fit:cover; }
+  .coverflow-slide.is-active{ cursor:default; }
+  .coverflow-slide:not(.is-active){ cursor:pointer; }
+  .coverflow-cap{
     position:absolute; left:0; right:0; bottom:0;
-    padding:1rem 1.1rem;
+    padding:1.1rem 1.2rem;
     background:linear-gradient(180deg, transparent, rgba(24,27,28,.92));
     color:var(--white);
   }
-  .carousel-cap .day{ display:block; font-size:.68rem; font-weight:800; letter-spacing:.22em; color:var(--orange-light); margin-bottom:.15rem; }
-  .carousel-cap .name{ font-family:'Bebas Neue',sans-serif; font-size:1.4rem; letter-spacing:.03em; }
+  .coverflow-cap .day{ display:block; font-size:.68rem; font-weight:800; letter-spacing:.22em; color:var(--orange-light); margin-bottom:.15rem; }
+  .coverflow-cap .name{ font-family:'Bebas Neue',sans-serif; font-size:1.5rem; letter-spacing:.03em; }
+
+  .cf-arrow{
+    position:absolute; top:50%; transform:translateY(-50%);
+    width:48px; height:48px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    background:var(--charcoal-deeper); color:var(--cream);
+    border:none; cursor:pointer; z-index:10;
+    box-shadow:0 12px 26px -10px rgba(24,27,28,.55);
+    transition: background .3s ease, transform .3s ease;
+  }
+  .cf-arrow:hover{ background:var(--charcoal-deep); transform:translateY(-50%) scale(1.08); }
+  .cf-arrow svg{ width:19px; height:19px; }
+  .cf-prev{ left:0; }
+  .cf-next{ right:0; }
+
+  .cf-dots{ display:flex; align-items:center; justify-content:center; gap:.5rem; margin-top:2rem; }
+  .cf-dot{
+    width:9px; height:9px; border-radius:999px; padding:0; border:none;
+    background:rgba(38,43,44,.35); cursor:pointer;
+    transition: width .35s ease, background .35s ease;
+  }
+  .cf-dot.active{ width:30px; background:var(--charcoal-deeper); }
+
+  @media (max-width:640px){
+    .coverflow{ padding-inline:2.75rem; }
+    .cf-arrow{ width:40px; height:40px; }
+  }
 
   /* ===== EXPERIENCE CARDS ===== */
-  .section-experience{ background:var(--charcoal); padding-block:var(--sect-pad); scroll-margin-top:90px; }
+  .section-experience{ background:var(--charcoal-sat); padding-block:var(--sect-pad); scroll-margin-top:90px; }
   .section-experience .eyebrow{ color:var(--orange-light); }
   .exp-head{ margin-bottom:3rem; max-width:40rem; }
   .exp-head h2{ color:var(--cream); font-size:clamp(2.4rem,6vw,4rem); margin-top:.35rem; }
@@ -475,26 +488,6 @@
         <a href="#visit" class="cta-btn">Reserve a Table</a>
         <a href="#menu" class="btn-outline">Explore the Menu</a>
       </div>
-
-      <div class="hero-info">
-        <span class="hero-info-item">
-          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21c-4.5-4.2-7-7.9-7-11a7 7 0 1 1 14 0c0 3.1-2.5 6.8-7 11Z"/><circle cx="12" cy="10" r="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          67 Van Heerden St, Mokopane
-        </span>
-        <span class="hero-info-item">
-          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" stroke-linecap="round" stroke-linejoin="round"/><path stroke-linecap="round" stroke-linejoin="round" d="M12 7v5l3.2 2"/></svg>
-          Open daily · Closes 11 PM
-        </span>
-        <a class="hero-info-item" href="tel:+27765069520">
-          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 5c0 8.3 6.7 15 15 15l3-4-6-3-2 2c-2.2-1.1-4-2.9-5-5l2-2-3-6-4 3Z"/></svg>
-          076 506 9520
-        </a>
-      </div>
-    </div>
-
-    <div class="scroll-cue" aria-hidden="true">
-      Scroll
-      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m0 0-6-6m6 6 6-6"/></svg>
     </div>
   </section>
 
@@ -513,34 +506,33 @@
       </div>
     </div>
 
-    <div class="carousel-viewport reveal">
-      <div class="carousel-track">
-        <!-- set 1 -->
-        <div class="carousel-tile">
+    <div class="coverflow reveal" id="eventsCoverflow">
+      <div class="coverflow-track" id="coverflowTrack">
+        <div class="coverflow-slide" data-index="0">
           <img src="https://i.postimg.cc/SNyFWJhT/Save-Clip-App-730332036-18016859684908826-276558060762799520-n.jpg" alt="Lekompo Fridays event at PV Lifestyle" loading="lazy">
-          <div class="carousel-cap"><span class="day">Friday</span><span class="name">Lekompo Fridays</span></div>
+          <div class="coverflow-cap"><span class="day">Friday</span><span class="name">Lekompo Fridays</span></div>
         </div>
-        <div class="carousel-tile">
+        <div class="coverflow-slide" data-index="1">
           <img src="https://i.postimg.cc/8z5209sL/Save-Clip-App-731158340-18016681901908826-3553037399421413566-n.jpg" alt="Exquisite Saturdays event at PV Lifestyle" loading="lazy">
-          <div class="carousel-cap"><span class="day">Saturday</span><span class="name">Exquisite Saturdays</span></div>
+          <div class="coverflow-cap"><span class="day">Saturday</span><span class="name">Exquisite Saturdays</span></div>
         </div>
-        <div class="carousel-tile">
+        <div class="coverflow-slide" data-index="2">
           <img src="https://i.postimg.cc/BnVr9pKS/Save-Clip-App-730332015-18016384001908826-7760478953285662725-n.jpg" alt="Sunday Soul Session event at PV Lifestyle" loading="lazy">
-          <div class="carousel-cap"><span class="day">Sunday</span><span class="name">Sunday Soul Session</span></div>
+          <div class="coverflow-cap"><span class="day">Sunday</span><span class="name">Sunday Soul Session</span></div>
         </div>
-        <!-- set 2 (duplicate for seamless loop) -->
-        <div class="carousel-tile" aria-hidden="true">
-          <img src="https://i.postimg.cc/SNyFWJhT/Save-Clip-App-730332036-18016859684908826-276558060762799520-n.jpg" alt="" loading="lazy">
-          <div class="carousel-cap"><span class="day">Friday</span><span class="name">Lekompo Fridays</span></div>
-        </div>
-        <div class="carousel-tile" aria-hidden="true">
-          <img src="https://i.postimg.cc/8z5209sL/Save-Clip-App-731158340-18016681901908826-3553037399421413566-n.jpg" alt="" loading="lazy">
-          <div class="carousel-cap"><span class="day">Saturday</span><span class="name">Exquisite Saturdays</span></div>
-        </div>
-        <div class="carousel-tile" aria-hidden="true">
-          <img src="https://i.postimg.cc/BnVr9pKS/Save-Clip-App-730332015-18016384001908826-7760478953285662725-n.jpg" alt="" loading="lazy">
-          <div class="carousel-cap"><span class="day">Sunday</span><span class="name">Sunday Soul Session</span></div>
-        </div>
+      </div>
+
+      <button class="cf-arrow cf-prev" id="cfPrev" aria-label="Previous event">
+        <svg fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 6l-6 6 6 6"/></svg>
+      </button>
+      <button class="cf-arrow cf-next" id="cfNext" aria-label="Next event">
+        <svg fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 6l6 6-6 6"/></svg>
+      </button>
+
+      <div class="cf-dots" id="cfDots">
+        <button class="cf-dot" data-index="0" aria-label="Show Lekompo Fridays"></button>
+        <button class="cf-dot" data-index="1" aria-label="Show Exquisite Saturdays"></button>
+        <button class="cf-dot" data-index="2" aria-label="Show Sunday Soul Session"></button>
       </div>
     </div>
   </section>
@@ -731,6 +723,87 @@
   } else {
     revealEls.forEach(el => el.classList.add('in-view'));
   }
+
+  // Coverflow carousel (Events section)
+  (function(){
+    const track = document.getElementById('coverflowTrack');
+    if(!track) return;
+    const slides = Array.from(track.querySelectorAll('.coverflow-slide'));
+    const dots = Array.from(document.querySelectorAll('#cfDots .cf-dot'));
+    const prevBtn = document.getElementById('cfPrev');
+    const nextBtn = document.getElementById('cfNext');
+    const wrapper = document.getElementById('eventsCoverflow');
+    const count = slides.length;
+    let current = 0;
+    let timer = null;
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function render(){
+      slides.forEach((slide, i) => {
+        let diff = i - current;
+        if(diff > count / 2) diff -= count;
+        if(diff < -count / 2) diff += count;
+
+        const abs = Math.abs(diff);
+        let x, scale, rotate, opacity, z, filter;
+
+        if(diff === 0){
+          x = 0; scale = 1; rotate = 0; opacity = 1; z = 5; filter = 'none';
+        } else if(abs === 1){
+          x = diff * 72;
+          scale = 0.82;
+          rotate = diff * -14;
+          opacity = 0.85;
+          z = 3;
+          filter = 'brightness(.7) saturate(.9)';
+        } else {
+          x = diff * 95;
+          scale = 0.68;
+          rotate = diff * -14;
+          opacity = 0;
+          z = 1;
+          filter = 'brightness(.6) saturate(.85)';
+        }
+
+        slide.style.transform = `translate(-50%, -50%) translateX(${x}%) scale(${scale}) rotateY(${rotate}deg)`;
+        slide.style.opacity = opacity;
+        slide.style.zIndex = z;
+        slide.style.filter = filter;
+        slide.classList.toggle('is-active', diff === 0);
+      });
+      dots.forEach((dot, i) => dot.classList.toggle('active', i === current));
+    }
+
+    function go(index){
+      current = ((index % count) + count) % count;
+      render();
+    }
+
+    function next(){ go(current + 1); }
+    function prev(){ go(current - 1); }
+
+    function startAutoplay(){
+      if(reduceMotion) return;
+      stopAutoplay();
+      timer = setInterval(next, 4200);
+    }
+    function stopAutoplay(){ if(timer) clearInterval(timer); }
+    function restartAutoplay(){ stopAutoplay(); startAutoplay(); }
+
+    nextBtn.addEventListener('click', () => { next(); restartAutoplay(); });
+    prevBtn.addEventListener('click', () => { prev(); restartAutoplay(); });
+    dots.forEach(dot => dot.addEventListener('click', () => { go(Number(dot.dataset.index)); restartAutoplay(); }));
+    slides.forEach(slide => slide.addEventListener('click', () => {
+      const idx = Number(slide.dataset.index);
+      if(idx !== current){ go(idx); restartAutoplay(); }
+    }));
+
+    wrapper.addEventListener('mouseenter', stopAutoplay);
+    wrapper.addEventListener('mouseleave', startAutoplay);
+
+    render();
+    startAutoplay();
+  })();
 
   // Footer year
   document.getElementById('year').textContent = new Date().getFullYear();
