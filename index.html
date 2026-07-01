@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PV Lifestyle | Restaurant &amp; Bar — Mokopane</title>
+<meta name="description" content="PV Lifestyle is a fine dining restaurant and bar in Mokopane, Limpopo. Fresh food, an exceptional drinks list, and unforgettable nights — the ideal atmosphere.">
+<meta name="theme-color" content="#181b1c">
+<link rel="icon" type="image/png" href="https://i.postimg.cc/DZh18dK7/pvlogo-removebg-preview.png">
+
+<meta property="og:title" content="PV Lifestyle | Restaurant &amp; Bar">
+<meta property="og:description" content="Fine dining, craft cocktails and signature nights in Mokopane. The ideal atmosphere.">
+<meta property="og:image" content="https://i.postimg.cc/VkjyjmCM/hero.png">
+<meta property="og:type" content="website">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;500;600;700;800&family=Cormorant+Garamond:ital,wght@1,500;1,600&display=swap" rel="stylesheet">
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          orange: { DEFAULT:'#e18a3f', light:'#f3a663', dark:'#b96a26' },
+          charcoal: { DEFAULT:'#3f4749', deep:'#262b2c', deeper:'#181b1c' },
+          cream:'#f7f2ea'
+        }
+      }
+    }
+  }
+</script>
+
+<style>
+  :root{
+    --orange:#e18a3f;
+    --orange-light:#f3a663;
+    --orange-dark:#b96a26;
+    --charcoal:#3f4749;
+    --charcoal-deep:#262b2c;
+    --charcoal-deeper:#181b1c;
+    --gray:#9aa3a3;
+    --cream:#f7f2ea;
+    --white:#ffffff;
+    --sect-pad: clamp(3.5rem, 8vw, 7rem);
+  }
+
+  *,*::before,*::after{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  body{
+    margin:0;
+    font-family:'Manrope', system-ui, sans-serif;
+    background:var(--cream);
+    color:var(--charcoal-deep);
+    overflow-x:hidden;
+  }
+  body.menu-open{ overflow:hidden; }
+  img{ max-width:100%; display:block; }
+  a{ text-decoration:none; color:inherit; }
+  ul{ list-style:none; margin:0; padding:0; }
+  h1,h2,h3,h4{ margin:0; }
+
+  .container{ width:100%; max-width:1280px; margin-inline:auto; padding-inline:clamp(1.25rem, 5vw, 3rem); }
+
+  .font-display{ font-family:'Bebas Neue', sans-serif; letter-spacing:.02em; }
+  .font-quote{ font-family:'Cormorant Garamond', serif; font-style:italic; }
+
+  .skip-link{
+    position:absolute; left:1rem; top:-60px; background:var(--orange); color:var(--charcoal-deeper);
+    padding:.75rem 1.25rem; border-radius:999px; font-weight:700; z-index:200; transition:top .25s ease;
+  }
+  .skip-link:focus{ top:1rem; }
+
+  /* ===== Eyebrow label w/ triangle bullet (signature motif) ===== */
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:.6rem;
+    font-size:.78rem; font-weight:800; letter-spacing:.22em; text-transform:uppercase;
+  }
+  .eyebrow::before{
+    content:''; width:0; height:0;
+    border-left:6px solid transparent; border-right:6px solid transparent;
+    border-bottom:10px solid currentColor;
+    flex-shrink:0;
+  }
+
+  /* ===== HEADER ===== */
+  .site-header{
+    position:fixed; top:0; left:0; right:0; z-index:100;
+    padding: clamp(1rem, 2.6vw, 1.6rem) clamp(1rem, 4vw, 3rem);
+    transition: background .35s ease, box-shadow .35s ease, padding .35s ease, backdrop-filter .35s ease;
+  }
+  .site-header.is-scrolled{
+    background: rgba(24,27,28,.86);
+    backdrop-filter: blur(14px);
+    box-shadow: 0 10px 30px -14px rgba(0,0,0,.5);
+    padding: .85rem clamp(1rem, 4vw, 3rem);
+  }
+  .header-inner{
+    max-width:1280px; margin-inline:auto;
+    display:flex; align-items:center; justify-content:space-between; gap:1rem;
+  }
+
+  .brand-chip{
+    display:inline-flex; align-items:center;
+    background:var(--cream);
+    border-radius:16px;
+    padding:.45rem .85rem;
+    box-shadow:0 10px 24px -12px rgba(0,0,0,.55);
+    flex-shrink:0;
+  }
+  .brand-chip img{ height:34px; width:auto; }
+
+  .pill-nav{
+    background:rgba(24,27,28,.55);
+    backdrop-filter:blur(14px);
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:999px;
+    padding:.4rem;
+  }
+  .pill-nav ul{ display:flex; align-items:center; gap:.15rem; }
+  .pill-nav a{
+    display:block; padding:.6rem 1.15rem; border-radius:999px;
+    color:var(--cream); font-weight:600; font-size:.9rem; letter-spacing:.01em;
+    transition: background .3s ease, color .3s ease;
+    white-space:nowrap;
+  }
+  .pill-nav a:hover{ background:var(--orange); color:var(--charcoal-deeper); }
+
+  .cta-btn{
+    display:inline-flex; align-items:center; justify-content:center;
+    background:var(--orange); color:var(--charcoal-deeper);
+    font-weight:800; font-size:.9rem; letter-spacing:.01em;
+    padding:.85rem 1.6rem; border-radius:999px;
+    box-shadow:0 12px 24px -10px rgba(225,138,63,.65);
+    transition: transform .3s ease, background .3s ease, box-shadow .3s ease;
+    flex-shrink:0; white-space:nowrap;
+  }
+  .cta-btn:hover{ background:var(--orange-light); transform:translateY(-3px); box-shadow:0 16px 30px -10px rgba(225,138,63,.8); }
+  .header-cta.mobile-only{ display:none; }
+
+  .hamburger{
+    display:none; flex-direction:column; justify-content:center; gap:5px;
+    width:44px; height:44px; border-radius:50%;
+    background:rgba(24,27,28,.6); backdrop-filter:blur(10px);
+    border:1px solid rgba(255,255,255,.1);
+    padding:0; cursor:pointer; flex-shrink:0;
+  }
+  .hamburger span{ width:18px; height:2px; background:var(--cream); margin-inline:auto; transition:transform .3s ease, opacity .3s ease; }
+  .hamburger.active span:nth-child(1){ transform:translateY(7px) rotate(45deg); }
+  .hamburger.active span:nth-child(2){ opacity:0; }
+  .hamburger.active span:nth-child(3){ transform:translateY(-7px) rotate(-45deg); }
+
+  .mobile-menu{
+    position:fixed; inset:0; top:0; z-index:90;
+    background:var(--charcoal-deeper);
+    display:flex; flex-direction:column; align-items:center; justify-content:center; gap:1rem;
+    opacity:0; visibility:hidden; transform:translateY(-12px);
+    transition:opacity .35s ease, transform .35s ease, visibility 0s linear .35s;
+  }
+  .mobile-menu.open{ opacity:1; visibility:visible; transform:translateY(0); transition:opacity .35s ease, transform .35s ease; }
+  .mobile-menu a{ color:var(--cream); font-family:'Bebas Neue',sans-serif; font-size:2rem; letter-spacing:.04em; }
+  .mobile-menu a:hover{ color:var(--orange); }
+  .mobile-menu .cta-btn{ margin-top:1rem; }
+
+  @media (max-width:900px){
+    .pill-nav, .site-header .header-cta{ display:none; }
+    .hamburger{ display:flex; }
+  }
+
+  /* ===== HERO ===== */
+  .hero{
+    position:relative; min-height:100svh; display:flex; align-items:flex-end;
+    overflow:hidden; isolation:isolate;
+  }
+  .hero-media{ position:absolute; inset:0; z-index:0; }
+  .hero-media img{ width:100%; height:100%; object-fit:cover; object-position:center; }
+  .hero-scrim{
+    position:absolute; inset:0; z-index:1;
+    background:linear-gradient(180deg, rgba(24,27,28,.15) 0%, rgba(24,27,28,.1) 35%, rgba(24,27,28,.75) 78%, var(--charcoal-deeper) 100%);
+  }
+  .hero-content{
+    position:relative; z-index:2; width:100%;
+    padding: 0 clamp(1.25rem,5vw,3rem) clamp(3.5rem,8vw,6rem);
+    max-width:1280px; margin-inline:auto;
+  }
+  .hero-eyebrow{ color:var(--orange-light); opacity:1; }
+  .hero-title{
+    color:var(--white); font-size:clamp(3.2rem, 12vw, 8.5rem); line-height:.92;
+    margin-top:.6rem; opacity:1;
+  }
+  .hero-subhead{
+    color:var(--cream); font-size:clamp(1rem,2.2vw,1.35rem); max-width:36rem;
+    margin-top:1rem; font-weight:500; opacity:1;
+  }
+  .hero-actions{ display:flex; flex-wrap:wrap; gap:1rem; margin-top:2rem; opacity:1; }
+  .btn-outline{
+    display:inline-flex; align-items:center; justify-content:center;
+    padding:.85rem 1.6rem; border-radius:999px; font-weight:800; font-size:.9rem;
+    border:1.5px solid rgba(247,242,234,.6); color:var(--white);
+    backdrop-filter:blur(6px); background:rgba(247,242,234,.06);
+    transition:border-color .3s ease, background .3s ease, transform .3s ease;
+  }
+  .btn-outline:hover{ border-color:var(--orange); background:rgba(225,138,63,.15); transform:translateY(-3px); }
+
+  .hero-info{
+    display:flex; flex-wrap:wrap; gap:1.75rem; margin-top:2.75rem;
+    padding-top:1.75rem; border-top:1px solid rgba(247,242,234,.18);
+    opacity:1;
+  }
+  .hero-info-item{ display:flex; align-items:center; gap:.55rem; color:var(--cream); font-size:.88rem; font-weight:600; }
+  .hero-info-item svg{ width:17px; height:17px; color:var(--orange-light); flex-shrink:0; }
+  .hero-info-item a:hover{ color:var(--orange-light); }
+
+  @media (prefers-reduced-motion:no-preference){
+    @keyframes heroFade{ from{ opacity:0; transform:translateY(28px); } to{ opacity:1; transform:translateY(0); } }
+    .hero-eyebrow{ opacity:0; animation:heroFade .9s ease .15s forwards; }
+    .hero-title{ opacity:0; animation:heroFade 1s ease .32s forwards; }
+    .hero-subhead{ opacity:0; animation:heroFade 1s ease .5s forwards; }
+    .hero-actions{ opacity:0; animation:heroFade 1s ease .68s forwards; }
+    .hero-info{ opacity:0; animation:heroFade 1s ease .85s forwards; }
+  }
+
+  .scroll-cue{
+    position:absolute; z-index:2; left:50%; bottom:1.4rem; transform:translateX(-50%);
+    display:flex; flex-direction:column; align-items:center; gap:.4rem;
+    color:var(--cream); opacity:.75; font-size:.68rem; letter-spacing:.2em; text-transform:uppercase;
+  }
+  .scroll-cue svg{ width:16px; height:16px; }
+  @media (prefers-reduced-motion:no-preference){
+    .scroll-cue svg{ animation:bob 1.8s ease-in-out infinite; }
+    @keyframes bob{ 0%,100%{ transform:translateY(0);} 50%{ transform:translateY(6px);} }
+  }
+
+  /* ===== Angled dividers (signature motif) ===== */
+  .angle-divider{ position:relative; height:clamp(46px,6vw,84px); width:100%; overflow:hidden; }
+  .angle-divider::before{ content:''; position:absolute; inset:0; }
+  .angle-divider::after{ content:''; position:absolute; inset:0; clip-path:polygon(0 100%, 100% 0, 100% 100%); }
+  .angle-one::before{ background:var(--charcoal-deeper); }
+  .angle-one::after{ background:var(--orange); }
+  .angle-two::before{ background:var(--orange); }
+  .angle-two::after{ background:var(--charcoal); }
+
+  /* ===== EVENTS / CAROUSEL ===== */
+  .section-events{ background:var(--orange); padding-block:var(--sect-pad); scroll-margin-top:90px; }
+  .events-head{ display:flex; flex-wrap:wrap; align-items:flex-end; justify-content:space-between; gap:1.5rem; margin-bottom:2.75rem; }
+  .section-events .eyebrow{ color:var(--charcoal-deeper); }
+  .events-head h2{ color:var(--charcoal-deeper); font-size:clamp(2.4rem,6vw,4rem); margin-top:.35rem; }
+  .events-head p{ color:rgba(38,43,44,.8); font-weight:600; max-width:26rem; }
+
+  .dot-cluster{ display:flex; align-items:center; gap:6px; }
+  .dot-cluster span{ display:block; border-radius:50%; background:var(--charcoal-deeper); opacity:.55; }
+  .dot-cluster span:nth-child(1){ width:6px; height:6px; }
+  .dot-cluster span:nth-child(2){ width:9px; height:9px; }
+  .dot-cluster span:nth-child(3){ width:13px; height:13px; opacity:.9; }
+
+  .carousel-viewport{ overflow:hidden; width:100%; }
+  .carousel-track{
+    display:flex; width:max-content;
+    animation: marquee 34s linear infinite;
+  }
+  .carousel-viewport:hover .carousel-track{ animation-play-state:paused; }
+  @keyframes marquee{ from{ transform:translateX(0); } to{ transform:translateX(-50%); } }
+  @media (prefers-reduced-motion:reduce){ .carousel-track{ animation:none; } }
+
+  .carousel-tile{
+    position:relative; flex:0 0 auto;
+    width:clamp(210px, 26vw, 330px); aspect-ratio:1/1;
+    margin-right:clamp(1rem,2vw,1.5rem);
+    overflow:hidden; border:3px solid var(--charcoal-deeper);
+  }
+  .carousel-tile img{ width:100%; height:100%; object-fit:cover; }
+  .carousel-cap{
+    position:absolute; left:0; right:0; bottom:0;
+    padding:1rem 1.1rem;
+    background:linear-gradient(180deg, transparent, rgba(24,27,28,.92));
+    color:var(--white);
+  }
+  .carousel-cap .day{ display:block; font-size:.68rem; font-weight:800; letter-spacing:.22em; color:var(--orange-light); margin-bottom:.15rem; }
+  .carousel-cap .name{ font-family:'Bebas Neue',sans-serif; font-size:1.4rem; letter-spacing:.03em; }
+
+  /* ===== EXPERIENCE CARDS ===== */
+  .section-experience{ background:var(--charcoal); padding-block:var(--sect-pad); scroll-margin-top:90px; }
+  .section-experience .eyebrow{ color:var(--orange-light); }
+  .exp-head{ margin-bottom:3rem; max-width:40rem; }
+  .exp-head h2{ color:var(--cream); font-size:clamp(2.4rem,6vw,4rem); margin-top:.35rem; }
+  .exp-head p{ color:rgba(247,242,234,.72); margin-top:.85rem; font-weight:500; }
+
+  .exp-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:clamp(1.25rem,2.5vw,2rem); }
+  @media (max-width:820px){ .exp-grid{ grid-template-columns:1fr; } }
+
+  .exp-card{
+    position:relative; aspect-ratio:1/1; overflow:hidden; border-radius:0;
+    cursor:default;
+    transition: transform .55s cubic-bezier(.2,.75,.2,1), box-shadow .55s ease;
+  }
+  .exp-card img{
+    position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
+    filter:saturate(.85) brightness(.72);
+    transition: transform .9s ease, filter .55s ease;
+  }
+  .exp-card::after{
+    content:''; position:absolute; inset:0;
+    background:linear-gradient(180deg, rgba(24,27,28,.05) 0%, rgba(24,27,28,.15) 45%, rgba(24,27,28,.94) 100%);
+    transition:background .55s ease;
+  }
+  .exp-card:hover{
+    transform:translateY(-10px);
+    box-shadow:0 30px 60px -18px rgba(225,138,63,.6), 0 0 0 1px rgba(225,138,63,.35);
+  }
+  .exp-card:hover img{ transform:scale(1.09); filter:saturate(1.05) brightness(.85); }
+  .exp-body{ position:absolute; left:0; right:0; bottom:0; z-index:2; padding:1.6rem; }
+  .exp-day{
+    display:inline-block; font-size:.7rem; font-weight:800; letter-spacing:.22em;
+    color:var(--charcoal-deeper); background:var(--orange);
+    padding:.3rem .7rem; margin-bottom:.9rem;
+  }
+  .exp-body h3{ font-family:'Bebas Neue',sans-serif; color:var(--white); font-size:clamp(1.7rem,3vw,2.3rem); letter-spacing:.02em; }
+  .exp-body p{ color:rgba(247,242,234,.8); font-size:.92rem; margin-top:.5rem; max-width:22rem; font-weight:500; }
+
+  /* ===== MENU / RESTAURANT GALLERY ===== */
+  .section-menu{ background:var(--cream); padding-block:var(--sect-pad); scroll-margin-top:90px; }
+  .section-menu .eyebrow{ color:var(--orange-dark); }
+  .menu-head{ display:grid; grid-template-columns:1.2fr 1fr; gap:2.5rem; align-items:end; margin-bottom:3rem; }
+  .menu-head h2{ color:var(--charcoal-deeper); font-size:clamp(2.4rem,6vw,4rem); margin-top:.35rem; }
+  .menu-quote{ color:var(--charcoal); font-size:clamp(1.15rem,2vw,1.5rem); line-height:1.5; position:relative; padding-left:1.4rem; border-left:3px solid var(--orange); }
+  @media (max-width:820px){ .menu-head{ grid-template-columns:1fr; } }
+
+  .meal-grid{
+    display:grid; grid-template-columns:repeat(4,1fr);
+    grid-auto-rows:clamp(140px,19vw,230px);
+    gap:clamp(.7rem,1.5vw,1.1rem);
+  }
+  .meal-item{ position:relative; overflow:hidden; }
+  .meal-item img{ width:100%; height:100%; object-fit:cover; transition:transform .8s ease, filter .5s ease; }
+  .meal-item:hover img{ transform:scale(1.07); }
+  .meal-item::after{ content:''; position:absolute; inset:0; box-shadow:inset 0 0 0 1px rgba(24,27,28,.06); pointer-events:none; }
+
+  .meal-1{ grid-column:1/3; grid-row:1/3; }
+  .meal-2{ grid-column:3/5; grid-row:1/2; }
+  .meal-3{ grid-column:3/4; grid-row:2/3; }
+  .meal-4{ grid-column:4/5; grid-row:2/3; }
+  .meal-5{ grid-column:1/3; grid-row:3/4; }
+  .meal-6{ grid-column:3/5; grid-row:3/4; }
+
+  @media (max-width:720px){
+    .meal-grid{ grid-template-columns:repeat(2,1fr); grid-auto-rows:clamp(130px,38vw,190px); }
+    .meal-1,.meal-2,.meal-3,.meal-4,.meal-5,.meal-6{ grid-column:span 1; grid-row:auto; }
+    .meal-1{ grid-column:span 2; aspect-ratio:16/9; height:auto; }
+  }
+
+  .menu-cta{ margin-top:2.75rem; text-align:center; }
+  .btn-solid{
+    display:inline-flex; align-items:center; gap:.6rem;
+    background:var(--charcoal-deeper); color:var(--cream);
+    font-weight:800; padding:.95rem 2rem; border-radius:999px;
+    transition:background .3s ease, transform .3s ease;
+  }
+  .btn-solid:hover{ background:var(--orange); color:var(--charcoal-deeper); transform:translateY(-3px); }
+
+  /* ===== FOOTER ===== */
+  .site-footer{ background:var(--charcoal-deeper); color:var(--cream); }
+  .footer-top{ padding-block:clamp(3.5rem,7vw,5.5rem); display:grid; grid-template-columns:1.3fr 1fr 1fr 1fr; gap:2.5rem; }
+  @media (max-width:900px){ .footer-top{ grid-template-columns:1fr 1fr; } }
+  @media (max-width:560px){ .footer-top{ grid-template-columns:1fr; } }
+
+  .footer-brand p{ color:rgba(247,242,234,.68); font-size:.95rem; line-height:1.6; margin-top:1.25rem; max-width:26rem; }
+  .footer-brand .tagline{ font-family:'Bebas Neue',sans-serif; letter-spacing:.06em; color:var(--orange-light); font-size:.85rem; margin-top:1.5rem; }
+
+  .footer-col h4{ font-size:.78rem; font-weight:800; letter-spacing:.18em; text-transform:uppercase; color:var(--orange-light); margin-bottom:1.15rem; }
+  .footer-col ul{ display:flex; flex-direction:column; gap:.75rem; }
+  .footer-col a{ color:rgba(247,242,234,.75); font-size:.92rem; font-weight:500; transition:color .25s ease, padding-left .25s ease; }
+  .footer-col a:hover{ color:var(--orange-light); padding-left:.25rem; }
+  .footer-col li{ font-size:.92rem; color:rgba(247,242,234,.75); }
+
+  .contact-item{ display:flex; gap:.65rem; align-items:flex-start; }
+  .contact-item svg{ width:17px; height:17px; color:var(--orange-light); flex-shrink:0; margin-top:.15rem; }
+
+  .service-item{ display:flex; gap:.6rem; align-items:center; }
+  .service-item svg{ width:15px; height:15px; color:var(--orange); flex-shrink:0; }
+
+  .social-row{ display:flex; gap:.7rem; margin-top:1.4rem; }
+  .social-btn{
+    width:42px; height:42px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    background:rgba(247,242,234,.08); border:1px solid rgba(247,242,234,.14);
+    transition:background .3s ease, transform .3s ease, border-color .3s ease;
+  }
+  .social-btn:hover{ background:var(--orange); border-color:var(--orange); transform:translateY(-3px); }
+  .social-btn svg{ width:19px; height:19px; color:var(--cream); }
+  .social-btn:hover svg{ color:var(--charcoal-deeper); }
+
+  .footer-bottom{
+    border-top:1px solid rgba(247,242,234,.1);
+    padding-block:1.5rem;
+    display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:1rem;
+  }
+  .footer-bottom p{ font-size:.82rem; color:rgba(247,242,234,.55); }
+  .to-top{
+    width:40px; height:40px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    background:rgba(247,242,234,.08); border:1px solid rgba(247,242,234,.14);
+    transition:background .3s ease, transform .3s ease;
+  }
+  .to-top:hover{ background:var(--orange); transform:translateY(-4px); }
+  .to-top svg{ width:16px; height:16px; color:var(--cream); }
+  .to-top:hover svg{ color:var(--charcoal-deeper); }
+
+  /* ===== Reveal on scroll ===== */
+  .reveal{ opacity:1; transform:none; }
+  @media (prefers-reduced-motion:no-preference){
+    .reveal{ opacity:0; transform:translateY(26px); transition:opacity .85s ease, transform .85s cubic-bezier(.2,.7,.2,1); }
+    .reveal.in-view{ opacity:1; transform:none; }
+    .reveal-stagger.in-view .exp-card:nth-child(1){ transition-delay:.05s; }
+    .reveal-stagger.in-view .exp-card:nth-child(2){ transition-delay:.18s; }
+    .reveal-stagger.in-view .exp-card:nth-child(3){ transition-delay:.31s; }
+  }
+
+  :focus-visible{ outline:2px solid var(--orange); outline-offset:3px; }
+</style>
+</head>
+<body>
+
+<a href="#main" class="skip-link">Skip to content</a>
+
+<!-- ================= HEADER ================= -->
+<header class="site-header" id="siteHeader">
+  <div class="header-inner">
+    <a href="#hero" class="brand-chip" aria-label="PV Lifestyle — home">
+      <img src="https://i.postimg.cc/DZh18dK7/pvlogo-removebg-preview.png" alt="PV Lifestyle logo">
+    </a>
+
+    <nav class="pill-nav" aria-label="Primary">
+      <ul>
+        <li><a href="#hero">Home</a></li>
+        <li><a href="#events">Events</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#menu">Menu</a></li>
+        <li><a href="#visit">Visit Us</a></li>
+      </ul>
+    </nav>
+
+    <a href="#visit" class="cta-btn header-cta">Reserve a Table</a>
+
+    <button class="hamburger" id="hamburgerBtn" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<nav class="mobile-menu" id="mobileMenu" aria-label="Mobile">
+  <a href="#hero">Home</a>
+  <a href="#events">Events</a>
+  <a href="#experience">Experience</a>
+  <a href="#menu">Menu</a>
+  <a href="#visit">Visit Us</a>
+  <a href="#visit" class="cta-btn">Reserve a Table</a>
+</nav>
+
+<main id="main">
+
+  <!-- ================= HERO ================= -->
+  <section class="hero" id="hero">
+    <div class="hero-media">
+      <img src="https://i.postimg.cc/VkjyjmCM/hero.png" alt="PV Lifestyle restaurant and bar atmosphere" fetchpriority="high">
+    </div>
+    <div class="hero-scrim"></div>
+
+    <div class="hero-content">
+      <span class="eyebrow hero-eyebrow">Mokopane · Restaurant &amp; Bar</span>
+      <h1 class="font-display hero-title">PV LIFESTYLE</h1>
+      <p class="hero-subhead">Fine dining, craft cocktails and signature nights — this is the ideal atmosphere.</p>
+
+      <div class="hero-actions">
+        <a href="#visit" class="cta-btn">Reserve a Table</a>
+        <a href="#menu" class="btn-outline">Explore the Menu</a>
+      </div>
+
+      <div class="hero-info">
+        <span class="hero-info-item">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21c-4.5-4.2-7-7.9-7-11a7 7 0 1 1 14 0c0 3.1-2.5 6.8-7 11Z"/><circle cx="12" cy="10" r="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          67 Van Heerden St, Mokopane
+        </span>
+        <span class="hero-info-item">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" stroke-linecap="round" stroke-linejoin="round"/><path stroke-linecap="round" stroke-linejoin="round" d="M12 7v5l3.2 2"/></svg>
+          Open daily · Closes 11 PM
+        </span>
+        <a class="hero-info-item" href="tel:+27765069520">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 5c0 8.3 6.7 15 15 15l3-4-6-3-2 2c-2.2-1.1-4-2.9-5-5l2-2-3-6-4 3Z"/></svg>
+          076 506 9520
+        </a>
+      </div>
+    </div>
+
+    <div class="scroll-cue" aria-hidden="true">
+      Scroll
+      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m0 0-6-6m6 6 6-6"/></svg>
+    </div>
+  </section>
+
+  <div class="angle-divider angle-one" aria-hidden="true"></div>
+
+  <!-- ================= EVENTS / CAROUSEL ================= -->
+  <section class="section-events" id="events">
+    <div class="container">
+      <div class="events-head reveal">
+        <div>
+          <span class="eyebrow">What's On</span>
+          <h2 class="font-display">This Week At PV</h2>
+          <p>A square-up of the nights on deck — new sounds, same ideal atmosphere.</p>
+        </div>
+        <div class="dot-cluster" aria-hidden="true"><span></span><span></span><span></span></div>
+      </div>
+    </div>
+
+    <div class="carousel-viewport reveal">
+      <div class="carousel-track">
+        <!-- set 1 -->
+        <div class="carousel-tile">
+          <img src="https://i.postimg.cc/SNyFWJhT/Save-Clip-App-730332036-18016859684908826-276558060762799520-n.jpg" alt="Lekompo Fridays event at PV Lifestyle" loading="lazy">
+          <div class="carousel-cap"><span class="day">Friday</span><span class="name">Lekompo Fridays</span></div>
+        </div>
+        <div class="carousel-tile">
+          <img src="https://i.postimg.cc/8z5209sL/Save-Clip-App-731158340-18016681901908826-3553037399421413566-n.jpg" alt="Exquisite Saturdays event at PV Lifestyle" loading="lazy">
+          <div class="carousel-cap"><span class="day">Saturday</span><span class="name">Exquisite Saturdays</span></div>
+        </div>
+        <div class="carousel-tile">
+          <img src="https://i.postimg.cc/BnVr9pKS/Save-Clip-App-730332015-18016384001908826-7760478953285662725-n.jpg" alt="Sunday Soul Session event at PV Lifestyle" loading="lazy">
+          <div class="carousel-cap"><span class="day">Sunday</span><span class="name">Sunday Soul Session</span></div>
+        </div>
+        <!-- set 2 (duplicate for seamless loop) -->
+        <div class="carousel-tile" aria-hidden="true">
+          <img src="https://i.postimg.cc/SNyFWJhT/Save-Clip-App-730332036-18016859684908826-276558060762799520-n.jpg" alt="" loading="lazy">
+          <div class="carousel-cap"><span class="day">Friday</span><span class="name">Lekompo Fridays</span></div>
+        </div>
+        <div class="carousel-tile" aria-hidden="true">
+          <img src="https://i.postimg.cc/8z5209sL/Save-Clip-App-731158340-18016681901908826-3553037399421413566-n.jpg" alt="" loading="lazy">
+          <div class="carousel-cap"><span class="day">Saturday</span><span class="name">Exquisite Saturdays</span></div>
+        </div>
+        <div class="carousel-tile" aria-hidden="true">
+          <img src="https://i.postimg.cc/BnVr9pKS/Save-Clip-App-730332015-18016384001908826-7760478953285662725-n.jpg" alt="" loading="lazy">
+          <div class="carousel-cap"><span class="day">Sunday</span><span class="name">Sunday Soul Session</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="angle-divider angle-two" aria-hidden="true"></div>
+
+  <!-- ================= EXPERIENCE ================= -->
+  <section class="section-experience" id="experience">
+    <div class="container">
+      <div class="exp-head reveal">
+        <span class="eyebrow">Signature Nights</span>
+        <h2 class="font-display">The Experience</h2>
+        <p>Three nights, three moods — all under the one roof.</p>
+      </div>
+
+      <div class="exp-grid reveal reveal-stagger">
+        <article class="exp-card">
+          <img src="https://i.postimg.cc/SNyFWJhT/Save-Clip-App-730332036-18016859684908826-276558060762799520-n.jpg" alt="Lekompo Fridays" loading="lazy">
+          <div class="exp-body">
+            <span class="exp-day">Fri</span>
+            <h3>Lekompo Fridays</h3>
+            <p>Kick the weekend off with the rhythms of Limpopo — good music, good company.</p>
+          </div>
+        </article>
+
+        <article class="exp-card">
+          <img src="https://i.postimg.cc/8z5209sL/Save-Clip-App-731158340-18016681901908826-3553037399421413566-n.jpg" alt="Exquisite Saturdays" loading="lazy">
+          <div class="exp-body">
+            <span class="exp-day">Sat</span>
+            <h3>Exquisite Saturdays</h3>
+            <p>An elevated night out — fine drinks, curated sounds, unforgettable energy.</p>
+          </div>
+        </article>
+
+        <article class="exp-card">
+          <img src="https://i.postimg.cc/BnVr9pKS/Save-Clip-App-730332015-18016384001908826-7760478953285662725-n.jpg" alt="Sunday Soul Session" loading="lazy">
+          <div class="exp-body">
+            <span class="exp-day">Sun</span>
+            <h3>Sunday Soul Session</h3>
+            <p>Wind the week down with soulful sounds and a laid-back atmosphere.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= MENU / RESTAURANT ================= -->
+  <section class="section-menu" id="menu">
+    <div class="container">
+      <div class="menu-head">
+        <div class="reveal">
+          <span class="eyebrow">The Kitchen</span>
+          <h2 class="font-display">A Taste of PV Lifestyle</h2>
+        </div>
+        <p class="menu-quote font-quote reveal">"An intimate space built for exceptional food — the freshest ingredients, thoughtfully prepared, alongside a drinks list worth lingering over."</p>
+      </div>
+
+      <div class="meal-grid reveal">
+        <div class="meal-item meal-1"><img src="https://i.postimg.cc/mDk66stX/meal-6.jpg" alt="Signature dish at PV Lifestyle" loading="lazy"></div>
+        <div class="meal-item meal-2"><img src="https://i.postimg.cc/m27RSYxh/meal-5.jpg" alt="Plated meal at PV Lifestyle" loading="lazy"></div>
+        <div class="meal-item meal-3"><img src="https://i.postimg.cc/DZW34sdf/meal-4.jpg" alt="Dish detail at PV Lifestyle" loading="lazy"></div>
+        <div class="meal-item meal-4"><img src="https://i.postimg.cc/qMcVKpn2/meal-3.jpg" alt="Fresh preparation at PV Lifestyle" loading="lazy"></div>
+        <div class="meal-item meal-5"><img src="https://i.postimg.cc/vmBpC9KY/meal-2.jpg" alt="Chef's plate at PV Lifestyle" loading="lazy"></div>
+        <div class="meal-item meal-6"><img src="https://i.postimg.cc/0jp37Czh/meal-1.jpg" alt="Table setting at PV Lifestyle" loading="lazy"></div>
+      </div>
+
+      <div class="menu-cta reveal">
+        <a href="#visit" class="btn-solid">Reserve Your Table
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" width="16" height="16"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m0 0-6-6m6 6-6 6"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ================= FOOTER ================= -->
+<footer class="site-footer" id="visit">
+  <div class="container footer-top">
+
+    <div class="footer-brand">
+      <div class="brand-chip">
+        <img src="https://i.postimg.cc/DZh18dK7/pvlogo-removebg-preview.png" alt="PV Lifestyle logo" style="height:40px;">
+      </div>
+      <p>PV Lifestyle brings fine dining to Mokopane in an intimate, elevated setting — fresh, thoughtfully prepared food, an exceptional drinks list, and an atmosphere built for good nights.</p>
+      <span class="tagline">THE IDEAL ATMOSPHERE</span>
+      <div class="social-row">
+        <a class="social-btn" href="https://www.instagram.com/pv.lifestyle2022/" target="_blank" rel="noopener noreferrer" aria-label="PV Lifestyle on Instagram">
+          <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="footer-col">
+      <h4>Explore</h4>
+      <ul>
+        <li><a href="#hero">Home</a></li>
+        <li><a href="#events">Events</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#menu">Menu</a></li>
+        <li><a href="#visit">Visit Us</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>Visit Us</h4>
+      <ul>
+        <li class="contact-item">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21c-4.5-4.2-7-7.9-7-11a7 7 0 1 1 14 0c0 3.1-2.5 6.8-7 11Z"/><circle cx="12" cy="10" r="2.5"/></svg>
+          <a href="https://www.google.com/maps/search/?api=1&query=67+Van+Heerden+St,+Mokopane,+0600" target="_blank" rel="noopener noreferrer">67 Van Heerden St,<br>Mokopane, 0600</a>
+        </li>
+        <li class="contact-item">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 5c0 8.3 6.7 15 15 15l3-4-6-3-2 2c-2.2-1.1-4-2.9-5-5l2-2-3-6-4 3Z"/></svg>
+          <a href="tel:+27765069520">076 506 9520</a>
+        </li>
+        <li class="contact-item">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path stroke-linecap="round" stroke-linejoin="round" d="M12 7v5l3.2 2"/></svg>
+          <span>Open Daily<br>Closes 11:00 PM</span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>Service Options</h4>
+      <ul>
+        <li class="service-item">
+          <svg fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+          All you can eat
+        </li>
+        <li class="service-item">
+          <svg fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+          Outdoor seating
+        </li>
+        <li class="service-item">
+          <svg fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+          Private dining room
+        </li>
+      </ul>
+    </div>
+
+  </div>
+
+  <div class="container footer-bottom">
+    <p>© <span id="year"></span> PV Lifestyle Restaurant &amp; Bar · Mokopane, Limpopo, South Africa. All rights reserved.</p>
+    <a href="#hero" class="to-top" aria-label="Back to top">
+      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 19V5m0 0-6 6m6-6 6 6"/></svg>
+    </a>
+  </div>
+</footer>
+
+<script>
+  // Header scroll state
+  const header = document.getElementById('siteHeader');
+  const onScroll = () => header.classList.toggle('is-scrolled', window.scrollY > 30);
+  window.addEventListener('scroll', onScroll, { passive:true });
+  onScroll();
+
+  // Mobile menu
+  const hamburgerBtn = document.getElementById('hamburgerBtn');
+  const mobileMenu = document.getElementById('mobileMenu');
+  function closeMenu(){
+    mobileMenu.classList.remove('open');
+    hamburgerBtn.classList.remove('active');
+    hamburgerBtn.setAttribute('aria-expanded','false');
+    document.body.classList.remove('menu-open');
+  }
+  hamburgerBtn.addEventListener('click', () => {
+    const willOpen = !mobileMenu.classList.contains('open');
+    mobileMenu.classList.toggle('open', willOpen);
+    hamburgerBtn.classList.toggle('active', willOpen);
+    hamburgerBtn.setAttribute('aria-expanded', String(willOpen));
+    document.body.classList.toggle('menu-open', willOpen);
+  });
+  mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
+
+  // Reveal on scroll
+  const revealEls = document.querySelectorAll('.reveal');
+  if('IntersectionObserver' in window){
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          entry.target.classList.add('in-view');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold:0.15, rootMargin:'0px 0px -60px 0px' });
+    revealEls.forEach(el => io.observe(el));
+  } else {
+    revealEls.forEach(el => el.classList.add('in-view'));
+  }
+
+  // Footer year
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>
