@@ -225,6 +225,10 @@
   .angle-one::after{ background:var(--orange-sat); }
   .angle-two::before{ background:var(--orange-sat); }
   .angle-two::after{ background:var(--charcoal-sat); }
+  .angle-three::before{ background:var(--charcoal-sat); }
+  .angle-three::after{ background:var(--charcoal-deeper); }
+  .angle-four::before{ background:var(--charcoal-deeper); }
+  .angle-four::after{ background:var(--cream); }
 
   /* ===== EVENTS / CAROUSEL ===== */
   .section-events{ background:var(--orange-sat); padding-block:var(--sect-pad); scroll-margin-top:90px; }
@@ -300,7 +304,8 @@
   .exp-head p{ color:rgba(247,242,234,.72); margin-top:.85rem; font-weight:500; }
 
   .exp-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:clamp(1.25rem,2.5vw,2rem); }
-  @media (max-width:820px){ .exp-grid{ grid-template-columns:1fr; } }
+  @media (max-width:1024px){ .exp-grid{ grid-template-columns:repeat(2,1fr); } }
+  @media (max-width:640px){ .exp-grid{ grid-template-columns:1fr; } }
 
   .exp-card{
     position:relative; aspect-ratio:1/1; overflow:hidden; border-radius:0;
@@ -330,6 +335,102 @@
   }
   .exp-body h3{ font-family:'Bebas Neue',sans-serif; color:var(--white); font-size:clamp(1.7rem,3vw,2.3rem); letter-spacing:.02em; }
   .exp-body p{ color:rgba(247,242,234,.8); font-size:.92rem; margin-top:.5rem; max-width:22rem; font-weight:500; }
+
+  /* ===== OUR MENU (CATEGORY CARDS) ===== */
+  .section-menu-cats{ background:var(--charcoal-deeper); padding-block:var(--sect-pad); scroll-margin-top:90px; }
+  .menucats-head{ max-width:40rem; margin-bottom:2.75rem; }
+  .menucats-head .eyebrow{ color:var(--orange-light); }
+  .menucats-head h2{ color:var(--cream); font-size:clamp(2.4rem,6vw,4rem); margin-top:.35rem; }
+  .menucats-head p{ color:rgba(247,242,234,.72); margin-top:.85rem; font-weight:500; }
+
+  .menucats-grid{
+    display:grid; grid-template-columns:repeat(5,1fr);
+    gap:clamp(.9rem,1.8vw,1.5rem);
+  }
+  @media (max-width:1024px){ .menucats-grid{ grid-template-columns:repeat(3,1fr); } }
+  @media (max-width:640px){ .menucats-grid{ grid-template-columns:repeat(2,1fr); gap:.85rem; } }
+
+  .menucats-card{
+    position:relative; aspect-ratio:1/1; overflow:hidden; border-radius:18px;
+    border:none; padding:0; margin:0; cursor:pointer; background:none;
+    font:inherit; text-align:left; -webkit-tap-highlight-color:transparent;
+    transition: transform .5s cubic-bezier(.2,.75,.2,1), box-shadow .5s ease;
+  }
+  .menucats-card img{
+    position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
+    filter:saturate(.9) brightness(.78);
+    transition: transform .9s ease, filter .5s ease;
+  }
+  .menucats-card::after{
+    content:''; position:absolute; inset:0;
+    background:linear-gradient(180deg, rgba(24,27,28,.02) 0%, rgba(24,27,28,.1) 45%, rgba(24,27,28,.92) 100%);
+  }
+  .menucats-card:hover, .menucats-card:focus-visible{
+    transform:translateY(-8px);
+    box-shadow:0 26px 50px -16px rgba(225,138,63,.55), 0 0 0 1px rgba(225,138,63,.35);
+  }
+  .menucats-card:hover img, .menucats-card:focus-visible img{ transform:scale(1.08); filter:saturate(1.05) brightness(.9); }
+  .menucats-cap{
+    position:absolute; left:0; right:0; bottom:0; z-index:2;
+    padding:1.1rem 1.1rem;
+    color:var(--white); font-family:'Bebas Neue',sans-serif;
+    font-size:clamp(1.1rem,2.4vw,1.4rem); letter-spacing:.03em; line-height:1.15;
+  }
+  .menucats-hint{
+    display:inline-flex; align-items:center; gap:.4rem;
+    color:var(--orange-light); font-family:'Manrope',sans-serif; font-weight:700;
+    font-size:.72rem; letter-spacing:.08em; text-transform:uppercase;
+    margin-top:2rem;
+  }
+
+  /* ===== LIGHTBOX (full view for menu cards) ===== */
+  .lightbox{
+    position:fixed; inset:0; z-index:200;
+    background:rgba(15,17,18,.94); backdrop-filter:blur(6px);
+    display:flex; align-items:center; justify-content:center;
+    opacity:0; visibility:hidden; transition:opacity .3s ease, visibility 0s linear .3s;
+    padding:clamp(1rem,4vw,2.5rem);
+  }
+  .lightbox.open{ opacity:1; visibility:visible; transition:opacity .3s ease; }
+  body.lightbox-open{ overflow:hidden; }
+  .lightbox-stage{
+    position:relative; width:100%; max-width:720px; max-height:100%;
+    display:flex; flex-direction:column; align-items:center; gap:1rem;
+  }
+  .lightbox-stage img{
+    width:100%; max-height:72svh; object-fit:contain; border-radius:14px;
+    box-shadow:0 30px 70px -20px rgba(0,0,0,.7);
+    background:var(--charcoal-deep);
+  }
+  .lightbox-caption{
+    color:var(--cream); font-family:'Bebas Neue',sans-serif;
+    font-size:clamp(1.3rem,3vw,1.9rem); letter-spacing:.03em; text-align:center; margin:0;
+  }
+  .lightbox-close{
+    position:absolute; top:clamp(.75rem,3vw,1.5rem); right:clamp(.75rem,3vw,1.5rem);
+    width:46px; height:46px; border-radius:50%; border:none; cursor:pointer;
+    background:rgba(255,255,255,.1); color:var(--cream);
+    display:flex; align-items:center; justify-content:center;
+    transition:background .3s ease, transform .3s ease; z-index:2;
+  }
+  .lightbox-close:hover{ background:var(--orange); color:var(--charcoal-deeper); transform:rotate(90deg); }
+  .lightbox-close svg{ width:20px; height:20px; }
+  .lightbox-arrow{
+    position:absolute; top:50%; transform:translateY(-50%);
+    width:48px; height:48px; border-radius:50%; border:none; cursor:pointer;
+    background:rgba(255,255,255,.1); color:var(--cream);
+    display:flex; align-items:center; justify-content:center;
+    transition:background .3s ease, transform .3s ease; z-index:2;
+  }
+  .lightbox-arrow:hover{ background:var(--orange); color:var(--charcoal-deeper); }
+  .lightbox-arrow svg{ width:20px; height:20px; }
+  .lightbox-prev{ left:clamp(.25rem,2vw,1rem); }
+  .lightbox-next{ right:clamp(.25rem,2vw,1rem); }
+  @media (max-width:640px){
+    .lightbox-arrow{ width:40px; height:40px; }
+    .lightbox-prev{ left:.25rem; }
+    .lightbox-next{ right:.25rem; }
+  }
 
   /* ===== MENU / RESTAURANT GALLERY ===== */
   .section-menu{ background:var(--cream); padding-block:var(--sect-pad); scroll-margin-top:90px; }
@@ -579,8 +680,51 @@
     </div>
   </section>
 
+  <div class="angle-divider angle-three" aria-hidden="true"></div>
+
+  <!-- ================= OUR MENU (CATEGORY CARDS) ================= -->
+  <section class="section-menu-cats" id="menu">
+    <div class="container">
+      <div class="menucats-head reveal">
+        <span class="eyebrow">Explore</span>
+        <h2 class="font-display">Our Menu</h2>
+        <p>Five categories, one philosophy — fresh, bold, and made to share. Tap a card for the full menu.</p>
+      </div>
+
+      <div class="menucats-grid reveal reveal-stagger" id="menuCatsGrid">
+        <button type="button" class="menucats-card" data-name="Wraps &amp; Sea Food">
+          <img src="https://i.postimg.cc/bv1yLr6v/PV-Wraps-and-Sea-Food-copy-1024x1024.jpg" alt="Wraps and Sea Food menu" loading="lazy">
+          <span class="menucats-cap">Wraps &amp; Sea Food</span>
+        </button>
+        <button type="button" class="menucats-card" data-name="Burgers">
+          <img src="https://i.postimg.cc/fyqDk9bG/PV-main-Burgersl-copy-1024x1024.jpg" alt="Burgers menu" loading="lazy">
+          <span class="menucats-cap">Burgers</span>
+        </button>
+        <button type="button" class="menucats-card" data-name="Traditional Cuisines">
+          <img src="https://i.postimg.cc/0239sDFw/PV-main-Tradition-Cuisines-copy-1024x1024.jpg" alt="Traditional Cuisines menu" loading="lazy">
+          <span class="menucats-cap">Traditional<br>Cuisines</span>
+        </button>
+        <button type="button" class="menucats-card" data-name="Pizza">
+          <img src="https://i.postimg.cc/fyyh4RvX/PV-Pizza-copy-1024x1024.jpg" alt="Pizza menu" loading="lazy">
+          <span class="menucats-cap">Pizza</span>
+        </button>
+        <button type="button" class="menucats-card" data-name="Platters">
+          <img src="https://i.postimg.cc/8cjxKn1x/PV-PLATTERS-copy-1024x1024.jpg" alt="Platters menu" loading="lazy">
+          <span class="menucats-cap">Platters</span>
+        </button>
+      </div>
+
+      <span class="menucats-hint reveal">
+        <svg fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24" width="14" height="14"><path stroke-linecap="round" stroke-linejoin="round" d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+        Tap any card to view full menu
+      </span>
+    </div>
+  </section>
+
+  <div class="angle-divider angle-four" aria-hidden="true"></div>
+
   <!-- ================= MENU / RESTAURANT ================= -->
-  <section class="section-menu" id="menu">
+  <section class="section-menu" id="kitchen">
     <div class="container">
       <div class="menu-head">
         <div class="reveal">
@@ -608,6 +752,23 @@
   </section>
 
 </main>
+
+<!-- ================= LIGHTBOX (full-view menu) ================= -->
+<div class="lightbox" id="menuLightbox" role="dialog" aria-modal="true" aria-label="Menu image viewer" aria-hidden="true">
+  <button class="lightbox-close" id="lightboxClose" aria-label="Close full view">
+    <svg fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 6l12 12M18 6 6 18"/></svg>
+  </button>
+  <button class="lightbox-arrow lightbox-prev" id="lightboxPrev" aria-label="Previous menu">
+    <svg fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 6l-6 6 6 6"/></svg>
+  </button>
+  <div class="lightbox-stage">
+    <img id="lightboxImg" src="" alt="">
+    <p class="lightbox-caption" id="lightboxCaption"></p>
+  </div>
+  <button class="lightbox-arrow lightbox-next" id="lightboxNext" aria-label="Next menu">
+    <svg fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 6l6 6-6 6"/></svg>
+  </button>
+</div>
 
 <!-- ================= FOOTER ================= -->
 <footer class="site-footer" id="visit">
@@ -803,6 +964,71 @@
 
     render();
     startAutoplay();
+  })();
+
+  // Menu category cards -> full-view lightbox
+  (function(){
+    const cards = Array.from(document.querySelectorAll('#menuCatsGrid .menucats-card'));
+    if(!cards.length) return;
+
+    const items = cards.map(card => ({
+      src: card.querySelector('img').src,
+      name: card.dataset.name
+    }));
+
+    const lightbox = document.getElementById('menuLightbox');
+    const lbImg = document.getElementById('lightboxImg');
+    const lbCaption = document.getElementById('lightboxCaption');
+    const closeBtn = document.getElementById('lightboxClose');
+    const prevBtn = document.getElementById('lightboxPrev');
+    const nextBtn = document.getElementById('lightboxNext');
+
+    let current = 0;
+    let lastFocused = null;
+
+    function show(index){
+      current = ((index % items.length) + items.length) % items.length;
+      const item = items[current];
+      lbImg.src = item.src;
+      lbImg.alt = item.name + ' — full menu view';
+      lbCaption.textContent = item.name;
+    }
+
+    function open(index, trigger){
+      lastFocused = trigger || document.activeElement;
+      show(index);
+      lightbox.classList.add('open');
+      lightbox.setAttribute('aria-hidden', 'false');
+      document.body.classList.add('lightbox-open');
+      closeBtn.focus();
+    }
+
+    function close(){
+      lightbox.classList.remove('open');
+      lightbox.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('lightbox-open');
+      lbImg.src = '';
+      if(lastFocused && typeof lastFocused.focus === 'function') lastFocused.focus();
+    }
+
+    cards.forEach((card, i) => {
+      card.addEventListener('click', () => open(i, card));
+    });
+
+    closeBtn.addEventListener('click', close);
+    nextBtn.addEventListener('click', () => show(current + 1));
+    prevBtn.addEventListener('click', () => show(current - 1));
+
+    lightbox.addEventListener('click', (e) => {
+      if(e.target === lightbox) close();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if(!lightbox.classList.contains('open')) return;
+      if(e.key === 'Escape') close();
+      if(e.key === 'ArrowRight') show(current + 1);
+      if(e.key === 'ArrowLeft') show(current - 1);
+    });
   })();
 
   // Footer year
