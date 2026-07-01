@@ -269,7 +269,7 @@
   }
   .coverflow-slide{
     position:absolute; top:50%; left:50%;
-    width:clamp(140px, 22vw, 300px); aspect-ratio:3/4;
+    width:clamp(140px, 22vw, 300px); aspect-ratio:1/1;
     border-radius:16px; overflow:hidden;
     box-shadow:0 20px 40px -12px rgba(24,27,28,.55);
     transition: transform .65s cubic-bezier(.22,.8,.25,1), opacity .65s ease, filter .55s ease;
@@ -290,7 +290,7 @@
 
   .cf-arrow{
     position:absolute; top:50%; transform:translateY(-50%);
-    width:clamp(36px, 8vw, 48px); height:clamp(36px, 8vw, 48px); border-radius:50%;
+    width:clamp(28px, 6vw, 36px); height:clamp(28px, 6vw, 36px); border-radius:50%;
     display:flex; align-items:center; justify-content:center;
     background:var(--charcoal-deeper); color:var(--cream);
     border:none; cursor:pointer; z-index:10;
@@ -300,20 +300,20 @@
   }
   .cf-arrow:hover{ background:var(--charcoal-deep); transform:translateY(-50%) scale(1.08); }
   .cf-arrow:active{ transform:translateY(-50%) scale(0.95); }
-  .cf-arrow svg{ width:clamp(14px, 3.5vw, 19px); height:clamp(14px, 3.5vw, 19px); }
+  .cf-arrow svg{ width:clamp(12px, 2.5vw, 16px); height:clamp(12px, 2.5vw, 16px); }
   .cf-prev{ left:clamp(.25rem, 1.5vw, 0); }
   .cf-next{ right:clamp(.25rem, 1.5vw, 0); }
 
   .cf-dots{ display:flex; align-items:center; justify-content:center; gap:.4rem; margin-top:clamp(1rem, 2vw, 2rem); flex-wrap:wrap; }
   .cf-dot{
-    width:7px; height:7px; border-radius:999px; padding:0; border:none;
+    width:5px; height:5px; border-radius:999px; padding:0; border:none;
     background:rgba(38,43,44,.35); cursor:pointer;
     transition: width .35s ease, background .35s ease;
     -webkit-tap-highlight-color:transparent;
     min-height:44px; min-width:44px; display:flex; align-items:center; justify-content:center;
   }
   .cf-dot:active{ background:var(--charcoal-deeper); }
-  .cf-dot.active{ width:28px; background:var(--charcoal-deeper); }
+  .cf-dot.active{ width:20px; background:var(--charcoal-deeper); }
 
   @media (max-width:640px){
     .coverflow{ padding-inline:.75rem; }
@@ -376,7 +376,7 @@
   }
   .menucats-slide{
     position:absolute; top:50%; left:50%;
-    width:clamp(140px, 22vw, 300px); aspect-ratio:3/4;
+    width:clamp(140px, 22vw, 300px); aspect-ratio:1/1;
     border-radius:16px; overflow:hidden;
     box-shadow:0 20px 40px -12px rgba(24,27,28,.55);
     transition: transform .65s cubic-bezier(.22,.8,.25,1), opacity .65s ease, filter .55s ease;
@@ -397,7 +397,7 @@
 
   .mc-arrow{
     position:absolute; top:50%; transform:translateY(-50%);
-    width:clamp(36px, 8vw, 48px); height:clamp(36px, 8vw, 48px); border-radius:50%;
+    width:clamp(28px, 6vw, 36px); height:clamp(28px, 6vw, 36px); border-radius:50%;
     display:flex; align-items:center; justify-content:center;
     background:var(--charcoal-deeper); color:var(--cream);
     border:none; cursor:pointer; z-index:10;
@@ -407,20 +407,20 @@
   }
   .mc-arrow:hover{ background:var(--charcoal-deep); transform:translateY(-50%) scale(1.08); }
   .mc-arrow:active{ transform:translateY(-50%) scale(0.95); }
-  .mc-arrow svg{ width:clamp(14px, 3.5vw, 19px); height:clamp(14px, 3.5vw, 19px); }
+  .mc-arrow svg{ width:clamp(12px, 2.5vw, 16px); height:clamp(12px, 2.5vw, 16px); }
   .mc-prev{ left:clamp(.25rem, 1.5vw, 0); }
   .mc-next{ right:clamp(.25rem, 1.5vw, 0); }
 
   .mc-dots{ display:flex; align-items:center; justify-content:center; gap:.4rem; margin-top:clamp(1rem, 2vw, 2rem); flex-wrap:wrap; }
   .mc-dot{
-    width:7px; height:7px; border-radius:999px; padding:0; border:none;
+    width:5px; height:5px; border-radius:999px; padding:0; border:none;
     background:rgba(247,242,234,.35); cursor:pointer;
     transition: width .35s ease, background .35s ease;
     -webkit-tap-highlight-color:transparent;
     min-height:44px; min-width:44px; display:flex; align-items:center; justify-content:center;
   }
   .mc-dot:active{ background:var(--cream); }
-  .mc-dot.active{ width:28px; background:var(--cream); }
+  .mc-dot.active{ width:20px; background:var(--cream); }
 
   .menucats-hint{
     display:inline-flex; align-items:center; gap:.4rem;
@@ -836,7 +836,7 @@
       </div>
 
       <div class="meal-grid reveal">
-        <div class="meal-item meal-1" data-type="meal" data-title="Signature Dish" data-src="https://i.postimg.cc/VsnqMWBz/meal-6.jpg"><img src="https://i.postimg.cc/VsnqMWBz/meal-6.jpg" alt="Signature dish at PV Lifestyle" loading="lazy"></div>
+        <div class="meal-item meal-1" data-type="meal" data-title="Signature Dish" data-src="https://i.postimg.cc/mDk66stX/meal-6.jpg"><img src="https://i.postimg.cc/mDk66stX/meal-6.jpg" alt="Signature dish at PV Lifestyle" loading="lazy"></div>
         <div class="meal-item meal-2" data-type="meal" data-title="Plated Meal" data-src="https://i.postimg.cc/m27RSYxh/meal-5.jpg"><img src="https://i.postimg.cc/m27RSYxh/meal-5.jpg" alt="Plated meal at PV Lifestyle" loading="lazy"></div>
         <div class="meal-item meal-3" data-type="meal" data-title="Dish Detail" data-src="https://i.postimg.cc/DZW34sdf/meal-4.jpg"><img src="https://i.postimg.cc/DZW34sdf/meal-4.jpg" alt="Dish detail at PV Lifestyle" loading="lazy"></div>
         <div class="meal-item meal-4" data-type="meal" data-title="Fresh Preparation" data-src="https://i.postimg.cc/qMcVKpn2/meal-3.jpg"><img src="https://i.postimg.cc/qMcVKpn2/meal-3.jpg" alt="Fresh preparation at PV Lifestyle" loading="lazy"></div>
