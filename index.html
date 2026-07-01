@@ -334,53 +334,73 @@
     padding:.3rem .7rem; margin-bottom:.9rem;
   }
   .exp-body h3{ font-family:'Bebas Neue',sans-serif; color:var(--white); font-size:clamp(1.7rem,3vw,2.3rem); letter-spacing:.02em; }
-  .exp-body p{ color:rgba(247,242,234,.8); font-size:.92rem; margin-top:.5rem; max-width:22rem; font-weight:500; }
+  .exp-body p{ color:rgba(247,242,234,.8); font-size:.92rem; margin-top:.35rem; }
 
-  /* ===== OUR MENU (CATEGORY CARDS) ===== */
+  /* ===== OUR MENU (COVERFLOW CAROUSEL) ===== */
   .section-menu-cats{ background:var(--charcoal-deeper); padding-block:var(--sect-pad); scroll-margin-top:90px; }
   .menucats-head{ max-width:40rem; margin-bottom:2.75rem; }
   .menucats-head .eyebrow{ color:var(--orange-light); }
   .menucats-head h2{ color:var(--cream); font-size:clamp(2.4rem,6vw,4rem); margin-top:.35rem; }
   .menucats-head p{ color:rgba(247,242,234,.72); margin-top:.85rem; font-weight:500; }
 
-  .menucats-grid{
-    display:grid; grid-template-columns:repeat(5,1fr);
-    gap:clamp(.9rem,1.8vw,1.5rem);
+  .menucats-coverflow{ position:relative; width:100%; padding-inline:clamp(3.5rem, 8vw, 6rem); }
+  .menucats-track{
+    position:relative; width:100%;
+    height:clamp(320px, 42vw, 460px);
+    perspective:1400px;
   }
-  @media (max-width:1024px){ .menucats-grid{ grid-template-columns:repeat(3,1fr); } }
-  @media (max-width:640px){ .menucats-grid{ grid-template-columns:repeat(2,1fr); gap:.85rem; } }
+  .menucats-slide{
+    position:absolute; top:50%; left:50%;
+    width:clamp(200px, 27vw, 300px); aspect-ratio:3/4;
+    border-radius:22px; overflow:hidden;
+    box-shadow:0 30px 55px -18px rgba(24,27,28,.55);
+    transition: transform .65s cubic-bezier(.22,.8,.25,1), opacity .65s ease, filter .55s ease;
+    will-change:transform;
+  }
+  .menucats-slide img{ width:100%; height:100%; object-fit:cover; }
+  .menucats-slide.is-active{ cursor:default; }
+  .menucats-slide:not(.is-active){ cursor:pointer; }
+  .menucats-slide-cap{
+    position:absolute; left:0; right:0; bottom:0;
+    padding:1.1rem 1.2rem;
+    background:linear-gradient(180deg, transparent, rgba(24,27,28,.92));
+    color:var(--white);
+  }
+  .menucats-slide-cap .label{ display:block; font-size:.68rem; font-weight:800; letter-spacing:.22em; color:var(--orange-light); margin-bottom:.15rem; }
+  .menucats-slide-cap .name{ font-family:'Bebas Neue',sans-serif; font-size:1.5rem; letter-spacing:.03em; }
 
-  .menucats-card{
-    position:relative; aspect-ratio:1/1; overflow:hidden; border-radius:18px;
-    border:none; padding:0; margin:0; cursor:pointer; background:none;
-    font:inherit; text-align:left; -webkit-tap-highlight-color:transparent;
-    transition: transform .5s cubic-bezier(.2,.75,.2,1), box-shadow .5s ease;
+  .mc-arrow{
+    position:absolute; top:50%; transform:translateY(-50%);
+    width:48px; height:48px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    background:var(--charcoal-deeper); color:var(--cream);
+    border:none; cursor:pointer; z-index:10;
+    box-shadow:0 12px 26px -10px rgba(24,27,28,.55);
+    transition: background .3s ease, transform .3s ease;
   }
-  .menucats-card img{
-    position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
-    filter:saturate(.9) brightness(.78);
-    transition: transform .9s ease, filter .5s ease;
+  .mc-arrow:hover{ background:var(--charcoal-deep); transform:translateY(-50%) scale(1.08); }
+  .mc-arrow svg{ width:19px; height:19px; }
+  .mc-prev{ left:0; }
+  .mc-next{ right:0; }
+
+  .mc-dots{ display:flex; align-items:center; justify-content:center; gap:.5rem; margin-top:2rem; }
+  .mc-dot{
+    width:9px; height:9px; border-radius:999px; padding:0; border:none;
+    background:rgba(247,242,234,.35); cursor:pointer;
+    transition: width .35s ease, background .35s ease;
   }
-  .menucats-card::after{
-    content:''; position:absolute; inset:0;
-    background:linear-gradient(180deg, rgba(24,27,28,.02) 0%, rgba(24,27,28,.1) 45%, rgba(24,27,28,.92) 100%);
-  }
-  .menucats-card:hover, .menucats-card:focus-visible{
-    transform:translateY(-8px);
-    box-shadow:0 26px 50px -16px rgba(225,138,63,.55), 0 0 0 1px rgba(225,138,63,.35);
-  }
-  .menucats-card:hover img, .menucats-card:focus-visible img{ transform:scale(1.08); filter:saturate(1.05) brightness(.9); }
-  .menucats-cap{
-    position:absolute; left:0; right:0; bottom:0; z-index:2;
-    padding:1.1rem 1.1rem;
-    color:var(--white); font-family:'Bebas Neue',sans-serif;
-    font-size:clamp(1.1rem,2.4vw,1.4rem); letter-spacing:.03em; line-height:1.15;
-  }
+  .mc-dot.active{ width:30px; background:var(--cream); }
+
   .menucats-hint{
     display:inline-flex; align-items:center; gap:.4rem;
     color:var(--orange-light); font-family:'Manrope',sans-serif; font-weight:700;
     font-size:.72rem; letter-spacing:.08em; text-transform:uppercase;
     margin-top:2rem;
+  }
+
+  @media (max-width:640px){
+    .menucats-coverflow{ padding-inline:2.75rem; }
+    .mc-arrow{ width:40px; height:40px; }
   }
 
   /* ===== LIGHTBOX (full view for menu cards) ===== */
@@ -498,7 +518,8 @@
     width:42px; height:42px; border-radius:50%;
     display:flex; align-items:center; justify-content:center;
     background:rgba(247,242,234,.08); border:1px solid rgba(247,242,234,.14);
-    transition:background .3s ease, transform .3s ease, border-color .3s ease;
+    transition: background .3s ease, border-color .3s ease, transform .3s ease;
+    cursor:pointer;
   }
   .social-btn:hover{ background:var(--orange); border-color:var(--orange); transform:translateY(-3px); }
   .social-btn svg{ width:19px; height:19px; color:var(--cream); }
@@ -682,38 +703,57 @@
 
   <div class="angle-divider angle-three" aria-hidden="true"></div>
 
-  <!-- ================= OUR MENU (CATEGORY CARDS) ================= -->
+  <!-- ================= OUR MENU (COVERFLOW CAROUSEL) ================= -->
   <section class="section-menu-cats" id="menu">
     <div class="container">
       <div class="menucats-head reveal">
         <span class="eyebrow">Explore</span>
         <h2 class="font-display">Our Menu</h2>
-        <p>Five categories, one philosophy — fresh, bold, and made to share. Tap a card for the full menu.</p>
+        <p>Five categories, one philosophy — fresh, bold, and made to share. Tap a card to view the full menu.</p>
       </div>
+    </div>
 
-      <div class="menucats-grid reveal reveal-stagger" id="menuCatsGrid">
-        <button type="button" class="menucats-card" data-name="Wraps &amp; Sea Food">
+    <div class="menucats-coverflow reveal" id="menuCoverflow">
+      <div class="menucats-track" id="menucatsTrack">
+        <div class="menucats-slide" data-index="0">
           <img src="https://i.postimg.cc/bv1yLr6v/PV-Wraps-and-Sea-Food-copy-1024x1024.jpg" alt="Wraps and Sea Food menu" loading="lazy">
-          <span class="menucats-cap">Wraps &amp; Sea Food</span>
-        </button>
-        <button type="button" class="menucats-card" data-name="Burgers">
+          <div class="menucats-slide-cap"><span class="label">Category</span><span class="name">Wraps &amp; Sea Food</span></div>
+        </div>
+        <div class="menucats-slide" data-index="1">
           <img src="https://i.postimg.cc/fyqDk9bG/PV-main-Burgersl-copy-1024x1024.jpg" alt="Burgers menu" loading="lazy">
-          <span class="menucats-cap">Burgers</span>
-        </button>
-        <button type="button" class="menucats-card" data-name="Traditional Cuisines">
+          <div class="menucats-slide-cap"><span class="label">Category</span><span class="name">Burgers</span></div>
+        </div>
+        <div class="menucats-slide" data-index="2">
           <img src="https://i.postimg.cc/0239sDFw/PV-main-Tradition-Cuisines-copy-1024x1024.jpg" alt="Traditional Cuisines menu" loading="lazy">
-          <span class="menucats-cap">Traditional<br>Cuisines</span>
-        </button>
-        <button type="button" class="menucats-card" data-name="Pizza">
+          <div class="menucats-slide-cap"><span class="label">Category</span><span class="name">Traditional<br>Cuisines</span></div>
+        </div>
+        <div class="menucats-slide" data-index="3">
           <img src="https://i.postimg.cc/fyyh4RvX/PV-Pizza-copy-1024x1024.jpg" alt="Pizza menu" loading="lazy">
-          <span class="menucats-cap">Pizza</span>
-        </button>
-        <button type="button" class="menucats-card" data-name="Platters">
+          <div class="menucats-slide-cap"><span class="label">Category</span><span class="name">Pizza</span></div>
+        </div>
+        <div class="menucats-slide" data-index="4">
           <img src="https://i.postimg.cc/8cjxKn1x/PV-PLATTERS-copy-1024x1024.jpg" alt="Platters menu" loading="lazy">
-          <span class="menucats-cap">Platters</span>
-        </button>
+          <div class="menucats-slide-cap"><span class="label">Category</span><span class="name">Platters</span></div>
+        </div>
       </div>
 
+      <button class="mc-arrow mc-prev" id="mcPrev" aria-label="Previous menu category">
+        <svg fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 6l-6 6 6 6"/></svg>
+      </button>
+      <button class="mc-arrow mc-next" id="mcNext" aria-label="Next menu category">
+        <svg fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 6l6 6-6 6"/></svg>
+      </button>
+
+      <div class="mc-dots" id="mcDots">
+        <button class="mc-dot" data-index="0" aria-label="Show Wraps &amp; Sea Food"></button>
+        <button class="mc-dot" data-index="1" aria-label="Show Burgers"></button>
+        <button class="mc-dot" data-index="2" aria-label="Show Traditional Cuisines"></button>
+        <button class="mc-dot" data-index="3" aria-label="Show Pizza"></button>
+        <button class="mc-dot" data-index="4" aria-label="Show Platters"></button>
+      </div>
+    </div>
+
+    <div class="container">
       <span class="menucats-hint reveal">
         <svg fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24" width="14" height="14"><path stroke-linecap="round" stroke-linejoin="round" d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
         Tap any card to view full menu
@@ -802,34 +842,30 @@
       <h4>Visit Us</h4>
       <ul>
         <li class="contact-item">
-          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21c-4.5-4.2-7-7.9-7-11a7 7 0 1 1 14 0c0 3.1-2.5 6.8-7 11Z"/><circle cx="12" cy="10" r="2.5"/></svg>
-          <a href="https://www.google.com/maps/search/?api=1&query=67+Van+Heerden+St,+Mokopane,+0600" target="_blank" rel="noopener noreferrer">67 Van Heerden St,<br>Mokopane, 0600</a>
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+          <a href="mailto:info@pvlifestyle.co.za">info@pvlifestyle.co.za</a>
         </li>
         <li class="contact-item">
-          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 5c0 8.3 6.7 15 15 15l3-4-6-3-2 2c-2.2-1.1-4-2.9-5-5l2-2-3-6-4 3Z"/></svg>
-          <a href="tel:+27765069520">076 506 9520</a>
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+          <a href="tel:+27152920000">+27 (0) 15 292 0000</a>
         </li>
         <li class="contact-item">
-          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path stroke-linecap="round" stroke-linejoin="round" d="M12 7v5l3.2 2"/></svg>
-          <span>Open Daily<br>Closes 11:00 PM</span>
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+          <span>Mokopane, Limpopo</span>
         </li>
       </ul>
     </div>
 
     <div class="footer-col">
-      <h4>Service Options</h4>
+      <h4>Hours</h4>
       <ul>
         <li class="service-item">
-          <svg fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
-          All you can eat
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="1"/><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4v2m7.07-7.07a7 7 0 11-9.9 0M12 2a10 10 0 110 20 10 10 0 010-20z"/></svg>
+          <span>Mon–Thu: 12pm–11pm</span>
         </li>
         <li class="service-item">
-          <svg fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
-          Outdoor seating
-        </li>
-        <li class="service-item">
-          <svg fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
-          Private dining room
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="1"/><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4v2m7.07-7.07a7 7 0 11-9.9 0M12 2a10 10 0 110 20 10 10 0 010-20z"/></svg>
+          <span>Fri–Sun: 12pm–2am</span>
         </li>
       </ul>
     </div>
@@ -837,17 +873,19 @@
   </div>
 
   <div class="container footer-bottom">
-    <p>© <span id="year"></span> PV Lifestyle Restaurant &amp; Bar · Mokopane, Limpopo, South Africa. All rights reserved.</p>
+    <p>&copy; <span id="year"></span> PV Lifestyle. All rights reserved.</p>
     <a href="#hero" class="to-top" aria-label="Back to top">
-      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 19V5m0 0-6 6m6-6 6 6"/></svg>
+      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4"/></svg>
     </a>
   </div>
 </footer>
 
 <script>
-  // Header scroll state
-  const header = document.getElementById('siteHeader');
-  const onScroll = () => header.classList.toggle('is-scrolled', window.scrollY > 30);
+  // Header scroll effect
+  const siteHeader = document.getElementById('siteHeader');
+  function onScroll(){
+    siteHeader.classList.toggle('is-scrolled', window.scrollY > 50);
+  }
   window.addEventListener('scroll', onScroll, { passive:true });
   onScroll();
 
@@ -966,14 +1004,95 @@
     startAutoplay();
   })();
 
+  // Menu category coverflow carousel
+  (function(){
+    const track = document.getElementById('menucatsTrack');
+    if(!track) return;
+    const slides = Array.from(track.querySelectorAll('.menucats-slide'));
+    const dots = Array.from(document.querySelectorAll('#mcDots .mc-dot'));
+    const prevBtn = document.getElementById('mcPrev');
+    const nextBtn = document.getElementById('mcNext');
+    const wrapper = document.getElementById('menuCoverflow');
+    const count = slides.length;
+    let current = 0;
+    let timer = null;
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function render(){
+      slides.forEach((slide, i) => {
+        let diff = i - current;
+        if(diff > count / 2) diff -= count;
+        if(diff < -count / 2) diff += count;
+
+        const abs = Math.abs(diff);
+        let x, scale, rotate, opacity, z, filter;
+
+        if(diff === 0){
+          x = 0; scale = 1; rotate = 0; opacity = 1; z = 5; filter = 'none';
+        } else if(abs === 1){
+          x = diff * 72;
+          scale = 0.82;
+          rotate = diff * -14;
+          opacity = 0.85;
+          z = 3;
+          filter = 'brightness(.7) saturate(.9)';
+        } else {
+          x = diff * 95;
+          scale = 0.68;
+          rotate = diff * -14;
+          opacity = 0;
+          z = 1;
+          filter = 'brightness(.6) saturate(.85)';
+        }
+
+        slide.style.transform = `translate(-50%, -50%) translateX(${x}%) scale(${scale}) rotateY(${rotate}deg)`;
+        slide.style.opacity = opacity;
+        slide.style.zIndex = z;
+        slide.style.filter = filter;
+        slide.classList.toggle('is-active', diff === 0);
+      });
+      dots.forEach((dot, i) => dot.classList.toggle('active', i === current));
+    }
+
+    function go(index){
+      current = ((index % count) + count) % count;
+      render();
+    }
+
+    function next(){ go(current + 1); }
+    function prev(){ go(current - 1); }
+
+    function startAutoplay(){
+      if(reduceMotion) return;
+      stopAutoplay();
+      timer = setInterval(next, 4200);
+    }
+    function stopAutoplay(){ if(timer) clearInterval(timer); }
+    function restartAutoplay(){ stopAutoplay(); startAutoplay(); }
+
+    nextBtn.addEventListener('click', () => { next(); restartAutoplay(); });
+    prevBtn.addEventListener('click', () => { prev(); restartAutoplay(); });
+    dots.forEach(dot => dot.addEventListener('click', () => { go(Number(dot.dataset.index)); restartAutoplay(); }));
+    slides.forEach(slide => slide.addEventListener('click', () => {
+      const idx = Number(slide.dataset.index);
+      if(idx !== current){ go(idx); restartAutoplay(); }
+    }));
+
+    wrapper.addEventListener('mouseenter', stopAutoplay);
+    wrapper.addEventListener('mouseleave', startAutoplay);
+
+    render();
+    startAutoplay();
+  })();
+
   // Menu category cards -> full-view lightbox
   (function(){
-    const cards = Array.from(document.querySelectorAll('#menuCatsGrid .menucats-card'));
-    if(!cards.length) return;
+    const slides = Array.from(document.querySelectorAll('#menucatsTrack .menucats-slide'));
+    if(!slides.length) return;
 
-    const items = cards.map(card => ({
-      src: card.querySelector('img').src,
-      name: card.dataset.name
+    const items = slides.map(slide => ({
+      src: slide.querySelector('img').src,
+      name: slide.querySelector('.name').textContent.trim()
     }));
 
     const lightbox = document.getElementById('menuLightbox');
@@ -1011,8 +1130,8 @@
       if(lastFocused && typeof lastFocused.focus === 'function') lastFocused.focus();
     }
 
-    cards.forEach((card, i) => {
-      card.addEventListener('click', () => open(i, card));
+    slides.forEach((slide, i) => {
+      slide.addEventListener('click', () => open(i, slide));
     });
 
     closeBtn.addEventListener('click', close);
