@@ -181,29 +181,23 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
   animation:heroZoom 18s ease-in-out infinite alternate;
 }
 @keyframes heroZoom{from{transform:scale(1.08);}to{transform:scale(1.16);}}
-.hero-overlay{
-  position:absolute;inset:0;
-  background:linear-gradient(180deg, rgba(255,233,210,0.55) 0%, rgba(122,50,22,0.55) 55%, rgba(122,50,22,0.82) 100%);
-}
+
 .hero-content{position:relative;z-index:2;max-width:780px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:26px;color:var(--cream);}
-.hero-content .eyebrow-pill{color:var(--cream);border-color:rgba(255,255,255,0.4);}
-.hero-content h1{font-size:clamp(2.8rem,8vw,5.6rem);color:var(--cream);line-height:1;text-shadow:0 10px 40px rgba(0,0,0,0.25);}
+.hero-content h1{
+  font-size:clamp(2.8rem,8vw,5.6rem);
+  color:var(--cream);
+  line-height:1;
+  text-shadow:0 10px 40px rgba(0,0,0,0.5);
+  font-weight: 700;
+}
 .hero-content .tagline{
   display:block;font-family:'Fraunces',serif;font-style:italic;font-weight:500;
   font-size:clamp(1.1rem,2.4vw,1.5rem);color:var(--gold-soft);margin-top:10px;
 }
-.hero-sub{font-size:clamp(1rem,2vw,1.15rem);opacity:0.92;max-width:520px;}
+.hero-sub{font-size:clamp(1rem,2vw,1.15rem);opacity:0.92;max-width:520px; text-shadow:0 2px 8px rgba(0,0,0,0.6);}
 .hero-actions{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;}
-.service-chips{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;color:var(--cream);}
-.service-chips .chip{background:rgba(255,255,255,0.14);border-color:rgba(255,255,255,0.3);color:var(--cream);}
-
-.scroll-cue{
-  position:absolute;bottom:28px;left:50%;transform:translateX(-50%);z-index:2;
-  display:flex;flex-direction:column;align-items:center;gap:8px;color:var(--cream);opacity:0.85;
-}
-.scroll-cue .line{width:1px;height:34px;background:linear-gradient(180deg, rgba(255,255,255,0.9), transparent);animation:scrollLine 2s ease-in-out infinite;}
-@keyframes scrollLine{0%{transform:scaleY(0.3);opacity:0.4;}50%{transform:scaleY(1);opacity:1;}100%{transform:scaleY(0.3);opacity:0.4;}}
-.scroll-cue span{font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;font-weight:600;}
+.service-chips{display:flex;flex-wrap:wrap;gap:20px;justify-content:center;color:var(--cream);}
+.service-text{font-size:1.1rem;font-weight:600;text-shadow:0 2px 8px rgba(0,0,0,0.8);}
 
 /* wedge divider — echoes the logo's triangular mark */
 .wedge{position:relative;height:64px;margin-top:-1px;z-index:3;}
@@ -222,12 +216,12 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 .explore .section-head p{color:rgba(255,255,255,0.9);}
 
 .card-grid{
-  max-width:1180px;margin:0 auto;
-  display:grid;grid-template-columns:repeat(4,1fr);gap:26px;
+  max-width:1652px;margin:0 auto;
+  display:grid;grid-template-columns:repeat(4,1fr);gap:36px;
   padding:0 20px;
 }
 .exp-card{
-  position:relative;aspect-ratio:1/1;border-radius:var(--radius-card);
+  position:relative;aspect-ratio:2/3;border-radius:var(--radius-card);
   overflow:hidden;cursor:pointer;
   border:1px solid rgba(255,255,255,0.35);
   box-shadow:var(--shadow-pop);
@@ -505,9 +499,7 @@ a:focus-visible, button:focus-visible{outline:2px solid var(--gold);outline-offs
 <!-- ============ HERO ============ -->
 <header class="hero" id="home">
   <div class="hero-bg"></div>
-  <div class="hero-overlay"></div>
   <div class="hero-content">
-    <span class="eyebrow-pill">Est. 2022 · Mokopane</span>
     <h1>PV Lifestyle <span class="tagline">The Ideal Atmosphere</span></h1>
     <p class="hero-sub">Fine dining, hand-crafted cocktails and an intimate atmosphere &mdash; serving the freshest food and finest wines Mokopane has to offer.</p>
     <div class="hero-actions">
@@ -515,12 +507,11 @@ a:focus-visible, button:focus-visible{outline:2px solid var(--gold);outline-offs
       <a href="tel:0765069520" class="btn btn-glass">Reserve a Table</a>
     </div>
     <div class="service-chips">
-      <span class="chip">🍽️ All You Can Eat</span>
-      <span class="chip">🌿 Outdoor Seating</span>
-      <span class="chip">🥂 Private Dining Room</span>
+      <span class="service-text">🍽️ All You Can Eat</span>
+      <span class="service-text">🌿 Outdoor Seating</span>
+      <span class="service-text">🥂 Private Dining Room</span>
     </div>
   </div>
-  <div class="scroll-cue"><div class="line"></div><span>Scroll</span></div>
 </header>
 
 <div class="wedge" style="background:var(--s1-b);">
@@ -612,6 +603,10 @@ a:focus-visible, button:focus-visible{outline:2px solid var(--gold);outline-offs
       <p>Open daily &middot; Closes 11 pm</p>
       <span class="status">Open Now</span>
     </div>
+  </div>
+  
+  <div class="map-container reveal" style="max-width: 1100px; margin: 40px auto 0; padding: 0 20px;">
+    <iframe src="https://maps.google.com/maps?q=67%20Van%20Heerden%20St,%20Mokopane&t=&z=15&ie=UTF8&iwloc=&output=embed" width="100%" height="450" style="border:0; border-radius: 26px; box-shadow: 0 10px 30px rgba(0,0,0,0.3);" allowfullscreen="" loading="lazy"></iframe>
   </div>
 </section>
 
