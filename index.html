@@ -3,794 +3,901 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PV Lifestyle Restaurant &amp; Bar | Fine Dining in Mokopane</title>
-<meta name="description" content="PV Lifestyle Restaurant &amp; Bar — an intimate fine dining experience in Mokopane, South Africa. Premium steaks, exceptional wines, unforgettable evenings.">
-
+<title>PV Lifestyle Restaurant & Bar | Mokopane's Finest Dining Experience</title>
+<meta name="description" content="PV Lifestyle Restaurant & Bar — fine dining, craft cocktails and an intimate atmosphere in Mokopane. All you can eat, outdoor seating, private dining room & events.">
+<link rel="icon" href="https://i.postimg.cc/DZh18dK7/pvlogo-removebg-preview.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --page:#efe9e0;
-    --card:#ffffff;
-    --card-cream:#fbf7f0;
-    --black:#111111;
-    --black-2:#1b1813;
-    --copper:#c8793b;
-    --copper-light:#e3a868;
-    --copper-dark:#8f5424;
-    --copper-pale:#f4e2c9;
-    --grey:#d9d9d9;
-    --ink:#1c1a16;
-    --muted:#726c60;
-    --line:rgba(28,26,22,0.09);
-    --font-display:'Plus Jakarta Sans', sans-serif;
-    --font-body:'Inter', sans-serif;
-    --ease:cubic-bezier(.22,1,.36,1);
-    --radius-lg:32px;
-    --radius-md:22px;
-  }
+/* =========================================================
+   PV LIFESTYLE — ROOT TOKENS
+========================================================= */
+:root{
+  --cream:#fff8f0;
+  --charcoal:#2a2622;
+  --charcoal-2:#1c1916;
+  --ink:#33291f;
 
-  *{ margin:0; padding:0; box-sizing:border-box; }
-  html{ scroll-behavior:smooth; }
-  body{
-    background:var(--page);
-    color:var(--ink);
-    font-family:var(--font-body);
-    font-weight:400;
-    line-height:1.6;
-    overflow-x:hidden;
-    -webkit-font-smoothing:antialiased;
-  }
-  img{ max-width:100%; display:block; }
-  a{ color:inherit; text-decoration:none; }
-  ul{ list-style:none; }
-  button{ font-family:inherit; cursor:pointer; border:none; background:none; color:inherit; }
-  input, textarea, select{ font-family:inherit; }
-  ::selection{ background:var(--copper); color:#fff; }
-  :focus-visible{ outline:2px solid var(--copper); outline-offset:3px; }
+  --gold:#f0a53e;
+  --gold-soft:#ffd48c;
 
-  .container{ max-width:1280px; margin:0 auto; padding:0 32px; }
-  @media (max-width:640px){ .container{ padding:0 20px; } }
+  /* Section 1 — lighter orange */
+  --s1-a:#ffe9d2;
+  --s1-b:#ffd9ac;
 
-  h1,h2,h3,h4{ font-family:var(--font-display); font-weight:700; color:var(--ink); letter-spacing:-0.01em; line-height:1.15; }
+  /* Section 2 — bright orange */
+  --s2-a:#ff8a2b;
+  --s2-b:#ea611b;
 
-  .eyebrow{
-    display:inline-flex; align-items:center; gap:8px; font-size:12px; letter-spacing:0.22em; text-transform:uppercase;
-    color:var(--copper-dark); font-weight:700; margin-bottom:14px;
-  }
-  .eyebrow .dot{ width:6px; height:6px; border-radius:50%; background:var(--copper); flex:none; }
-  .eyebrow.on-dark{ color:var(--copper-light); }
+  /* Section 3 — darker orange */
+  --s3-a:#7a3216;
+  --s3-b:#4f1f0c;
 
-  .section-title{ font-size:clamp(28px,4vw,42px); margin-bottom:16px; }
-  .section-title em{ font-style:normal; color:var(--copper); }
-  .section-lede{ color:var(--muted); font-size:15.5px; max-width:480px; }
+  --white-glass: rgba(255,255,255,0.16);
+  --white-glass-strong: rgba(255,255,255,0.28);
+  --border-glass: rgba(255,255,255,0.35);
 
-  .btn{
-    display:inline-flex; align-items:center; justify-content:center; gap:8px;
-    padding:15px 30px; border-radius:999px; font-size:14px; font-weight:600;
-    transition:all .4s var(--ease); white-space:nowrap;
-  }
-  .btn-primary{ background:var(--copper); color:#fff; }
-  .btn-primary:hover{ background:var(--copper-dark); transform:translateY(-2px); box-shadow:0 16px 30px -12px rgba(200,121,59,0.5); }
-  .btn-dark{ background:var(--black); color:#fff; }
-  .btn-dark:hover{ background:#000; transform:translateY(-2px); box-shadow:0 16px 30px -12px rgba(0,0,0,0.4); }
-  .btn-outline{ border:1.5px solid var(--ink); color:var(--ink); }
-  .btn-outline:hover{ background:var(--ink); color:#fff; }
-  .btn-outline-light{ border:1.5px solid rgba(255,255,255,0.4); color:#fff; }
-  .btn-outline-light:hover{ background:rgba(255,255,255,0.12); border-color:#fff; }
-  .btn-sm{ padding:11px 22px; font-size:13px; }
+  --shadow-soft: 0 20px 50px -20px rgba(43,23,10,0.45);
+  --shadow-pop: 0 12px 30px -8px rgba(43,23,10,0.35);
 
-  .reveal{ opacity:0; transform:translateY(26px); transition:opacity .8s var(--ease), transform .8s var(--ease); }
-  .reveal.in{ opacity:1; transform:translateY(0); }
-  .reveal-delay-1{ transition-delay:.1s; }
-  .reveal-delay-2{ transition-delay:.2s; }
-  .reveal-delay-3{ transition-delay:.3s; }
-  @media (prefers-reduced-motion: reduce){ .reveal{ opacity:1; transform:none; transition:none; } html{ scroll-behavior:auto; } }
+  --radius-pill: 999px;
+  --radius-card: 28px;
 
-  /* icon circle */
-  .icon-badge{
-    width:52px; height:52px; border-radius:50%; background:var(--copper-pale); display:flex; align-items:center;
-    justify-content:center; flex:none;
-  }
-  .icon-badge svg{ width:22px; height:22px; stroke:var(--copper-dark); fill:none; stroke-width:1.6; }
-  .icon-badge.dark{ background:rgba(255,255,255,0.12); }
-  .icon-badge.dark svg{ stroke:var(--copper-light); }
+  --ease: cubic-bezier(.22,1,.36,1);
+}
 
-  /* ============ HEADER ============ */
-  header{ position:sticky; top:0; z-index:200; padding:22px 0; transition:all .4s var(--ease); }
-  header.scrolled{ padding:12px 0; background:rgba(239,233,224,0.86); backdrop-filter:blur(14px); }
-  nav{ display:flex; align-items:center; justify-content:space-between; }
-  .logo-mark img{ height:52px; width:auto; transition:height .4s var(--ease); }
-  header.scrolled .logo-mark img{ height:42px; }
-  .nav-links{ display:flex; align-items:center; gap:36px; }
-  .nav-links a{ font-size:14px; font-weight:500; color:var(--ink); position:relative; padding:4px 0; }
-  .nav-links a::after{ content:''; position:absolute; left:0; bottom:0; height:2px; width:0; background:var(--copper); transition:width .3s var(--ease); border-radius:2px; }
-  .nav-links a:hover::after{ width:100%; }
-  .nav-actions{ display:flex; align-items:center; gap:18px; }
-  .burger{ display:none; flex-direction:column; gap:5px; width:26px; z-index:220; }
-  .burger span{ height:2px; background:var(--ink); width:100%; border-radius:2px; transition:all .35s var(--ease); }
-  .burger.open span:nth-child(1){ transform:translateY(6.5px) rotate(45deg); }
-  .burger.open span:nth-child(2){ opacity:0; }
-  .burger.open span:nth-child(3){ transform:translateY(-6.5px) rotate(-45deg); }
-  @media (max-width:920px){
-    .nav-links{
-      position:fixed; inset:0 0 0 auto; width:min(78vw,340px); height:100vh; background:var(--card-cream);
-      flex-direction:column; justify-content:center; align-items:flex-start; gap:26px; padding:0 44px;
-      transform:translateX(100%); transition:transform .5s var(--ease); box-shadow:-20px 0 60px rgba(0,0,0,0.15);
-    }
-    .nav-links.open{ transform:translateX(0); }
-    .nav-links a{ font-size:18px; }
-    .nav-actions .btn{ display:none; }
-    .burger{ display:flex; }
-  }
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0;
+  font-family:'Inter',sans-serif;
+  color:var(--ink);
+  background:var(--s1-a);
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+img{max-width:100%;display:block;}
+a{color:inherit;text-decoration:none;}
+h1,h2,h3,h4{font-family:'Fraunces',serif;margin:0;font-weight:600;letter-spacing:-0.01em;}
+p{margin:0;line-height:1.65;}
+ul{margin:0;padding:0;list-style:none;}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit;}
+::selection{background:var(--gold);color:#241305;}
 
-  /* ============ HERO ============ */
-  .hero-wrap{ padding:10px 0 60px; }
-  .hero-card{
-    background:var(--card-cream); border-radius:44px; padding:64px; position:relative; overflow:hidden;
-    display:grid; grid-template-columns:1fr 1fr; gap:50px; align-items:center;
-  }
-  .hero-text h1{ font-size:clamp(34px,4.4vw,54px); margin-bottom:20px; }
-  .hero-text h1 .accent{ color:var(--copper); }
-  .hero-text p{ color:var(--muted); font-size:16px; max-width:420px; margin-bottom:34px; }
-  .hero-actions{ display:flex; gap:14px; flex-wrap:wrap; margin-bottom:44px; }
-  .hero-features{ display:flex; gap:28px; flex-wrap:wrap; }
-  .hero-feature{ display:flex; align-items:center; gap:10px; }
-  .hero-feature .icon-badge{ width:40px; height:40px; }
-  .hero-feature .icon-badge svg{ width:18px; height:18px; }
-  .hero-feature span{ font-size:13px; font-weight:600; color:var(--ink); max-width:90px; line-height:1.3; }
+@media (prefers-reduced-motion: reduce){
+  *{animation-duration:0.001ms !important; transition-duration:0.001ms !important; scroll-behavior:auto !important;}
+}
 
-  .hero-media{ position:relative; }
-  .hero-blob{
-    position:absolute; inset:-6% -10% -6% 6%; background:var(--copper-pale);
-    border-radius:63% 37% 38% 62% / 43% 39% 61% 57%;
-    z-index:0;
-  }
-  .hero-photo{
-    position:relative; z-index:1; border-radius:36px; overflow:hidden; box-shadow:0 40px 80px -30px rgba(20,15,5,0.35);
-  }
-  .hero-photo img{ width:100%; height:480px; object-fit:cover; }
-  .hero-badge{
-    position:absolute; z-index:2; bottom:24px; right:-18px; background:var(--black); color:#fff;
-    border-radius:20px; padding:18px 22px; text-align:center; box-shadow:0 20px 40px -14px rgba(0,0,0,0.5);
-    min-width:120px;
-  }
-  .hero-badge .num{ font-family:var(--font-display); font-size:26px; font-weight:800; color:var(--copper-light); line-height:1; }
-  .hero-badge .txt{ font-size:10.5px; letter-spacing:0.08em; text-transform:uppercase; margin-top:4px; color:var(--grey); }
+.eyebrow-pill{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:8px 18px;border-radius:var(--radius-pill);
+  font-size:0.72rem;letter-spacing:0.14em;text-transform:uppercase;
+  background:var(--white-glass);border:1px solid var(--border-glass);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  font-weight:600;
+}
+.eyebrow-pill::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--gold);display:inline-block;}
 
-  @media (max-width:980px){
-    .hero-card{ grid-template-columns:1fr; padding:44px 28px; border-radius:32px; }
-    .hero-media{ order:-1; }
-    .hero-photo img{ height:320px; }
-    .hero-badge{ right:8px; }
-  }
-  @media (max-width:520px){ .hero-features{ gap:18px; } .hero-feature span{ max-width:76px; } }
+.section-head{max-width:640px;margin:0 auto 56px;text-align:center;padding:0 24px;}
+.section-head .eyebrow{
+  display:inline-block;font-size:0.75rem;letter-spacing:0.2em;text-transform:uppercase;
+  font-weight:700;margin-bottom:14px;
+}
+.section-head h2{font-size:clamp(2rem,4.5vw,3.1rem);margin-bottom:14px;}
+.section-head p{font-size:1.02rem;opacity:0.85;}
 
-  /* ============ FEATURE ROW ============ */
-  .features{ padding:70px 0; }
-  .features-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:26px; }
-  .feature-item{ text-align:left; }
-  .feature-item .icon-badge{ margin-bottom:20px; }
-  .feature-item h3{ font-size:17px; margin-bottom:8px; }
-  .feature-item p{ font-size:13.5px; color:var(--muted); }
-  @media (max-width:900px){ .features-grid{ grid-template-columns:repeat(2,1fr); gap:34px 20px; } }
+/* buttons */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  padding:15px 30px;border-radius:var(--radius-pill);
+  font-weight:700;font-size:0.92rem;letter-spacing:0.01em;
+  transition:transform 0.4s var(--ease), box-shadow 0.4s var(--ease), background 0.3s ease;
+  white-space:nowrap;
+}
+.btn:hover{transform:translateY(-3px);}
+.btn-solid{background:linear-gradient(135deg,var(--gold-soft),var(--gold));color:#2a1706;box-shadow:var(--shadow-pop);}
+.btn-solid:hover{box-shadow:0 18px 38px -10px rgba(240,165,62,0.55);}
+.btn-glass{
+  background:var(--white-glass);border:1px solid var(--border-glass);color:inherit;
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+}
+.btn-glass:hover{background:var(--white-glass-strong);}
+.btn-dark{background:var(--charcoal);color:var(--cream);}
+.btn-dark:hover{box-shadow:0 18px 38px -10px rgba(0,0,0,0.5);}
 
-  /* ============ POPULAR DISHES (dark band) ============ */
-  .popular{ padding:20px 0 70px; }
-  .popular-band{
-    background:var(--black); border-radius:40px; padding:60px 56px 70px; position:relative; overflow:hidden;
-  }
-  .popular-band::before{
-    content:''; position:absolute; top:-120px; right:-120px; width:320px; height:320px; border-radius:50%;
-    background:radial-gradient(circle, rgba(200,121,59,0.18), transparent 70%);
-  }
-  .popular-head{ display:flex; justify-content:space-between; align-items:flex-end; gap:30px; margin-bottom:56px; flex-wrap:wrap; position:relative; z-index:1; }
-  .popular-head h2{ color:#fff; font-size:clamp(26px,3.4vw,36px); }
-  .popular-head p{ color:var(--grey); font-size:14.5px; max-width:340px; }
-  .dish-circles{ display:grid; grid-template-columns:repeat(3,1fr); gap:28px; position:relative; z-index:1; }
-  .dish-circle-card{
-    background:#fff; border-radius:24px; padding:86px 22px 30px; text-align:center; position:relative;
-    transition:transform .5s var(--ease);
-  }
-  .dish-circle-card:hover{ transform:translateY(-8px); }
-  .dish-circle{
-    position:absolute; top:-56px; left:50%; transform:translateX(-50%); width:132px; height:132px; border-radius:50%;
-    overflow:hidden; border:6px solid #fff; box-shadow:0 14px 30px -10px rgba(0,0,0,0.35);
-  }
-  .dish-circle img{ width:100%; height:100%; object-fit:cover; }
-  .dish-circle-card h4{ font-size:17px; margin-bottom:6px; }
-  .dish-circle-card p{ font-size:12.5px; color:var(--muted); margin-bottom:12px; }
-  .dish-circle-card .price{ font-family:var(--font-display); font-weight:800; color:var(--copper-dark); font-size:16px; }
-  @media (max-width:900px){ .dish-circles{ grid-template-columns:1fr; max-width:320px; margin:0 auto; } .popular-band{ padding:50px 26px 60px; } }
+/* chips */
+.chip{
+  display:inline-flex;align-items:center;gap:8px;padding:10px 18px;
+  border-radius:var(--radius-pill);font-size:0.82rem;font-weight:600;
+  background:var(--white-glass);border:1px solid var(--border-glass);
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+}
 
-  /* ============ RECOMMENDED ============ */
-  .recommended{ padding:70px 0 20px; text-align:center; }
-  .recommended .eyebrow{ justify-content:center; }
-  .recommended-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:28px; margin-top:52px; text-align:left; }
-  .dish-card{ background:var(--card); border-radius:24px; overflow:hidden; box-shadow:0 20px 50px -30px rgba(20,15,5,0.25); transition:transform .5s var(--ease); }
-  .dish-card:hover{ transform:translateY(-8px); }
-  .dish-card-media{ position:relative; height:220px; overflow:hidden; }
-  .dish-card-media img{ width:100%; height:100%; object-fit:cover; transition:transform .7s var(--ease); }
-  .dish-card:hover .dish-card-media img{ transform:scale(1.08); }
-  .dish-card-body{ padding:22px 24px 26px; position:relative; }
-  .dish-card-body h3{ font-size:18px; margin-bottom:6px; }
-  .dish-card-body p{ font-size:13px; color:var(--muted); margin-bottom:14px; line-height:1.55; }
-  .dish-card-foot{ display:flex; align-items:center; justify-content:space-between; }
-  .dish-card-foot .price{ font-family:var(--font-display); font-weight:800; color:var(--ink); font-size:17px; }
-  .plus-btn{
-    width:38px; height:38px; border-radius:50%; background:var(--copper); color:#fff; font-size:18px;
-    display:flex; align-items:center; justify-content:center; transition:all .3s var(--ease); flex:none;
-  }
-  .plus-btn:hover{ background:var(--copper-dark); transform:rotate(90deg); }
-  @media (max-width:900px){ .recommended-grid{ grid-template-columns:1fr; max-width:400px; margin:52px auto 0; } }
+/* =========================================================
+   NAVBAR
+========================================================= */
+.navbar{
+  position:fixed;top:18px;left:0;right:0;z-index:900;
+  display:flex;justify-content:center;padding:0 16px;
+  transition:top 0.4s var(--ease);
+}
+.nav-inner{
+  width:100%;max-width:1180px;
+  display:flex;align-items:center;justify-content:space-between;
+  gap:20px;padding:10px 12px 10px 20px;border-radius:var(--radius-pill);
+  background:rgba(255,255,255,0.22);
+  border:1px solid rgba(255,255,255,0.4);
+  backdrop-filter:blur(20px) saturate(160%);-webkit-backdrop-filter:blur(20px) saturate(160%);
+  box-shadow:0 8px 32px -12px rgba(43,23,10,0.35);
+  transition:background 0.4s ease, box-shadow 0.4s ease, padding 0.4s ease;
+}
+.navbar.scrolled .nav-inner{
+  background:rgba(255,255,255,0.55);
+  box-shadow:0 10px 30px -10px rgba(43,23,10,0.3);
+}
+.brand{display:flex;align-items:center;gap:10px;flex-shrink:0;}
+.brand img{height:42px;width:auto;}
+.nav-links{display:flex;align-items:center;gap:6px;}
+.nav-links a{
+  padding:10px 16px;border-radius:var(--radius-pill);font-size:0.9rem;font-weight:600;
+  transition:background 0.3s ease, color 0.3s ease;
+}
+.nav-links a:hover{background:rgba(255,255,255,0.5);}
+.nav-cta{padding:12px 24px;font-size:0.85rem;}
+.nav-toggle{display:none;width:42px;height:42px;border-radius:50%;background:rgba(255,255,255,0.4);align-items:center;justify-content:center;flex-direction:column;gap:5px;flex-shrink:0;}
+.nav-toggle span{width:18px;height:2px;background:var(--ink);border-radius:2px;transition:transform 0.3s ease, opacity 0.3s ease;}
+.nav-toggle.active span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.nav-toggle.active span:nth-child(2){opacity:0;}
+.nav-toggle.active span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
 
-  /* ============ ABOUT / INGREDIENTS PANEL ============ */
-  .about{ padding:70px 0; }
-  .about-panel{
-    background:var(--copper-pale); border-radius:40px; padding:60px 56px; display:grid;
-    grid-template-columns:1fr 1fr; gap:56px; align-items:center;
-  }
-  .about-text p{ color:#4a3f2f; font-size:15px; margin-bottom:24px; max-width:440px; }
-  .about-icons{ display:flex; gap:24px; margin-top:34px; flex-wrap:wrap; }
-  .about-icon{ display:flex; align-items:center; gap:10px; }
-  .about-icon .icon-badge{ background:#fff; width:42px; height:42px; }
-  .about-icon .icon-badge svg{ width:18px; height:18px; }
-  .about-icon span{ font-size:12.5px; font-weight:600; max-width:90px; line-height:1.3; color:#3a3122; }
-  .about-media{ position:relative; }
-  .about-media img{ border-radius:28px; width:100%; height:400px; object-fit:cover; box-shadow:0 30px 60px -24px rgba(20,15,5,0.35); }
-  .about-media::before{
-    content:''; position:absolute; top:24px; left:-24px; width:60%; height:60%; background:var(--black); border-radius:24px; z-index:0;
-  }
-  .about-media img{ position:relative; z-index:1; }
-  @media (max-width:980px){
-    .about-panel{ grid-template-columns:1fr; padding:44px 26px; border-radius:32px; }
-    .about-media{ order:-1; }
-    .about-media::before{ display:none; }
-    .about-media img{ height:280px; }
-  }
+.mobile-menu{
+  position:fixed;top:90px;left:16px;right:16px;z-index:895;
+  background:rgba(255,255,255,0.9);backdrop-filter:blur(24px);
+  border-radius:28px;border:1px solid rgba(255,255,255,0.5);
+  padding:20px;box-shadow:var(--shadow-soft);
+  display:flex;flex-direction:column;gap:6px;
+  transform:translateY(-16px) scale(0.98);opacity:0;visibility:hidden;pointer-events:none;
+  transition:all 0.35s var(--ease);
+}
+.mobile-menu.open{transform:translateY(0) scale(1);opacity:1;visibility:visible;pointer-events:all;}
+.mobile-menu a{padding:14px 18px;border-radius:16px;font-weight:600;font-size:1rem;}
+.mobile-menu a:hover{background:rgba(234,97,27,0.1);}
+.mobile-menu .btn{margin-top:8px;}
 
-  /* ============ TESTIMONIALS ============ */
-  .testimonials{ padding:80px 0; text-align:center; }
-  .t-slider{ max-width:680px; margin:0 auto; position:relative; min-height:200px; }
-  .t-slide{ position:absolute; inset:0; opacity:0; transform:translateY(14px); transition:all .6s var(--ease); pointer-events:none; }
-  .t-slide.active{ opacity:1; transform:translateY(0); pointer-events:auto; position:relative; }
-  .stars{ color:var(--copper); font-size:16px; letter-spacing:3px; margin-bottom:20px; }
-  .t-slide p{ font-family:var(--font-display); font-size:clamp(18px,2.4vw,24px); font-weight:600; color:var(--ink); line-height:1.5; margin-bottom:20px; }
-  .t-slide .who{ font-size:12px; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); font-weight:600; }
-  .t-dots{ display:flex; gap:9px; justify-content:center; margin-top:34px; }
-  .t-dot{ width:8px; height:8px; border-radius:50%; background:var(--grey); transition:all .3s var(--ease); }
-  .t-dot.active{ background:var(--copper); width:22px; border-radius:6px; }
+/* =========================================================
+   HERO
+========================================================= */
+.hero{
+  position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;
+  overflow:hidden;padding:140px 20px 100px;
+  background:linear-gradient(180deg,var(--s1-a),var(--s1-b));
+}
+.hero-bg{
+  position:absolute;inset:0;
+  background-image:url('https://i.postimg.cc/VkjyjmCM/hero.png');
+  background-size:cover;background-position:center;
+  transform:scale(1.08);
+  animation:heroZoom 18s ease-in-out infinite alternate;
+}
+@keyframes heroZoom{from{transform:scale(1.08);}to{transform:scale(1.16);}}
+.hero-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(180deg, rgba(255,233,210,0.55) 0%, rgba(122,50,22,0.55) 55%, rgba(122,50,22,0.82) 100%);
+}
+.hero-content{position:relative;z-index:2;max-width:780px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:26px;color:var(--cream);}
+.hero-content .eyebrow-pill{color:var(--cream);border-color:rgba(255,255,255,0.4);}
+.hero-content h1{font-size:clamp(2.8rem,8vw,5.6rem);color:var(--cream);line-height:1;text-shadow:0 10px 40px rgba(0,0,0,0.25);}
+.hero-content .tagline{
+  display:block;font-family:'Fraunces',serif;font-style:italic;font-weight:500;
+  font-size:clamp(1.1rem,2.4vw,1.5rem);color:var(--gold-soft);margin-top:10px;
+}
+.hero-sub{font-size:clamp(1rem,2vw,1.15rem);opacity:0.92;max-width:520px;}
+.hero-actions{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;}
+.service-chips{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;color:var(--cream);}
+.service-chips .chip{background:rgba(255,255,255,0.14);border-color:rgba(255,255,255,0.3);color:var(--cream);}
 
-  /* ============ RESERVATION ============ */
-  .reserve{ padding:20px 0 70px; }
-  .reserve-panel{
-    background:var(--card-cream); border-radius:40px; overflow:hidden; display:grid; grid-template-columns:0.85fr 1.15fr;
-  }
-  .reserve-side{ padding:56px 46px; background:var(--black); color:#fff; display:flex; flex-direction:column; justify-content:center; }
-  .reserve-side p{ color:var(--grey); font-size:14px; margin-bottom:26px; }
-  .info-row{ display:flex; gap:12px; align-items:flex-start; margin-bottom:18px; font-size:13.5px; }
-  .info-row .icon-badge{ width:34px; height:34px; }
-  .info-row .icon-badge svg{ width:15px; height:15px; }
-  .reserve-form{ padding:56px 50px; }
-  .form-grid{ display:grid; grid-template-columns:1fr 1fr; gap:18px; }
-  .field{ margin-bottom:18px; }
-  .field.full{ grid-column:1/-1; }
-  .field label{ display:block; font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); margin-bottom:8px; font-weight:600; }
-  .field input, .field select, .field textarea{
-    width:100%; background:#fff; border:1.5px solid var(--line); color:var(--ink); padding:13px 16px;
-    border-radius:14px; font-size:14px; transition:border-color .3s var(--ease);
-  }
-  .field input:focus, .field select:focus, .field textarea:focus{ border-color:var(--copper); outline:none; }
-  .field textarea{ resize:vertical; min-height:80px; }
-  .success-msg{
-    display:none; align-items:center; gap:10px; background:rgba(200,121,59,0.12); border:1px solid rgba(200,121,59,0.35);
-    color:var(--copper-dark); padding:14px 18px; border-radius:14px; font-size:13.5px; margin-top:16px; font-weight:600;
-  }
-  .success-msg.show{ display:flex; }
-  .form-note{ font-size:11.5px; color:var(--muted); margin-top:14px; text-align:center; }
-  @media (max-width:920px){
-    .reserve-panel{ grid-template-columns:1fr; border-radius:32px; }
-    .form-grid{ grid-template-columns:1fr; }
-    .reserve-form, .reserve-side{ padding:40px 26px; }
-  }
+.scroll-cue{
+  position:absolute;bottom:28px;left:50%;transform:translateX(-50%);z-index:2;
+  display:flex;flex-direction:column;align-items:center;gap:8px;color:var(--cream);opacity:0.85;
+}
+.scroll-cue .line{width:1px;height:34px;background:linear-gradient(180deg, rgba(255,255,255,0.9), transparent);animation:scrollLine 2s ease-in-out infinite;}
+@keyframes scrollLine{0%{transform:scaleY(0.3);opacity:0.4;}50%{transform:scaleY(1);opacity:1;}100%{transform:scaleY(0.3);opacity:0.4;}}
+.scroll-cue span{font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;font-weight:600;}
 
-  /* ============ SOCIAL / FOLLOW GRID ============ */
-  .follow{ padding:20px 0 70px; text-align:center; }
-  .follow-grid{ display:grid; grid-template-columns:repeat(6,1fr); gap:14px; margin:48px 0 40px; }
-  .follow-item{ position:relative; aspect-ratio:1/1; overflow:hidden; border-radius:18px; cursor:pointer; }
-  .follow-item img{ width:100%; height:100%; object-fit:cover; transition:transform .6s var(--ease); }
-  .follow-item:hover img{ transform:scale(1.1); }
-  @media (max-width:860px){ .follow-grid{ grid-template-columns:repeat(3,1fr); } }
+/* wedge divider — echoes the logo's triangular mark */
+.wedge{position:relative;height:64px;margin-top:-1px;z-index:3;}
+.wedge svg{width:100%;height:100%;display:block;}
 
-  /* ============ CONTACT ============ */
-  .contact{ padding:20px 0 70px; }
-  .contact-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:22px; margin-bottom:44px; }
-  .contact-card{ background:var(--card); border:1px solid var(--line); border-radius:22px; padding:28px 26px; transition:all .4s var(--ease); }
-  .contact-card:hover{ transform:translateY(-6px); box-shadow:0 20px 40px -24px rgba(20,15,5,0.3); }
-  .contact-card .icon-badge{ margin-bottom:16px; }
-  .contact-card h4{ font-size:14px; margin-bottom:8px; text-transform:uppercase; letter-spacing:0.04em; }
-  .contact-card p{ font-size:13.5px; color:var(--muted); line-height:1.7; }
-  .map-frame{ border-radius:28px; overflow:hidden; border:1px solid var(--line); }
-  .map-frame iframe{ width:100%; height:380px; border:0; display:block; filter:saturate(0.7); }
-  @media (max-width:980px){ .contact-grid{ grid-template-columns:repeat(2,1fr); } }
-  @media (max-width:560px){ .contact-grid{ grid-template-columns:1fr; } }
+/* =========================================================
+   EXPLORE — bright orange
+========================================================= */
+.explore{
+  position:relative;padding:120px 20px 130px;
+  background:linear-gradient(160deg,var(--s2-a),var(--s2-b));
+  color:var(--cream);
+}
+.explore .section-head .eyebrow{color:var(--charcoal);}
+.explore .section-head h2{color:var(--cream);}
+.explore .section-head p{color:rgba(255,255,255,0.9);}
 
-  /* ============ FOOTER ============ */
-  .site-footer{ padding:20px 0 40px; }
-  .footer-panel{
-    background:var(--card-cream); border-radius:40px; padding:56px; display:grid;
-    grid-template-columns:1fr 1fr auto; gap:50px; align-items:center;
-  }
-  .footer-visit h3{ font-size:22px; margin-bottom:20px; }
-  .footer-visit .info-row{ color:var(--ink); }
-  .footer-visit .info-row .icon-badge{ background:var(--copper-pale); }
-  .footer-visit .info-row .icon-badge svg{ stroke:var(--copper-dark); }
-  .footer-news h3{ font-size:22px; margin-bottom:20px; }
-  .footer-news p{ color:var(--muted); font-size:14px; margin-bottom:20px; }
-  .newsletter-row{ display:flex; gap:10px; }
-  .newsletter-row input{
-    flex:1; background:#fff; border:1.5px solid var(--line); border-radius:999px; padding:13px 20px; font-size:14px; color:var(--ink);
-  }
-  .newsletter-row input:focus{ outline:none; border-color:var(--copper); }
-  .footer-illustration{ width:150px; height:150px; opacity:0.85; }
-  .footer-illustration svg{ width:100%; height:100%; stroke:var(--copper-dark); fill:none; stroke-width:1; }
-  .footer-links{ display:flex; gap:26px; margin-top:26px; flex-wrap:wrap; }
-  .footer-links a{ font-size:13px; color:var(--muted); font-weight:500; }
-  .footer-links a:hover{ color:var(--copper-dark); }
-  .footer-bottom{
-    display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;
-    padding:26px 32px 0; font-size:12.5px; color:var(--muted);
-  }
-  .social-row{ display:flex; gap:10px; }
-  .social-row a{
-    width:36px; height:36px; border-radius:50%; background:var(--card); border:1px solid var(--line);
-    display:flex; align-items:center; justify-content:center; transition:all .3s var(--ease);
-  }
-  .social-row a:hover{ background:var(--black); }
-  .social-row svg{ width:15px; height:15px; stroke:var(--ink); fill:none; stroke-width:1.6; }
-  .social-row a:hover svg{ stroke:#fff; }
-  @media (max-width:980px){
-    .footer-panel{ grid-template-columns:1fr 1fr; padding:44px 28px; border-radius:32px; }
-    .footer-illustration{ display:none; }
-  }
-  @media (max-width:640px){ .footer-panel{ grid-template-columns:1fr; gap:36px; } .footer-bottom{ padding:26px 8px 0; } }
+.card-grid{
+  max-width:1180px;margin:0 auto;
+  display:grid;grid-template-columns:repeat(4,1fr);gap:26px;
+  padding:0 20px;
+}
+.exp-card{
+  position:relative;aspect-ratio:1/1;border-radius:var(--radius-card);
+  overflow:hidden;cursor:pointer;
+  border:1px solid rgba(255,255,255,0.35);
+  box-shadow:var(--shadow-pop);
+  opacity:0;transform:translateY(36px);
+  transition:transform 0.6s var(--ease), box-shadow 0.5s ease;
+}
+.exp-card.in-view{opacity:1;transform:translateY(0);}
+.exp-card:hover{transform:translateY(-10px);box-shadow:0 26px 55px -14px rgba(30,10,0,0.5);}
+.exp-card img, .exp-card .card-fallback{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  transition:transform 0.7s var(--ease), filter 0.5s ease;
+}
+.exp-card:hover img{transform:scale(1.09);}
+.exp-card .card-fallback{
+  background:linear-gradient(150deg,#3a1c0d,#7a3216 45%,#f0a53e 130%);
+  display:flex;align-items:center;justify-content:center;
+}
+.exp-card .card-fallback svg{width:38%;opacity:0.85;}
+.exp-card::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(0deg, rgba(20,10,4,0.86) 0%, rgba(20,10,4,0.15) 55%, rgba(20,10,4,0.05) 100%);
+}
+.exp-card-label{
+  position:absolute;left:0;right:0;bottom:0;z-index:2;padding:22px;
+  display:flex;flex-direction:column;gap:8px;
+}
+.exp-card-label .tag{
+  align-self:flex-start;padding:6px 14px;border-radius:var(--radius-pill);
+  background:rgba(255,255,255,0.2);border:1px solid rgba(255,255,255,0.4);
+  backdrop-filter:blur(10px);font-size:0.65rem;letter-spacing:0.14em;text-transform:uppercase;font-weight:700;
+}
+.exp-card-label h3{color:#fff;font-size:1.35rem;}
+.exp-card-label .arrow{
+  width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,0.2);
+  border:1px solid rgba(255,255,255,0.4);display:flex;align-items:center;justify-content:center;
+  margin-top:4px;transition:background 0.3s ease, transform 0.4s var(--ease);
+}
+.exp-card:hover .arrow{background:var(--gold);transform:rotate(45deg);}
+.exp-card:hover .arrow svg{stroke:#2a1706;}
+
+@media(max-width:980px){.card-grid{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:520px){.card-grid{grid-template-columns:1fr 1fr;gap:14px;}.exp-card-label{padding:14px;}.exp-card-label h3{font-size:1.02rem;}}
+
+/* =========================================================
+   STORY / VISIT — darker orange
+========================================================= */
+.story{
+  position:relative;padding:120px 20px 100px;
+  background:linear-gradient(160deg,var(--s3-a),var(--s3-b));
+  color:var(--cream);
+}
+.story-inner{
+  max-width:880px;margin:0 auto 90px;text-align:center;
+  padding:60px 40px;border-radius:36px;
+  background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.16);
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  opacity:0;transform:translateY(30px);transition:all 0.7s var(--ease);
+}
+.story-inner.in-view{opacity:1;transform:translateY(0);}
+.story-inner .quote-mark{font-family:'Fraunces',serif;font-size:4rem;color:var(--gold);line-height:0.5;display:block;margin-bottom:14px;}
+.story-inner blockquote{
+  margin:0 0 26px;font-family:'Fraunces',serif;font-weight:500;font-style:italic;
+  font-size:clamp(1.15rem,2.6vw,1.55rem);line-height:1.55;color:#fff5e9;
+}
+.story-meta{font-weight:700;letter-spacing:0.05em;text-transform:uppercase;font-size:0.78rem;color:var(--gold-soft);margin-bottom:26px;}
+.story-actions{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;}
+
+.info-grid{
+  max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:22px;padding:0 20px;
+}
+.info-card{
+  padding:34px 28px;border-radius:26px;
+  background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.15);
+  backdrop-filter:blur(12px);
+  opacity:0;transform:translateY(28px);transition:all 0.6s var(--ease);
+}
+.info-card.in-view{opacity:1;transform:translateY(0);}
+.info-card .icon{
+  width:52px;height:52px;border-radius:16px;background:linear-gradient(135deg,var(--gold-soft),var(--gold));
+  display:flex;align-items:center;justify-content:center;margin-bottom:18px;
+}
+.info-card .icon svg{width:24px;height:24px;stroke:#2a1706;}
+.info-card h4{color:#fff;font-size:1.15rem;margin-bottom:10px;}
+.info-card p{color:rgba(255,246,235,0.82);font-size:0.95rem;}
+.info-card .status{
+  display:inline-flex;align-items:center;gap:6px;margin-top:14px;padding:6px 14px;
+  border-radius:var(--radius-pill);background:rgba(120,220,150,0.16);border:1px solid rgba(120,220,150,0.4);
+  font-size:0.75rem;font-weight:700;color:#a7f3c1;
+}
+.info-card .status::before{content:"";width:7px;height:7px;border-radius:50%;background:#3fdc76;}
+
+@media(max-width:900px){.info-grid{grid-template-columns:1fr;}}
+
+/* =========================================================
+   MODALS
+========================================================= */
+.modal-overlay{
+  position:fixed;inset:0;z-index:2000;
+  background:rgba(20,10,4,0.72);backdrop-filter:blur(6px);
+  display:flex;align-items:flex-start;justify-content:center;
+  padding:40px 16px;overflow-y:auto;
+  opacity:0;visibility:hidden;transition:opacity 0.35s ease, visibility 0.35s ease;
+}
+.modal-overlay.open{opacity:1;visibility:visible;}
+.modal-box{
+  width:100%;max-width:1020px;border-radius:32px;overflow:hidden;
+  background:linear-gradient(165deg,#fff8ef,#ffe9d2);
+  box-shadow:0 40px 90px -20px rgba(0,0,0,0.5);
+  transform:translateY(40px) scale(0.97);transition:transform 0.4s var(--ease);
+  margin:auto 0;
+}
+.modal-overlay.open .modal-box{transform:translateY(0) scale(1);}
+.modal-hero{position:relative;height:260px;overflow:hidden;}
+.modal-hero img{width:100%;height:100%;object-fit:cover;}
+.modal-hero .modal-hero-fallback{
+  width:100%;height:100%;background:linear-gradient(150deg,#3a1c0d,#7a3216 45%,#f0a53e 130%);
+  display:flex;align-items:center;justify-content:center;
+}
+.modal-hero::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg, rgba(20,10,4,0.55), rgba(20,10,4,0) 55%);}
+.modal-hero-title{position:absolute;left:32px;bottom:24px;color:#fff;z-index:2;}
+.modal-hero-title .tag{
+  display:inline-block;padding:6px 14px;border-radius:var(--radius-pill);background:rgba(255,255,255,0.2);
+  border:1px solid rgba(255,255,255,0.4);backdrop-filter:blur(8px);font-size:0.68rem;letter-spacing:0.14em;
+  text-transform:uppercase;font-weight:700;margin-bottom:10px;
+}
+.modal-hero-title h3{color:#fff;font-size:clamp(1.6rem,4vw,2.3rem);}
+.modal-close{
+  position:absolute;top:20px;right:20px;z-index:5;width:42px;height:42px;border-radius:50%;
+  background:rgba(255,255,255,0.25);border:1px solid rgba(255,255,255,0.5);backdrop-filter:blur(10px);
+  display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.3rem;
+  transition:transform 0.3s var(--ease), background 0.3s ease;
+}
+.modal-close:hover{transform:rotate(90deg);background:rgba(255,255,255,0.4);}
+.modal-body{padding:34px 36px 46px;}
+.modal-body p.desc{opacity:0.8;margin-bottom:26px;max-width:640px;}
+
+.tab-row{display:flex;gap:10px;margin-bottom:26px;flex-wrap:wrap;}
+.tab-btn{
+  padding:11px 24px;border-radius:var(--radius-pill);font-weight:700;font-size:0.88rem;
+  background:rgba(122,50,22,0.08);border:1px solid rgba(122,50,22,0.18);
+  transition:all 0.3s ease;
+}
+.tab-btn.active{background:linear-gradient(135deg,var(--gold-soft),var(--gold));border-color:transparent;box-shadow:var(--shadow-pop);}
+.tab-panel{display:none;}
+.tab-panel.active{display:block;animation:fadeUp 0.5s var(--ease);}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}
+
+.gallery-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:16px;
+}
+.gallery-grid .g-item{
+  position:relative;border-radius:20px;overflow:hidden;aspect-ratio:1/1;
+  box-shadow:var(--shadow-pop);
+}
+.gallery-grid .g-item img{width:100%;height:100%;object-fit:cover;transition:transform 0.5s ease;}
+.gallery-grid .g-item:hover img{transform:scale(1.07);}
+.gallery-grid .g-item .g-label{
+  position:absolute;left:10px;bottom:10px;padding:6px 12px;border-radius:var(--radius-pill);
+  background:rgba(20,10,4,0.55);color:#fff;font-size:0.7rem;font-weight:700;backdrop-filter:blur(6px);
+}
+.subhead{font-size:1.05rem;margin:30px 0 16px;font-weight:600;display:flex;align-items:center;gap:10px;}
+.subhead .dot{width:8px;height:8px;border-radius:50%;background:var(--gold);}
+
+@media(max-width:760px){.gallery-grid{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:460px){.gallery-grid{grid-template-columns:1fr 1fr;gap:10px;}.modal-body{padding:24px 18px 34px;}}
+
+.bar-content{display:grid;grid-template-columns:1.1fr 0.9fr;gap:34px;}
+.bar-list{display:flex;flex-direction:column;gap:14px;margin-top:10px;}
+.bar-list li{
+  display:flex;justify-content:space-between;gap:16px;padding:14px 18px;border-radius:18px;
+  background:rgba(122,50,22,0.06);border:1px solid rgba(122,50,22,0.12);font-weight:600;
+}
+.bar-list li span.price{color:var(--s3-a);font-weight:800;}
+.bar-visual{
+  border-radius:24px;background:linear-gradient(150deg,#3a1c0d,#7a3216 45%,#f0a53e 130%);
+  min-height:260px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;
+}
+.bar-visual svg{width:46%;opacity:0.9;}
+.bar-visual::before{content:"";position:absolute;width:220px;height:220px;border-radius:50%;background:rgba(255,255,255,0.08);top:-60px;right:-60px;}
+@media(max-width:760px){.bar-content{grid-template-columns:1fr;}}
+
+/* =========================================================
+   FOOTER — charcoal grey
+========================================================= */
+.site-footer{
+  background:linear-gradient(180deg,var(--charcoal),var(--charcoal-2));
+  color:rgba(255,248,240,0.85);padding:90px 20px 0;position:relative;
+}
+.footer-grid{
+  max-width:1180px;margin:0 auto;display:grid;grid-template-columns:1.4fr 1fr 1fr 1.1fr;gap:50px;padding-bottom:60px;
+  border-bottom:1px solid rgba(255,255,255,0.1);
+}
+.footer-brand img{height:46px;margin-bottom:18px;}
+.footer-brand p{font-size:0.92rem;opacity:0.75;max-width:280px;margin-bottom:22px;}
+.footer-social{display:flex;gap:10px;}
+.footer-social a{
+  width:42px;height:42px;border-radius:50%;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);
+  display:flex;align-items:center;justify-content:center;transition:all 0.3s var(--ease);
+}
+.footer-social a:hover{background:var(--gold);transform:translateY(-4px);}
+.footer-social a:hover svg{stroke:#2a1706;}
+.footer-col h5{color:#fff;font-family:'Inter',sans-serif;font-size:0.78rem;letter-spacing:0.14em;text-transform:uppercase;font-weight:800;margin-bottom:20px;}
+.footer-col ul{display:flex;flex-direction:column;gap:12px;}
+.footer-col a{font-size:0.92rem;opacity:0.78;transition:opacity 0.3s ease, padding-left 0.3s ease;}
+.footer-col a:hover{opacity:1;padding-left:4px;color:var(--gold-soft);}
+.footer-col .contact-item{display:flex;gap:10px;align-items:flex-start;font-size:0.92rem;opacity:0.85;}
+.footer-col .contact-item svg{flex-shrink:0;margin-top:2px;width:16px;height:16px;stroke:var(--gold-soft);}
+.footer-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px;}
+.footer-chips .chip{background:rgba(255,255,255,0.06);border-color:rgba(255,255,255,0.14);font-size:0.72rem;padding:8px 14px;}
+.footer-bottom{
+  max-width:1180px;margin:0 auto;padding:26px 0 30px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;
+  font-size:0.82rem;opacity:0.6;
+}
+@media(max-width:900px){.footer-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:560px){.footer-grid{grid-template-columns:1fr;gap:36px;}.footer-bottom{flex-direction:column;text-align:center;}}
+
+/* =========================================================
+   FLOATING ACTIONS
+========================================================= */
+.floating-actions{
+  position:fixed;right:20px;bottom:20px;z-index:850;display:flex;flex-direction:column;align-items:flex-end;gap:12px;
+}
+.fab{
+  display:flex;align-items:center;gap:10px;border-radius:var(--radius-pill);
+  background:linear-gradient(135deg,var(--gold-soft),var(--gold));color:#2a1706;font-weight:700;
+  box-shadow:0 14px 34px -8px rgba(122,50,22,0.55);
+  transition:transform 0.4s var(--ease), box-shadow 0.4s ease;
+  animation:fabPulse 3.4s ease-in-out infinite;
+}
+.fab-book{padding:16px 26px;font-size:0.9rem;}
+.fab-call{width:54px;height:54px;justify-content:center;background:rgba(255,255,255,0.9);color:var(--charcoal);border:1px solid rgba(255,255,255,0.6);backdrop-filter:blur(10px);animation:none;}
+.fab:hover{transform:translateY(-4px) scale(1.04);box-shadow:0 20px 42px -8px rgba(122,50,22,0.65);}
+@keyframes fabPulse{0%,100%{box-shadow:0 14px 34px -8px rgba(122,50,22,0.55);}50%{box-shadow:0 14px 44px -6px rgba(240,165,62,0.75);}}
+.fab-call svg{width:20px;height:20px;}
+
+@media(max-width:560px){.fab-book span.long{display:none;}}
+
+/* generic reveal */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity 0.7s var(--ease), transform 0.7s var(--ease);}
+.reveal.in-view{opacity:1;transform:translateY(0);}
+
+/* focus visibility */
+a:focus-visible, button:focus-visible{outline:2px solid var(--gold);outline-offset:3px;}
 </style>
 </head>
 <body>
 
-<!-- ============ HEADER ============ -->
-<header id="siteHeader">
-  <div class="container nav">
-    <a href="#home" class="logo-mark">
-      <img src="https://i.postimg.cc/DZh18dK7/pvlogo-removebg-preview.png" alt="PV Lifestyle logo">
+<!-- ============ NAVBAR ============ -->
+<nav class="navbar" id="navbar">
+  <div class="nav-inner">
+    <a href="#home" class="brand">
+      <img src="https://i.postimg.cc/DZh18dK7/pvlogo-removebg-preview.png" alt="PV Lifestyle Restaurant & Bar logo">
     </a>
-    <ul class="nav-links" id="navLinks">
-      <li><a href="#home" class="nav-link">Home</a></li>
-      <li><a href="#about" class="nav-link">About</a></li>
-      <li><a href="#menu" class="nav-link">Menu</a></li>
-      <li><a href="#reserve" class="nav-link">Reserve</a></li>
-      <li><a href="#contact" class="nav-link">Contact</a></li>
+    <ul class="nav-links">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#explore">Explore</a></li>
+      <li><a href="#story">Our Story</a></li>
+      <li><a href="#visit">Visit Us</a></li>
     </ul>
-    <div class="nav-actions">
-      <a href="#reserve" class="btn btn-primary btn-sm">Reserve a Table</a>
-      <button class="burger" id="burger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
-    </div>
+    <a href="tel:0765069520" class="btn btn-solid nav-cta">Reserve a Table</a>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
   </div>
-</header>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#home">Home</a>
+  <a href="#explore">Explore</a>
+  <a href="#story">Our Story</a>
+  <a href="#visit">Visit Us</a>
+  <a href="tel:0765069520" class="btn btn-solid">Reserve a Table</a>
+</div>
 
 <!-- ============ HERO ============ -->
-<section id="home" class="hero-wrap">
-  <div class="container">
-    <div class="hero-card">
-      <div class="hero-text reveal in">
-        <h1>Fine dining you <span class="accent">fall for</span> from the first bite.</h1>
-        <p>Exceptional cuisine, premium wines, and an intimate atmosphere — right in the heart of Mokopane.</p>
-        <div class="hero-actions">
-          <a href="#menu" class="btn btn-primary">View Menu</a>
-          <a href="#reserve" class="btn btn-outline">Reserve a Table</a>
-        </div>
-        <div class="hero-features">
-          <div class="hero-feature">
-            <div class="icon-badge"><svg viewBox="0 0 24 24"><path d="M8 2v8a2 2 0 0 0 2 2v10M8 2v20M16 2v8s2 0 2-3V2M18 2v20"/></svg></div>
-            <span>Premium Cuts</span>
-          </div>
-          <div class="hero-feature">
-            <div class="icon-badge"><svg viewBox="0 0 24 24"><path d="M8 3h8l-1 8a3 3 0 0 1-6 0L8 3zM12 13v6M9 21h6"/></svg></div>
-            <span>Reserve Wines</span>
-          </div>
-          <div class="hero-feature">
-            <div class="icon-badge"><svg viewBox="0 0 24 24"><path d="M3 21h18M5 21V9l7-5 7 5v12M9 21v-6h6v6"/></svg></div>
-            <span>Warm Atmosphere</span>
-          </div>
-        </div>
-      </div>
-      <div class="hero-media reveal in reveal-delay-1">
-        <div class="hero-blob"></div>
-        <div class="hero-photo">
-          <img src="https://i.postimg.cc/VkjyjmCM/hero.png" alt="PV Lifestyle signature dish">
-        </div>
-        <div class="hero-badge">
-          <div class="num" data-count="500">0</div>
-          <div class="txt">5★ Evenings</div>
-        </div>
-      </div>
+<header class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <span class="eyebrow-pill">Est. 2022 · Mokopane</span>
+    <h1>PV Lifestyle <span class="tagline">The Ideal Atmosphere</span></h1>
+    <p class="hero-sub">Fine dining, hand-crafted cocktails and an intimate atmosphere &mdash; serving the freshest food and finest wines Mokopane has to offer.</p>
+    <div class="hero-actions">
+      <a href="#explore" class="btn btn-solid">View Our Menu</a>
+      <a href="tel:0765069520" class="btn btn-glass">Reserve a Table</a>
     </div>
+    <div class="service-chips">
+      <span class="chip">🍽️ All You Can Eat</span>
+      <span class="chip">🌿 Outdoor Seating</span>
+      <span class="chip">🥂 Private Dining Room</span>
+    </div>
+  </div>
+  <div class="scroll-cue"><div class="line"></div><span>Scroll</span></div>
+</header>
+
+<div class="wedge" style="background:var(--s1-b);">
+  <svg viewBox="0 0 1200 64" preserveAspectRatio="none"><path d="M0,64 L400,10 L600,54 L800,6 L1200,64 Z" fill="#ff8a2b"></path></svg>
+</div>
+
+<!-- ============ EXPLORE / 4 CARDS ============ -->
+<section class="explore" id="explore">
+  <div class="section-head reveal">
+    <span class="eyebrow">Explore</span>
+    <h2>Everything PV Lifestyle</h2>
+    <p>From candle-lit dinners to boardroom conferences &mdash; discover every side of the PV Lifestyle experience.</p>
+  </div>
+
+  <div class="card-grid">
+    <article class="exp-card" data-modal="modal-events" tabindex="0" role="button" aria-haspopup="dialog">
+      <img src="https://i.postimg.cc/SNyFWJhT/Save-Clip-App-730332036-18016859684908826-276558060762799520-n.jpg" alt="PV Lifestyle events" loading="lazy">
+      <div class="exp-card-label">
+        <span class="tag">Live &amp; Upcoming</span>
+        <h3>Events</h3>
+        <div class="arrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M5 19L19 5M19 5H9M19 5V15"/></svg></div>
+      </div>
+    </article>
+
+    <article class="exp-card" data-modal="modal-restaurant" tabindex="0" role="button" aria-haspopup="dialog">
+      <img src="https://i.postimg.cc/bv1yLr6v/PV-Wraps-and-Sea-Food-copy-1024x1024.jpg" alt="PV Lifestyle restaurant food" loading="lazy">
+      <div class="exp-card-label">
+        <span class="tag">Food &amp; Menu</span>
+        <h3>Restaurant</h3>
+        <div class="arrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M5 19L19 5M19 5H9M19 5V15"/></svg></div>
+      </div>
+    </article>
+
+    <article class="exp-card" data-modal="modal-conferences" tabindex="0" role="button" aria-haspopup="dialog">
+      <img src="https://i.postimg.cc/T38Nm616/img6.jpg" alt="PV Lifestyle conference room" loading="lazy">
+      <div class="exp-card-label">
+        <span class="tag">Business &amp; Functions</span>
+        <h3>Conferences</h3>
+        <div class="arrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M5 19L19 5M19 5H9M19 5V15"/></svg></div>
+      </div>
+    </article>
+
+    <article class="exp-card" data-modal="modal-bar" tabindex="0" role="button" aria-haspopup="dialog">
+      <div class="card-fallback">
+        <svg viewBox="0 0 64 64" fill="none" stroke="#fff" stroke-width="1.6"><path d="M14 10h36l-14 22v18h-8V32z"/><path d="M20 54h24"/><circle cx="46" cy="12" r="2" fill="#fff" stroke="none"/></svg>
+      </div>
+      <div class="exp-card-label">
+        <span class="tag">Cocktails &amp; Nights</span>
+        <h3>The Bar</h3>
+        <div class="arrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M5 19L19 5M19 5H9M19 5V15"/></svg></div>
+      </div>
+    </article>
   </div>
 </section>
 
-<!-- ============ FEATURE ROW ============ -->
-<section class="features">
-  <div class="container features-grid">
-    <div class="feature-item reveal">
-      <div class="icon-badge"><svg viewBox="0 0 24 24"><path d="M12 2v6M12 22v-6M4.9 4.9l4.2 4.2M14.9 14.9l4.2 4.2M2 12h6M16 12h6M4.9 19.1l4.2-4.2M14.9 9.1l4.2-4.2"/></svg></div>
-      <h3>Fresh Ingredients</h3>
-      <p>Sourced daily, prepared with care, never held longer than a day.</p>
-    </div>
-    <div class="feature-item reveal reveal-delay-1">
-      <div class="icon-badge"><svg viewBox="0 0 24 24"><path d="M4 19c4-2 6-2 10 0s6 2 10 0M6 13c8-8 8 8 16 0M9 9c1-3 5-3 5 0"/></svg></div>
-      <h3>Expert Chefs</h3>
-      <p>Professionals who cook with skill, discipline, and real care.</p>
-    </div>
-    <div class="feature-item reveal reveal-delay-2">
-      <div class="icon-badge"><svg viewBox="0 0 24 24"><path d="M8 3h8l-1 8a3 3 0 0 1-6 0L8 3zM12 13v6M9 21h6"/></svg></div>
-      <h3>Private Dining</h3>
-      <p>An exclusive room for birthdays, anniversaries, and special evenings.</p>
-    </div>
-    <div class="feature-item reveal reveal-delay-3">
-      <div class="icon-badge"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8 12h8M12 8v8"/></svg></div>
-      <h3>Elegant Atmosphere</h3>
-      <p>Calm, refined, and comfortable — built for slow, unhurried evenings.</p>
+<div class="wedge" style="background:var(--s2-b);">
+  <svg viewBox="0 0 1200 64" preserveAspectRatio="none"><path d="M0,64 L400,10 L600,54 L800,6 L1200,64 Z" fill="#7a3216"></path></svg>
+</div>
+
+<!-- ============ STORY + VISIT INFO ============ -->
+<section class="story" id="story">
+  <div class="story-inner reveal">
+    <span class="quote-mark">&ldquo;</span>
+    <blockquote>PV Lifestyle is a fine dining restaurant with an intimate atmosphere. Serving up the freshest, most delicious food and meats on the market today, coupled with an impressive wine list of rare and exclusive vintages &mdash; you're sure to experience something exceptional when you visit our restaurant.</blockquote>
+    <div class="story-meta">&mdash; PV Lifestyle Restaurant &amp; Bar</div>
+    <div class="story-actions">
+      <a href="https://instagram.com" target="_blank" rel="noopener" class="btn btn-glass">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+        Follow on Instagram
+      </a>
+      <a href="tel:0765069520" class="btn btn-solid">Get in Touch</a>
     </div>
   </div>
-</section>
 
-<!-- ============ POPULAR DISHES ============ -->
-<section class="popular" id="menu">
-  <div class="container">
-    <div class="popular-band reveal">
-      <div class="popular-head">
-        <div>
-          <div class="eyebrow on-dark"><span class="dot"></span>Popular Dishes</div>
-          <h2>Classics our guests keep coming back for.</h2>
-        </div>
-        <p>A few signatures from the full menu — from dry-aged steak to our reserve wine list.</p>
-      </div>
-      <div class="dish-circles">
-        <div class="dish-circle-card reveal">
-          <div class="dish-circle"><img src="https://images.unsplash.com/photo-1706650616334-97875fae8521?auto=format&fit=crop&w=400&q=80" alt="Premium steak"></div>
-          <h4>Premium Steak</h4>
-          <p>Dry-aged ribeye, char-grilled</p>
-          <div class="price">R385</div>
-        </div>
-        <div class="dish-circle-card reveal reveal-delay-1">
-          <div class="dish-circle"><img src="https://images.unsplash.com/photo-1550426735-c33c7ce414ff?auto=format&fit=crop&w=400&q=80" alt="Signature cocktail"></div>
-          <h4>Signature Cocktail</h4>
-          <p>PV Old Fashioned, house smoked</p>
-          <div class="price">R110</div>
-        </div>
-        <div class="dish-circle-card reveal reveal-delay-2">
-          <div class="dish-circle"><img src="https://images.unsplash.com/photo-1643101570532-88c8ecc07c1f?auto=format&fit=crop&w=400&q=80" alt="Reserve wine"></div>
-          <h4>Reserve Wine</h4>
-          <p>Rare South African vintages</p>
-          <div class="price">R150</div>
-        </div>
-      </div>
+  <div id="visit" class="info-grid">
+    <div class="info-card reveal">
+      <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg></div>
+      <h4>Find Us</h4>
+      <p>67 Van Heerden St, Mokopane, 0600, South Africa</p>
     </div>
-  </div>
-</section>
-
-<!-- ============ RECOMMENDED TO TRY ============ -->
-<section class="recommended">
-  <div class="container">
-    <div class="eyebrow reveal"><span class="dot"></span>Recommended to Try</div>
-    <h2 class="section-title reveal reveal-delay-1">Straight from the pass tonight.</h2>
-    <div class="recommended-grid">
-      <div class="dish-card reveal">
-        <div class="dish-card-media">
-          <img src="https://i.postimg.cc/SNyFWJhT/Save-Clip-App-730332036-18016859684908826-276558060762799520-n.jpg" alt="Featured dish at PV Lifestyle">
-        </div>
-        <div class="dish-card-body">
-          <h3>Chef's Selection</h3>
-          <p>Tonight's featured plate, prepared fresh and finished tableside.</p>
-          <div class="dish-card-foot">
-            <span class="price">R320</span>
-            <button class="plus-btn" aria-label="Add to order">+</button>
-          </div>
-        </div>
-      </div>
-      <div class="dish-card reveal reveal-delay-1">
-        <div class="dish-card-media">
-          <img src="https://i.postimg.cc/8z5209sL/Save-Clip-App-731158340-18016681901908826-3553037399421413566-n.jpg" alt="Featured dish at PV Lifestyle">
-        </div>
-        <div class="dish-card-body">
-          <h3>House Favourite</h3>
-          <p>A guest favourite, plated with our signature attention to detail.</p>
-          <div class="dish-card-foot">
-            <span class="price">R280</span>
-            <button class="plus-btn" aria-label="Add to order">+</button>
-          </div>
-        </div>
-      </div>
-      <div class="dish-card reveal reveal-delay-2">
-        <div class="dish-card-media">
-          <img src="https://i.postimg.cc/BnVr9pKS/Save-Clip-App-730332015-18016384001908826-7760478953285662725-n.jpg" alt="Featured dish at PV Lifestyle">
-        </div>
-        <div class="dish-card-body">
-          <h3>From the Grill</h3>
-          <p>Char-grilled to order, served with our seasonal accompaniments.</p>
-          <div class="dish-card-foot">
-            <span class="price">R350</span>
-            <button class="plus-btn" aria-label="Add to order">+</button>
-          </div>
-        </div>
-      </div>
+    <div class="info-card reveal">
+      <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.1-8.7A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.7a2 2 0 0 1-.5 2.1L8 9.6a16 16 0 0 0 6 6l1.1-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.5 2.7.6a2 2 0 0 1 1.7 2z"/></svg></div>
+      <h4>Call to Reserve</h4>
+      <p><a href="tel:0765069520">076 506 9520</a></p>
     </div>
-  </div>
-</section>
-
-<!-- ============ ABOUT ============ -->
-<section class="about" id="about">
-  <div class="container">
-    <div class="about-panel reveal">
-      <div class="about-text">
-        <div class="eyebrow"><span class="dot"></span>About PV Lifestyle</div>
-        <h2 class="section-title" style="color:#2b2416;">Quality we're proud to serve.</h2>
-        <p>PV Lifestyle is a fine dining restaurant with an intimate atmosphere. Serving the freshest meats, exceptional cuisine, and an impressive wine selection featuring rare and exclusive vintages, every visit is designed to be memorable.</p>
-        <p>Whether you're celebrating a special occasion, enjoying a romantic dinner, or simply looking for outstanding food, PV Lifestyle delivers an unforgettable dining experience.</p>
-        <a href="#menu" class="btn btn-dark">Explore Our Menu</a>
-        <div class="about-icons">
-          <div class="about-icon"><div class="icon-badge"><svg viewBox="0 0 24 24"><path d="M4 19c4-2 6-2 10 0s6 2 10 0M6 13c8-8 8 8 16 0M9 9c1-3 5-3 5 0"/></svg></div><span>Locally Sourced</span></div>
-          <div class="about-icon"><div class="icon-badge"><svg viewBox="0 0 24 24"><path d="M8 2v8a2 2 0 0 0 2 2v10M8 2v20M16 2v8s2 0 2-3V2M18 2v20"/></svg></div><span>Dry-Aged In House</span></div>
-          <div class="about-icon"><div class="icon-badge"><svg viewBox="0 0 24 24"><path d="M8 3h8l-1 8a3 3 0 0 1-6 0L8 3zM12 13v6M9 21h6"/></svg></div><span>Reserve Cellar</span></div>
-        </div>
-      </div>
-      <div class="about-media">
-        <img src="https://images.unsplash.com/photo-1666032119084-82351976a922?auto=format&fit=crop&w=900&q=80" alt="PV Lifestyle dining room interior">
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ TESTIMONIALS ============ -->
-<section class="testimonials">
-  <div class="container">
-    <div class="eyebrow" style="justify-content:center;"><span class="dot"></span>Testimonials</div>
-    <div class="t-slider">
-      <div class="t-slide active">
-        <div class="stars">★★★★★</div>
-        <p>"Excellent food, beautiful atmosphere, and outstanding service. Definitely the best restaurant in Mokopane."</p>
-        <div class="who">— Dinner Guest</div>
-      </div>
-      <div class="t-slide">
-        <div class="stars">★★★★★</div>
-        <p>"The steaks are incredible and the wine selection is amazing."</p>
-        <div class="who">— Regular Guest</div>
-      </div>
-      <div class="t-slide">
-        <div class="stars">★★★★★</div>
-        <p>"Perfect place for date nights and family celebrations."</p>
-        <div class="who">— Celebration Party</div>
-      </div>
-    </div>
-    <div class="t-dots" id="tDots"></div>
-  </div>
-</section>
-
-<!-- ============ RESERVATION ============ -->
-<section class="reserve" id="reserve">
-  <div class="container">
-    <div class="reserve-panel reveal">
-      <div class="reserve-side">
-        <div class="eyebrow on-dark"><span class="dot"></span>Reservations</div>
-        <h2 style="color:#fff;">Book your table.</h2>
-        <p>Tell us the occasion and we'll take care of the rest. For parties larger than 10, please call us directly.</p>
-        <div class="info-row">
-          <div class="icon-badge dark"><svg viewBox="0 0 24 24"><path d="M12 22s8-7.5 8-13a8 8 0 1 0-16 0c0 5.5 8 13 8 13z"/><circle cx="12" cy="9" r="2.5"/></svg></div>
-          <span>67 Van Heerden St, Mokopane, 0600</span>
-        </div>
-        <div class="info-row">
-          <div class="icon-badge dark"><svg viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3-8.7A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 3a2 2 0 0 1-.5 2.1L8 10a16 16 0 0 0 6 6l1.2-1.3a2 2 0 0 1 2.1-.5c1 .3 2 .5 3 .7a2 2 0 0 1 1.7 2z"/></svg></div>
-          <span>076 506 9520</span>
-        </div>
-        <div class="info-row">
-          <div class="icon-badge dark"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
-          <span>Open Daily — Closes at 11:00 PM</span>
-        </div>
-      </div>
-      <form class="reserve-form" id="reserveForm">
-        <div class="form-grid">
-          <div class="field"><label for="rName">Name</label><input id="rName" type="text" placeholder="Your full name" required></div>
-          <div class="field"><label for="rPhone">Phone</label><input id="rPhone" type="tel" placeholder="076 000 0000" required></div>
-          <div class="field"><label for="rEmail">Email</label><input id="rEmail" type="email" placeholder="you@email.com" required></div>
-          <div class="field"><label for="rGuests">Number of Guests</label>
-            <select id="rGuests" required>
-              <option value="">Select</option>
-              <option>1–2 Guests</option><option>3–4 Guests</option><option>5–6 Guests</option><option>7–10 Guests</option><option>10+ Guests (call us)</option>
-            </select>
-          </div>
-          <div class="field"><label for="rDate">Date</label><input id="rDate" type="date" required></div>
-          <div class="field"><label for="rTime">Time</label><input id="rTime" type="time" required></div>
-          <div class="field full"><label for="rNotes">Special Requests</label><textarea id="rNotes" placeholder="Anniversary, allergies, seating preference..."></textarea></div>
-        </div>
-        <button type="submit" class="btn btn-primary" style="width:100%;">Reserve Your Table</button>
-        <div class="success-msg" id="successMsg">✓ Thank you — your request has been noted. We'll confirm shortly by phone or email.</div>
-        <div class="form-note">This form is a front-end demo — connect it to your email or booking service to go live.</div>
-      </form>
-    </div>
-  </div>
-</section>
-
-<!-- ============ FOLLOW / INSTAGRAM ============ -->
-<section class="follow">
-  <div class="container">
-    <div class="eyebrow" style="justify-content:center;"><span class="dot"></span>@pvlifestyle</div>
-    <h2 class="section-title" style="margin:0 auto;">Follow the evenings.</h2>
-    <div class="follow-grid">
-      <div class="follow-item"><img src="https://i.postimg.cc/SNyFWJhT/Save-Clip-App-730332036-18016859684908826-276558060762799520-n.jpg" alt="Instagram post"></div>
-      <div class="follow-item"><img src="https://i.postimg.cc/8z5209sL/Save-Clip-App-731158340-18016681901908826-3553037399421413566-n.jpg" alt="Instagram post"></div>
-      <div class="follow-item"><img src="https://i.postimg.cc/BnVr9pKS/Save-Clip-App-730332015-18016384001908826-7760478953285662725-n.jpg" alt="Instagram post"></div>
-      <div class="follow-item"><img src="https://images.unsplash.com/photo-1574966739987-65e38db0f7ce?auto=format&fit=crop&w=400&q=70" alt="Instagram post"></div>
-      <div class="follow-item"><img src="https://images.unsplash.com/photo-1500217052183-bc01eee1a74e?auto=format&fit=crop&w=400&q=70" alt="Instagram post"></div>
-      <div class="follow-item"><img src="https://images.unsplash.com/photo-1567745219000-b99afacf5ef6?auto=format&fit=crop&w=400&q=70" alt="Instagram post"></div>
-    </div>
-    <a href="#" class="btn btn-outline">Follow Us on Instagram</a>
-  </div>
-</section>
-
-<!-- ============ CONTACT ============ -->
-<section class="contact" id="contact">
-  <div class="container">
-    <div class="contact-grid">
-      <div class="contact-card reveal">
-        <div class="icon-badge"><svg viewBox="0 0 24 24"><path d="M12 22s8-7.5 8-13a8 8 0 1 0-16 0c0 5.5 8 13 8 13z"/><circle cx="12" cy="9" r="2.5"/></svg></div>
-        <h4>Address</h4>
-        <p>67 Van Heerden St,<br>Mokopane, 0600</p>
-      </div>
-      <div class="contact-card reveal reveal-delay-1">
-        <div class="icon-badge"><svg viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3-8.7A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 3a2 2 0 0 1-.5 2.1L8 10a16 16 0 0 0 6 6l1.2-1.3a2 2 0 0 1 2.1-.5c1 .3 2 .5 3 .7a2 2 0 0 1 1.7 2z"/></svg></div>
-        <h4>Phone</h4>
-        <p>076 506 9520</p>
-      </div>
-      <div class="contact-card reveal reveal-delay-2">
-        <div class="icon-badge"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
-        <h4>Hours</h4>
-        <p>Open Daily<br>Closes at 11:00 PM</p>
-      </div>
-      <div class="contact-card reveal reveal-delay-3">
-        <div class="icon-badge"><svg viewBox="0 0 24 24"><path d="M8 3h8l-1 8a3 3 0 0 1-6 0L8 3zM12 13v6M9 21h6"/></svg></div>
-        <h4>Service Options</h4>
-        <p>All You Can Eat · Outdoor Seating · Private Dining Room</p>
-      </div>
-    </div>
-    <div class="map-frame reveal">
-      <iframe src="https://www.google.com/maps?q=67%20Van%20Heerden%20St%2C%20Mokopane%2C%200600%2C%20South%20Africa&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="PV Lifestyle location map"></iframe>
+    <div class="info-card reveal">
+      <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg></div>
+      <h4>Opening Hours</h4>
+      <p>Open daily &middot; Closes 11 pm</p>
+      <span class="status">Open Now</span>
     </div>
   </div>
 </section>
 
 <!-- ============ FOOTER ============ -->
 <footer class="site-footer">
-  <div class="container">
-    <div class="footer-panel">
-      <div class="footer-visit">
-        <h3>Join us for dinner!</h3>
-        <div class="info-row"><div class="icon-badge"><svg viewBox="0 0 24 24"><path d="M12 22s8-7.5 8-13a8 8 0 1 0-16 0c0 5.5 8 13 8 13z"/><circle cx="12" cy="9" r="2.5"/></svg></div><span>67 Van Heerden St, Mokopane, 0600</span></div>
-        <div class="info-row"><div class="icon-badge"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div><span>Open Daily · Closes at 11:00 PM</span></div>
-        <div class="info-row"><div class="icon-badge"><svg viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3-8.7A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 3a2 2 0 0 1-.5 2.1L8 10a16 16 0 0 0 6 6l1.2-1.3a2 2 0 0 1 2.1-.5c1 .3 2 .5 3 .7a2 2 0 0 1 1.7 2z"/></svg></div><span>076 506 9520</span></div>
-        <div class="footer-links">
-          <a href="#about">About</a>
-          <a href="#menu">Menu</a>
-          <a href="#reserve">Reservations</a>
-          <a href="#contact">Contact</a>
-        </div>
-      </div>
-      <div class="footer-news">
-        <h3>Stay in the loop</h3>
-        <p>New menu drops, wine arrivals, and special evenings — straight to your inbox.</p>
-        <form class="newsletter-row" id="newsletterForm">
-          <input type="email" placeholder="Your e-mail" required>
-          <button type="submit" class="btn btn-primary btn-sm">Subscribe</button>
-        </form>
-        <div class="social-row" style="margin-top:22px;">
-          <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg></a>
-          <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M15 3h-2a5 5 0 0 0-5 5v3H6v4h2v6h4v-6h3l1-4h-4V8a1 1 0 0 1 1-1h3z"/></svg></a>
-          <a href="#" aria-label="Whatsapp"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.5 8.5 0 0 1-12.4 7.5L3 20l1.1-5.4A8.5 8.5 0 1 1 21 11.5z"/></svg></a>
-        </div>
-      </div>
-      <div class="footer-illustration">
-        <svg viewBox="0 0 100 100"><path d="M20 80 L20 40 M80 80 L80 40 M15 40 L85 40 M50 40 L50 15 M35 15 L65 15 M50 15 A15 15 0 0 1 35 15 M50 15 A15 15 0 0 0 65 15"/><circle cx="20" cy="70" r="6"/><circle cx="80" cy="70" r="6"/></svg>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <img src="https://i.postimg.cc/DZh18dK7/pvlogo-removebg-preview.png" alt="PV Lifestyle logo">
+      <p>Fine dining, craft cocktails and an intimate atmosphere &mdash; PV Lifestyle Restaurant &amp; Bar is Mokopane's home for exceptional evenings.</p>
+      <div class="footer-social">
+        <a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+        <a href="#" aria-label="Facebook"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 8h-2a2 2 0 0 0-2 2v10M9 13h6"/><path d="M15 3v3a1 1 0 0 0 1 1h3"/><circle cx="12" cy="12" r="9"/></svg></a>
+        <a href="tel:0765069520" aria-label="Call"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.1-8.7A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.7a2 2 0 0 1-.5 2.1L8 9.6a16 16 0 0 0 6 6l1.1-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.5 2.7.6a2 2 0 0 1 1.7 2z"/></svg></a>
       </div>
     </div>
-    <div class="container footer-bottom">
-      <span>© <span id="year"></span> PV Lifestyle Restaurant &amp; Bar. All rights reserved.</span>
-      <span>Mokopane, South Africa</span>
+
+    <div class="footer-col">
+      <h5>Explore</h5>
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#explore">Events</a></li>
+        <li><a href="#explore">Restaurant &amp; Menu</a></li>
+        <li><a href="#explore">Conferences</a></li>
+        <li><a href="#explore">The Bar</a></li>
+        <li><a href="#story">Our Story</a></li>
+      </ul>
     </div>
+
+    <div class="footer-col">
+      <h5>Contact</h5>
+      <ul>
+        <li class="contact-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+          <span>67 Van Heerden St, Mokopane, 0600</span>
+        </li>
+        <li class="contact-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.1-8.7A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.7a2 2 0 0 1-.5 2.1L8 9.6a16 16 0 0 0 6 6l1.1-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.5 2.7.6a2 2 0 0 1 1.7 2z"/></svg>
+          <span><a href="tel:0765069520">076 506 9520</a></span>
+        </li>
+        <li class="contact-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>
+          <span>Open daily &middot; Closes 11&nbsp;pm</span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h5>Service Options</h5>
+      <div class="footer-chips">
+        <span class="chip">All You Can Eat</span>
+        <span class="chip">Outdoor Seating</span>
+        <span class="chip">Private Dining Room</span>
+      </div>
+      <h5 style="margin-top:28px;">Reserve</h5>
+      <a href="tel:0765069520" class="btn btn-solid" style="padding:12px 22px;font-size:0.85rem;">Book a Table</a>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <span>&copy; <span id="year"></span> PV Lifestyle Restaurant &amp; Bar. All rights reserved.</span>
+    <span>Designed with care &middot; Mokopane, South Africa</span>
   </div>
 </footer>
 
+<!-- ============ FLOATING ACTIONS ============ -->
+<div class="floating-actions">
+  <a href="tel:0765069520" class="fab fab-call" aria-label="Call PV Lifestyle">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.1-8.7A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.7a2 2 0 0 1-.5 2.1L8 9.6a16 16 0 0 0 6 6l1.1-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.5 2.7.6a2 2 0 0 1 1.7 2z"/></svg>
+  </a>
+  <a href="tel:0765069520" class="fab fab-book"><span class="long">Book a Table</span><span class="short" style="display:none;">Book</span></a>
+</div>
+
+<!-- ============ MODALS ============ -->
+
+<!-- Events Modal -->
+<div class="modal-overlay" id="modal-events" role="dialog" aria-modal="true" aria-label="Events">
+  <div class="modal-box">
+    <div class="modal-hero">
+      <img src="https://i.postimg.cc/SNyFWJhT/Save-Clip-App-730332036-18016859684908826-276558060762799520-n.jpg" alt="PV Lifestyle events">
+      <button class="modal-close" data-close aria-label="Close">&times;</button>
+      <div class="modal-hero-title"><span class="tag">Events</span><h3>Nights to Remember</h3></div>
+    </div>
+    <div class="modal-body">
+      <p class="desc">From themed parties to live entertainment, PV Lifestyle regularly hosts unforgettable evenings. Take a look at what's coming up and relive our most recent celebrations.</p>
+      <div class="tab-row">
+        <button class="tab-btn active" data-tab-target="ev-upcoming">Upcoming Events</button>
+        <button class="tab-btn" data-tab-target="ev-past">Previous Events</button>
+      </div>
+      <div class="tab-panel active" id="ev-upcoming">
+        <div class="gallery-grid">
+          <div class="g-item"><img src="https://i.postimg.cc/8z5209sL/Save-Clip-App-731158340-18016681901908826-3553037399421413566-n.jpg" alt="Upcoming event at PV Lifestyle" loading="lazy"><span class="g-label">Upcoming</span></div>
+        </div>
+      </div>
+      <div class="tab-panel" id="ev-past">
+        <div class="gallery-grid">
+          <div class="g-item"><img src="https://i.postimg.cc/BnVr9pKS/Save-Clip-App-730332015-18016384001908826-7760478953285662725-n.jpg" alt="Previous event at PV Lifestyle" loading="lazy"><span class="g-label">Past Event</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Restaurant Modal -->
+<div class="modal-overlay" id="modal-restaurant" role="dialog" aria-modal="true" aria-label="Restaurant">
+  <div class="modal-box">
+    <div class="modal-hero">
+      <img src="https://i.postimg.cc/bv1yLr6v/PV-Wraps-and-Sea-Food-copy-1024x1024.jpg" alt="PV Lifestyle restaurant">
+      <button class="modal-close" data-close aria-label="Close">&times;</button>
+      <div class="modal-hero-title"><span class="tag">Restaurant</span><h3>Fresh, Bold &amp; Made to Share</h3></div>
+    </div>
+    <div class="modal-body">
+      <p class="desc">Explore our menu highlights and see the dishes leaving our kitchen &mdash; from wood-fired pizzas and hearty platters to our most-loved seasonal meals.</p>
+      <div class="tab-row">
+        <button class="tab-btn active" data-tab-target="r-menu">Menu</button>
+        <button class="tab-btn" data-tab-target="r-food">Food</button>
+      </div>
+      <div class="tab-panel active" id="r-menu">
+        <div class="gallery-grid">
+          <div class="g-item"><img src="https://i.postimg.cc/fyqDk9bG/PV-main-Burgersl-copy-1024x1024.jpg" alt="Burgers" loading="lazy"><span class="g-label">Burgers</span></div>
+          <div class="g-item"><img src="https://i.postimg.cc/0239sDFw/PV-main-Tradition-Cuisines-copy-1024x1024.jpg" alt="Traditional Cuisines" loading="lazy"><span class="g-label">Traditional Cuisine</span></div>
+          <div class="g-item"><img src="https://i.postimg.cc/fyyh4RvX/PV-Pizza-copy-1024x1024.jpg" alt="Pizza" loading="lazy"><span class="g-label">Pizza</span></div>
+          <div class="g-item"><img src="https://i.postimg.cc/8cjxKn1x/PV-PLATTERS-copy-1024x1024.jpg" alt="Platters" loading="lazy"><span class="g-label">Platters</span></div>
+        </div>
+      </div>
+      <div class="tab-panel" id="r-food">
+        <div class="gallery-grid">
+          <div class="g-item"><img src="https://i.postimg.cc/mDk66stX/meal-6.jpg" alt="Signature meal" loading="lazy"></div>
+          <div class="g-item"><img src="https://i.postimg.cc/m27RSYxh/meal-5.jpg" alt="Signature meal" loading="lazy"></div>
+          <div class="g-item"><img src="https://i.postimg.cc/DZW34sdf/meal-4.jpg" alt="Signature meal" loading="lazy"></div>
+          <div class="g-item"><img src="https://i.postimg.cc/qMcVKpn2/meal-3.jpg" alt="Signature meal" loading="lazy"></div>
+          <div class="g-item"><img src="https://i.postimg.cc/vmBpC9KY/meal-2.jpg" alt="Signature meal" loading="lazy"></div>
+          <div class="g-item"><img src="https://i.postimg.cc/0jp37Czh/meal-1.jpg" alt="Signature meal" loading="lazy"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Conferences Modal -->
+<div class="modal-overlay" id="modal-conferences" role="dialog" aria-modal="true" aria-label="Conferences">
+  <div class="modal-box">
+    <div class="modal-hero">
+      <img src="https://i.postimg.cc/T38Nm616/img6.jpg" alt="PV Lifestyle conference room">
+      <button class="modal-close" data-close aria-label="Close">&times;</button>
+      <div class="modal-hero-title"><span class="tag">Conferences &amp; Functions</span><h3>Business Done Beautifully</h3></div>
+    </div>
+    <div class="modal-body">
+      <p class="desc">Our private conference and function space is fully equipped for meetings, workshops and corporate gatherings &mdash; paired with the same warm hospitality PV Lifestyle is known for.</p>
+      <div class="gallery-grid">
+        <div class="g-item"><img src="https://i.postimg.cc/T38Nm616/img6.jpg" alt="Conference room setup" loading="lazy"><span class="g-label">Conference Room</span></div>
+      </div>
+      <div class="subhead"><span class="dot"></span>What's included</div>
+      <div class="bar-list">
+        <li>Seating for small &amp; large groups <span class="price">Flexible</span></li>
+        <li>Catering &amp; refreshments on request <span class="price">Available</span></li>
+        <li>Private, quiet function space <span class="price">Included</span></li>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Bar Modal -->
+<div class="modal-overlay" id="modal-bar" role="dialog" aria-modal="true" aria-label="The Bar">
+  <div class="modal-box">
+    <div class="modal-hero">
+      <div class="modal-hero-fallback"></div>
+      <button class="modal-close" data-close aria-label="Close">&times;</button>
+      <div class="modal-hero-title"><span class="tag">The Bar</span><h3>Craft Cocktails &amp; Late Nights</h3></div>
+    </div>
+    <div class="modal-body">
+      <p class="desc">Unwind at our bar with hand-crafted cocktails, an exclusive wine list of rare vintages, and a relaxed atmosphere that carries the night from dinner into drinks.</p>
+      <div class="bar-content">
+        <div>
+          <div class="subhead"><span class="dot"></span>Bar highlights</div>
+          <ul class="bar-list">
+            <li>Signature Cocktails <span class="price">Hand-crafted</span></li>
+            <li>Exclusive Wine List <span class="price">Rare Vintages</span></li>
+            <li>Craft &amp; Local Beers <span class="price">On Tap</span></li>
+            <li>Weekend Live Music <span class="price">From 8pm</span></li>
+          </ul>
+        </div>
+        <div class="bar-visual">
+          <svg viewBox="0 0 64 64" fill="none" stroke="#fff" stroke-width="1.4"><path d="M14 10h36l-14 22v18h-8V32z"/><path d="M20 54h24"/><circle cx="46" cy="12" r="2" fill="#fff" stroke="none"/><circle cx="50" cy="8" r="1.2" fill="#fff" stroke="none"/></svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script>
-(function(){
-  document.getElementById('year').textContent = new Date().getFullYear();
+document.getElementById('year').textContent = new Date().getFullYear();
 
-  var header = document.getElementById('siteHeader');
-  window.addEventListener('scroll', function(){ header.classList.toggle('scrolled', window.scrollY > 30); });
+/* Navbar scroll state */
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  navbar.classList.toggle('scrolled', window.scrollY > 40);
+}, {passive:true});
 
-  var burger = document.getElementById('burger');
-  var navLinks = document.getElementById('navLinks');
-  burger.addEventListener('click', function(){ burger.classList.toggle('open'); navLinks.classList.toggle('open'); });
-  document.querySelectorAll('.nav-link').forEach(function(a){
-    a.addEventListener('click', function(){ burger.classList.remove('open'); navLinks.classList.remove('open'); });
+/* Mobile menu */
+const navToggle = document.getElementById('navToggle');
+const mobileMenu = document.getElementById('mobileMenu');
+navToggle.addEventListener('click', () => {
+  const open = mobileMenu.classList.toggle('open');
+  navToggle.classList.toggle('active', open);
+  navToggle.setAttribute('aria-expanded', open);
+});
+mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+  mobileMenu.classList.remove('open');
+  navToggle.classList.remove('active');
+}));
+
+/* Scroll reveal */
+const revealEls = document.querySelectorAll('.reveal, .exp-card, .story-inner, .info-card');
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting){
+      entry.target.classList.add('in-view');
+      io.unobserve(entry.target);
+    }
   });
+}, {threshold:0.15});
+revealEls.forEach(el => io.observe(el));
 
-  var revealEls = document.querySelectorAll('.reveal');
-  var io = new IntersectionObserver(function(entries){
-    entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
-  }, { threshold:0.15 });
-  revealEls.forEach(function(el){ io.observe(el); });
-
-  // hero badge counter
-  var badgeNum = document.querySelector('.hero-badge .num');
-  if(badgeNum){
-    var target = parseInt(badgeNum.getAttribute('data-count'), 10);
-    var current = 0, step = Math.max(1, Math.round(target/50));
-    var counted = false;
-    var bio = new IntersectionObserver(function(entries){
-      entries.forEach(function(e){
-        if(e.isIntersecting && !counted){
-          counted = true;
-          var t = setInterval(function(){
-            current += step;
-            if(current >= target){ current = target; clearInterval(t); }
-            badgeNum.textContent = current + '+';
-          }, 26);
-        }
-      });
-    }, { threshold:0.4 });
-    bio.observe(badgeNum);
+/* Modals */
+const modalTriggers = document.querySelectorAll('[data-modal]');
+let lastFocused = null;
+function openModal(id){
+  const modal = document.getElementById(id);
+  if(!modal) return;
+  lastFocused = document.activeElement;
+  modal.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  const closeBtn = modal.querySelector('.modal-close');
+  if(closeBtn) closeBtn.focus();
+}
+function closeModal(modal){
+  modal.classList.remove('open');
+  document.body.style.overflow = '';
+  if(lastFocused) lastFocused.focus();
+}
+modalTriggers.forEach(card => {
+  const id = card.getAttribute('data-modal');
+  card.addEventListener('click', () => openModal(id));
+  card.addEventListener('keydown', (e) => {
+    if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); openModal(id); }
+  });
+});
+document.querySelectorAll('.modal-overlay').forEach(modal => {
+  modal.addEventListener('click', (e) => { if(e.target === modal) closeModal(modal); });
+  modal.querySelector('[data-close]').addEventListener('click', () => closeModal(modal));
+});
+document.addEventListener('keydown', (e) => {
+  if(e.key === 'Escape'){
+    document.querySelectorAll('.modal-overlay.open').forEach(m => closeModal(m));
   }
+});
 
-  // testimonial slider
-  var slides = document.querySelectorAll('.t-slide');
-  var dotsWrap = document.getElementById('tDots');
-  var current = 0;
-  slides.forEach(function(_, i){
-    var dot = document.createElement('button');
-    dot.className = 't-dot' + (i===0 ? ' active' : '');
-    dot.setAttribute('aria-label', 'Show testimonial ' + (i+1));
-    dot.addEventListener('click', function(){ showSlide(i); });
-    dotsWrap.appendChild(dot);
+/* Tabs inside modals */
+document.querySelectorAll('.tab-row').forEach(row => {
+  const buttons = row.querySelectorAll('.tab-btn');
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const target = btn.getAttribute('data-tab-target');
+      const panelWrap = row.parentElement;
+      buttons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      panelWrap.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+      document.getElementById(target).classList.add('active');
+    });
   });
-  var dots = document.querySelectorAll('.t-dot');
-  function showSlide(i){
-    slides[current].classList.remove('active'); dots[current].classList.remove('active');
-    current = i;
-    slides[current].classList.add('active'); dots[current].classList.add('active');
-  }
-  setInterval(function(){ showSlide((current + 1) % slides.length); }, 6000);
+});
 
-  // reservation form
-  var form = document.getElementById('reserveForm');
-  var successMsg = document.getElementById('successMsg');
-  form.addEventListener('submit', function(e){
-    e.preventDefault();
-    successMsg.classList.add('show');
-    form.reset();
-    setTimeout(function(){ successMsg.classList.remove('show'); }, 6000);
+/* Smooth anchor scroll offset for fixed navbar */
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', (e) => {
+    const id = a.getAttribute('href');
+    if(id.length > 1){
+      const target = document.querySelector(id);
+      if(target){
+        e.preventDefault();
+        const y = target.getBoundingClientRect().top + window.pageYOffset - 90;
+        window.scrollTo({top:y, behavior:'smooth'});
+      }
+    }
   });
-
-  // newsletter form
-  var nform = document.getElementById('newsletterForm');
-  nform.addEventListener('submit', function(e){
-    e.preventDefault();
-    var btn = nform.querySelector('button');
-    var original = btn.textContent;
-    btn.textContent = 'Subscribed ✓';
-    nform.reset();
-    setTimeout(function(){ btn.textContent = original; }, 3000);
-  });
-})();
+});
 </script>
 </body>
 </html>
