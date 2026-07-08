@@ -232,14 +232,15 @@
   .hero-eyebrow{ color:var(--orange-light); opacity:1; }
   .hero-title{
     font-family:'Anton', sans-serif; font-weight:400; letter-spacing:.01em;
-    color:var(--white); font-size:clamp(1.8rem, 9vw, 8.5rem); line-height:.92;
+    color:var(--white); font-size:clamp(1.26rem, 6.3vw, 5.95rem); line-height:.92;
     margin-top:.6rem; opacity:1;
   }
   .hero-subhead{
-    color:var(--cream); font-size:clamp(.9rem, 1.8vw, 1.35rem); max-width:36rem;
+    color:var(--cream); font-size:clamp(.63rem, 1.26vw, .945rem); max-width:36rem;
     margin-top:1rem; font-weight:500; opacity:1;
   }
   .hero-actions{ display:flex; flex-wrap:wrap; gap:.75rem; margin-top:1.5rem; opacity:1; }
+  .hero-actions .cta-btn, .hero-actions .btn-outline{ font-size:clamp(.56rem, 1.26vw, .63rem); }
   .btn-outline{
     display:inline-flex; align-items:center; justify-content:center;
     padding:clamp(.7rem, 1.5vw, .85rem) clamp(1.2rem, 2.5vw, 1.6rem); border-radius:999px; font-weight:800; font-size:clamp(.8rem, 1.8vw, .9rem);
@@ -835,11 +836,15 @@
       <div class="events-modal-slide" data-slide="1">
         <img src="https://i.postimg.cc/Ghr4VsJv/fabr.jpg" alt="Upcoming event flyer at PV Lifestyle" loading="eager">
       </div>
+      <div class="events-modal-slide" data-slide="2">
+        <img src="https://i.postimg.cc/dVRhmbHN/kabza.png" alt="Upcoming event flyer with Kabza" loading="lazy">
+      </div>
     </div>
 
     <div class="events-modal-dots" id="eventsModalDots">
       <button class="events-modal-dot active" data-dot="0" aria-label="Show event 1"></button>
       <button class="events-modal-dot" data-dot="1" aria-label="Show event 2"></button>
+      <button class="events-modal-dot" data-dot="2" aria-label="Show event 3"></button>
     </div>
 
     <div class="events-modal-cta">
@@ -898,6 +903,9 @@
       <div class="hero-slide" data-slide="2">
         <img src="https://i.postimg.cc/dVRhmbHN/kabza.png" alt="Special event featuring Kabza De Small">
       </div>
+      <div class="hero-slide" data-slide="3">
+        <img src="https://i.postimg.cc/7ZxfYB9X/messiah.png" alt="PV Lifestyle restaurant and bar atmosphere">
+      </div>
     </div>
     <div class="hero-scrim"></div>
 
@@ -916,6 +924,7 @@
       <button class="hero-dot active" type="button" data-dot="0" aria-label="Show hero image 1" aria-selected="true"></button>
       <button class="hero-dot" type="button" data-dot="1" aria-label="Show hero image 2" aria-selected="false"></button>
       <button class="hero-dot" type="button" data-dot="2" aria-label="Show hero image 3" aria-selected="false"></button>
+      <button class="hero-dot" type="button" data-dot="3" aria-label="Show hero image 4" aria-selected="false"></button>
     </div>
   </section>
 
