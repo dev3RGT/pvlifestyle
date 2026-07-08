@@ -201,9 +201,28 @@
   }
   .hero-media{ position:absolute; inset:0; z-index:0; }
   .hero-media img{ width:100%; height:100%; object-fit:cover; object-position:center; }
+  .hero-slide{
+    position:absolute; inset:0; opacity:0; visibility:hidden;
+    transition:opacity 1.4s ease;
+  }
+  .hero-slide.is-active{ opacity:1; visibility:visible; z-index:1; }
   .hero-scrim{
     position:absolute; inset:0; z-index:1;
     background:linear-gradient(180deg, rgba(24,27,28,.15) 0%, rgba(24,27,28,.1) 35%, rgba(24,27,28,.75) 78%, var(--charcoal-deeper) 100%);
+  }
+  .hero-dots{
+    position:absolute; z-index:3; right:clamp(1rem, 4vw, 3rem); bottom:clamp(1.2rem, 3vw, 2rem);
+    display:flex; gap:.5rem;
+  }
+  .hero-dot{
+    width:8px; height:8px; border-radius:50%; border:none; cursor:pointer;
+    background:rgba(247,242,234,.32); padding:0; transition:background .3s ease, width .3s ease;
+    -webkit-tap-highlight-color:transparent; min-width:8px;
+  }
+  .hero-dot.active{ background:var(--orange); width:22px; border-radius:999px; }
+  @media (prefers-reduced-motion:no-preference){
+    .hero-slide.is-active img{ animation:heroKenBurns 6.5s ease-out forwards; }
+    @keyframes heroKenBurns{ from{ transform:scale(1.07); } to{ transform:scale(1); } }
   }
   .hero-content{
     position:relative; z-index:2; width:100%;
@@ -868,8 +887,13 @@
 
   <!-- ================= HERO ================= -->
   <section class="hero" id="hero">
-    <div class="hero-media">
-      <img src="https://i.postimg.cc/VkjyjmCM/hero.png" alt="PV Lifestyle restaurant and bar atmosphere" fetchpriority="high">
+    <div class="hero-media" id="heroSlideshow">
+      <div class="hero-slide is-active" data-slide="0">
+        <img src="https://i.postimg.cc/VkjyjmCM/hero.png" alt="PV Lifestyle restaurant and bar atmosphere" fetchpriority="high">
+      </div>
+      <div class="hero-slide" data-slide="1">
+        <img src="https://i.postimg.cc/t4qR3YLM/h.png" alt="PV Lifestyle restaurant and bar atmosphere">
+      </div>
     </div>
     <div class="hero-scrim"></div>
 
@@ -882,6 +906,11 @@
         <a href="#reserve" class="cta-btn">Reserve a Table</a>
         <a href="#menu" class="btn-outline">Explore the Menu</a>
       </div>
+    </div>
+
+    <div class="hero-dots" id="heroDots" role="tablist" aria-label="Hero image slideshow">
+      <button class="hero-dot active" type="button" data-dot="0" aria-label="Show hero image 1" aria-selected="true"></button>
+      <button class="hero-dot" type="button" data-dot="1" aria-label="Show hero image 2" aria-selected="false"></button>
     </div>
   </section>
 
@@ -1533,6 +1562,53 @@
   const lightbox = new FullscreenLightbox();
   const eventsCF = new CarouselController('coverflowTrack', 'cfDots', 'cfPrev', 'cfNext', 'coverflow');
   const menuCF = new CarouselController('menucatsTrack', 'mcDots', 'mcPrev', 'mcNext', 'menucats-coverflow');
+
+  // Hero slideshow
+  (function initHeroSlideshow() {
+    const wrap = document.getElementById('heroSlideshow');
+    if (!wrap) return;
+    const slides = wrap.querySelectorAll('.hero-slide');
+    const dots = document.querySelectorAll('#heroDots .hero-dot');
+    if (slides.length < 2) return;
+
+    let active = 0;
+    let timer = null;
+    const DURATION = 6000;
+
+    function showSlide(index) {
+      active = (index + slides.length) % slides.length;
+      slides.forEach((slide, i) => {
+        const isActive = i === active;
+        slide.classList.toggle('is-active', isActive);
+        if (isActive) {
+          const img = slide.querySelector('img');
+          img.style.animation = 'none';
+          void img.offsetWidth;
+          img.style.animation = '';
+        }
+      });
+      dots.forEach((dot, i) => {
+        dot.classList.toggle('active', i === active);
+        dot.setAttribute('aria-selected', i === active ? 'true' : 'false');
+      });
+    }
+
+    function startAutoplay() {
+      clearInterval(timer);
+      timer = setInterval(() => showSlide(active + 1), DURATION);
+    }
+
+    dots.forEach((dot, i) => {
+      dot.addEventListener('click', () => { showSlide(i); startAutoplay(); });
+    });
+
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) clearInterval(timer);
+      else startAutoplay();
+    });
+
+    startAutoplay();
+  })();
 
   // Header scroll effect
   const siteHeader = document.getElementById('siteHeader');
