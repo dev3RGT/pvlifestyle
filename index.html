@@ -202,10 +202,13 @@
   .hero-media{ position:absolute; inset:0; z-index:0; }
   .hero-media img{ width:100%; height:100%; object-fit:cover; object-position:center; }
   .hero-slide{
-    position:absolute; inset:0; opacity:0; visibility:hidden;
-    transition:opacity 1.4s ease;
+    position:absolute; inset:0; opacity:0;
+    transform: translateX(100%);
+    transition: transform 1.2s cubic-bezier(0.4, 0, 0.2, 1), opacity 1.2s ease;
+    z-index: 0;
   }
-  .hero-slide.is-active{ opacity:1; visibility:visible; z-index:1; }
+  .hero-slide.is-active{ opacity:1; transform: translateX(0); z-index:1; }
+  .hero-slide.is-past{ transform: translateX(-100%); opacity: 0; }
   .hero-scrim{
     position:absolute; inset:0; z-index:1;
     background:linear-gradient(180deg, rgba(24,27,28,.15) 0%, rgba(24,27,28,.1) 35%, rgba(24,27,28,.75) 78%, var(--charcoal-deeper) 100%);
@@ -220,10 +223,7 @@
     -webkit-tap-highlight-color:transparent; min-width:8px;
   }
   .hero-dot.active{ background:var(--orange); width:22px; border-radius:999px; }
-  @media (prefers-reduced-motion:no-preference){
-    .hero-slide.is-active img{ animation:heroKenBurns 6.5s ease-out forwards; }
-    @keyframes heroKenBurns{ from{ transform:scale(1.07); } to{ transform:scale(1); } }
-  }
+  /* Hero zoom animation removed per request */
   .hero-content{
     position:relative; z-index:2; width:100%;
     padding: 0 clamp(1rem, 5vw, 3rem) clamp(2rem, 6vw, 6rem);
@@ -834,11 +834,15 @@
       <div class="events-modal-slide" data-slide="1">
         <img src="https://i.postimg.cc/Ghr4VsJv/fabr.jpg" alt="Upcoming event flyer at PV Lifestyle" loading="eager">
       </div>
+      <div class="events-modal-slide" data-slide="2">
+        <img src="https://i.postimg.cc/dVRhmbHN/kabza.png" alt="Upcoming event flyer with Kabza" loading="lazy">
+      </div>
     </div>
 
     <div class="events-modal-dots" id="eventsModalDots">
       <button class="events-modal-dot active" data-dot="0" aria-label="Show event 1"></button>
       <button class="events-modal-dot" data-dot="1" aria-label="Show event 2"></button>
+      <button class="events-modal-dot" data-dot="2" aria-label="Show event 3"></button>
     </div>
 
     <div class="events-modal-cta">
@@ -894,6 +898,9 @@
       <div class="hero-slide" data-slide="1">
         <img src="https://i.postimg.cc/t4qR3YLM/h.png" alt="PV Lifestyle restaurant and bar atmosphere">
       </div>
+      <div class="hero-slide" data-slide="2">
+        <img src="https://i.postimg.cc/dVRhmbHN/kabza.png" alt="Special event featuring Kabza De Small">
+      </div>
     </div>
     <div class="hero-scrim"></div>
 
@@ -911,6 +918,7 @@
     <div class="hero-dots" id="heroDots" role="tablist" aria-label="Hero image slideshow">
       <button class="hero-dot active" type="button" data-dot="0" aria-label="Show hero image 1" aria-selected="true"></button>
       <button class="hero-dot" type="button" data-dot="1" aria-label="Show hero image 2" aria-selected="false"></button>
+      <button class="hero-dot" type="button" data-dot="2" aria-label="Show hero image 3" aria-selected="false"></button>
     </div>
   </section>
 
@@ -951,6 +959,10 @@
           <img src="https://i.postimg.cc/BnVr9pKS/Save-Clip-App-730332015-18016384001908826-7760478953285662725-n.jpg" alt="Sunday Soul Session event at PV Lifestyle" loading="lazy">
           <div class="coverflow-cap"><span class="day">Sunday</span><span class="name">Sunday Soul Session</span></div>
         </div>
+        <div class="coverflow-slide" data-index="3" data-type="event" data-title="Special Guest: Kabza De Small">
+          <img src="https://i.postimg.cc/dVRhmbHN/kabza.png" alt="Special event with Kabza De Small at PV Lifestyle" loading="lazy">
+          <div class="coverflow-cap"><span class="day">Special</span><span class="name">Kabza De Small</span></div>
+        </div>
       </div>
 
       <button class="cf-arrow cf-prev" id="cfPrev" aria-label="Previous event">
@@ -964,6 +976,7 @@
         <button class="cf-dot" data-index="0" aria-label="Show Lekompo Fridays"></button>
         <button class="cf-dot" data-index="1" aria-label="Show Exquisite Saturdays"></button>
         <button class="cf-dot" data-index="2" aria-label="Show Sunday Soul Session"></button>
+        <button class="cf-dot" data-index="3" aria-label="Show Kabza De Small"></button>
       </div>
     </div>
   </section>
@@ -1576,15 +1589,14 @@
     const DURATION = 6000;
 
     function showSlide(index) {
+      const prevActive = active;
       active = (index + slides.length) % slides.length;
       slides.forEach((slide, i) => {
-        const isActive = i === active;
-        slide.classList.toggle('is-active', isActive);
-        if (isActive) {
-          const img = slide.querySelector('img');
-          img.style.animation = 'none';
-          void img.offsetWidth;
-          img.style.animation = '';
+        slide.classList.remove('is-active', 'is-past');
+        if (i === active) {
+          slide.classList.add('is-active');
+        } else if (i === prevActive) {
+          slide.classList.add('is-past');
         }
       });
       dots.forEach((dot, i) => {
