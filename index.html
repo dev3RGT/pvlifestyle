@@ -131,8 +131,10 @@
   .site-logo img{ 
     height:clamp(38px, 7.2vw, 49px); width:auto; 
     filter: brightness(0) invert(1);
-    mix-blend-mode: difference;
     transition: filter .35s ease;
+  }
+  .site-header.is-scrolled .site-logo img{
+    filter: none;
   }
 
   .pill-nav{
