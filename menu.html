@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
 <title>Menu | PV Lifestyle — Restaurant &amp; Bar, Mokopane</title>
-<meta name="description" content="Five categories, one philosophy — Wraps &amp; Sea Food, Burgers, Traditional Cuisines, Pizza and Platters at PV Lifestyle, Mokopane. Fresh, bold, and made to share.">
+<meta name="description" content="Explore the full PV Lifestyle menu — wraps &amp; seafood, burgers, traditional Limpopo favourites, stone-baked pizza, sharing platters, sides, sweets and a full bar list. Fresh, bold, made to share.">
 <meta name="theme-color" content="#181b1c">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -12,13 +12,13 @@
 <link rel="icon" type="image/png" href="https://i.postimg.cc/DZh18dK7/pvlogo-removebg-preview.png">
 
 <meta property="og:title" content="Menu | PV Lifestyle">
-<meta property="og:description" content="Five categories, one philosophy — fresh, bold, and made to share.">
-<meta property="og:image" content="https://i.postimg.cc/8cjxKn1x/PV-PLATTERS-copy-1024x1024.jpg">
+<meta property="og:description" content="Fresh, bold, and made to share — explore every category on the PV Lifestyle menu.">
+<meta property="og:image" content="https://i.postimg.cc/mDk66stX/meal-6.jpg">
 <meta property="og:type" content="website">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=Manrope:wght@400;500;600;700;800&family=Cormorant+Garamond:ital,wght@1,500;1,600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=Manrope:wght@400;500;600;700;800&family=Cormorant+Garamond:ital,wght@1,500;1,600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 
 <style>
   :root{
@@ -58,6 +58,7 @@
   .container{ width:100%; max-width:1280px; margin-inline:auto; padding-inline:clamp(1rem, 5vw, 3rem); }
   .font-display{ font-family:'Bebas Neue', sans-serif; letter-spacing:.02em; }
   .font-quote{ font-family:'Cormorant Garamond', serif; font-style:italic; }
+  .font-mono{ font-family:'Space Mono', monospace; }
 
   .skip-link{
     position:absolute; left:1rem; top:-60px; background:var(--orange); color:var(--charcoal-deeper);
@@ -163,27 +164,21 @@
     .hamburger{ display:flex; }
   }
 
-  /* ===== Angled dividers (match site) ===== */
+  /* ===== Angled dividers (flexible via inline custom props) ===== */
   .angle-divider{ position:relative; height:clamp(30px, 5vw, 84px); width:100%; overflow:hidden; }
-  .angle-divider::before{ content:''; position:absolute; inset:0; }
-  .angle-divider::after{ content:''; position:absolute; inset:0; clip-path:polygon(0 100%, 100% 0, 100% 100%); }
-  .angle-one::before{ background:var(--charcoal-deeper); }
-  .angle-one::after{ background:var(--orange-sat); }
-  .angle-two::before{ background:var(--orange-sat); }
-  .angle-two::after{ background:var(--charcoal-sat); }
-  .angle-three::before{ background:var(--charcoal-sat); }
-  .angle-three::after{ background:var(--charcoal-deeper); }
+  .angle-divider::before{ content:''; position:absolute; inset:0; background:var(--seg-from); }
+  .angle-divider::after{ content:''; position:absolute; inset:0; clip-path:polygon(0 100%, 100% 0, 100% 100%); background:var(--seg-to); }
 
   /* ===== PAGE HERO ===== */
   .page-hero{
-    position:relative; min-height:78svh; display:flex; align-items:flex-end;
+    position:relative; min-height:74svh; display:flex; align-items:flex-end;
     overflow:hidden; isolation:isolate; padding-top:60px;
   }
   .page-hero-media{ position:absolute; inset:0; z-index:0; }
-  .page-hero-media img{ width:100%; height:100%; object-fit:cover; object-position:center 30%; }
+  .page-hero-media img{ width:100%; height:100%; object-fit:cover; object-position:center 35%; }
   .page-hero-scrim{
     position:absolute; inset:0; z-index:1;
-    background:linear-gradient(180deg, rgba(24,27,28,.35) 0%, rgba(24,27,28,.25) 30%, rgba(24,27,28,.82) 80%, var(--charcoal-deeper) 100%);
+    background:linear-gradient(180deg, rgba(24,27,28,.4) 0%, rgba(24,27,28,.3) 30%, rgba(24,27,28,.85) 80%, var(--charcoal-deeper) 100%);
   }
   .page-hero-content{ position:relative; z-index:2; width:100%; max-width:1280px; margin-inline:auto; padding:0 clamp(1rem, 5vw, 3rem) clamp(2.5rem, 6vw, 5rem); }
   .page-crumb{ display:flex; align-items:center; gap:.5rem; color:rgba(247,242,234,.65); font-size:clamp(.72rem, 1.4vw, .82rem); font-weight:600; margin-bottom:1rem; }
@@ -194,10 +189,11 @@
     font-family:'Anton', sans-serif; font-weight:400; letter-spacing:.01em; color:var(--white);
     font-size:clamp(2.6rem, 10vw, 7rem); line-height:.9; margin-top:.5rem;
   }
-  .page-hero-sub{ color:var(--cream); font-size:clamp(.85rem, 1.7vw, 1.05rem); max-width:34rem; margin-top:1.1rem; font-weight:500; line-height:1.55; }
+  .page-hero-sub{ color:var(--cream); font-size:clamp(.85rem, 1.7vw, 1.05rem); max-width:36rem; margin-top:1.1rem; font-weight:500; line-height:1.55; }
   .page-hero-stats{ display:flex; flex-wrap:wrap; gap:clamp(1.25rem, 3vw, 2.5rem); margin-top:2rem; }
   .hstat b{ display:block; font-family:'Bebas Neue',sans-serif; font-size:clamp(1.5rem, 3vw, 2.1rem); color:var(--orange-light); letter-spacing:.02em; }
   .hstat span{ display:block; font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; color:rgba(247,242,234,.65); margin-top:.15rem; }
+  .page-hero-actions{ display:flex; flex-wrap:wrap; gap:.85rem; margin-top:2rem; }
 
   @media (prefers-reduced-motion:no-preference){
     @keyframes heroFadeUp{ from{ opacity:0; transform:translateY(24px); } to{ opacity:1; transform:translateY(0); } }
@@ -205,209 +201,186 @@
     .page-hero-title{ opacity:0; animation:heroFadeUp .9s ease .22s forwards; }
     .page-hero-sub{ opacity:0; animation:heroFadeUp .9s ease .38s forwards; }
     .page-hero-stats{ opacity:0; animation:heroFadeUp .9s ease .52s forwards; }
+    .page-hero-actions{ opacity:0; animation:heroFadeUp .9s ease .64s forwards; }
   }
 
-  /* ===== SPOTLIGHT / NEXT UP ===== */
-  .section-spotlight{ background:var(--orange-sat); padding-block:var(--sect-pad); position:relative; overflow:hidden; }
-  .spotlight-head{ margin-bottom:clamp(2rem, 4vw, 3rem); max-width:40rem; }
-  .section-spotlight .eyebrow{ color:var(--charcoal-deeper); }
-  .spotlight-head h2{ color:var(--charcoal-deeper); font-size:clamp(1.8rem, 5vw, 4rem); margin-top:.35rem; }
-  .spotlight-head p{ color:rgba(38,43,44,.82); font-weight:600; margin-top:.6rem; font-size:clamp(.85rem, 1.8vw, 1rem); }
-
-  .spotlight-grid{ display:grid; grid-template-columns:.85fr 1.15fr; gap:clamp(2rem, 5vw, 5rem); align-items:center; }
-  @media (max-width:900px){ .spotlight-grid{ grid-template-columns:1fr; gap:2.5rem; } }
-
-  .spotlight-visual{ position:relative; width:100%; max-width:420px; margin-inline:auto; aspect-ratio:1/1; }
-  .plate{
-    position:absolute; top:50%; left:8%; width:88%; aspect-ratio:1/1; transform:translateY(-50%);
-    border-radius:50%;
-    background:
-      radial-gradient(circle at 34% 28%, rgba(255,255,255,.5), transparent 42%),
-      radial-gradient(circle at center, var(--cream) 0 61%, #e7dfcd 62% 77%, var(--cream) 78% 100%);
-    box-shadow:0 25px 60px -20px rgba(0,0,0,.55), inset 0 0 0 9px rgba(255,255,255,.35);
-  }
-
-  .steam{ position:absolute; top:-8%; left:0; right:0; height:40%; z-index:4; pointer-events:none; }
-  .steam span{
-    position:absolute; bottom:0; width:9px; height:56px; border-radius:50%;
-    background:linear-gradient(to top, rgba(255,255,255,.55), rgba(255,255,255,0));
-    filter:blur(3px); opacity:0;
-  }
-  .steam span:nth-child(1){ left:32%; }
-  .steam span:nth-child(2){ left:48%; }
-  .steam span:nth-child(3){ left:64%; }
+  /* ---- Steam signature decoration ---- */
+  .hero-steam{ position:absolute; right:clamp(1rem,7vw,6rem); bottom:clamp(7rem,15vw,10rem); width:clamp(64px,9vw,110px); z-index:2; pointer-events:none; display:none; }
+  @media (min-width:760px){ .hero-steam{ display:block; } }
+  .steam-path{ fill:none; stroke:var(--cream); stroke-width:3; stroke-linecap:round; opacity:0; }
   @media (prefers-reduced-motion:no-preference){
-    .steam span:nth-child(1){ animation:steamRise 3.4s ease-in-out infinite .1s; }
-    .steam span:nth-child(2){ animation:steamRise 3.8s ease-in-out infinite .9s; }
-    .steam span:nth-child(3){ animation:steamRise 3.1s ease-in-out infinite .5s; }
+    .steam-path{ animation: steamRise 5.5s ease-in-out infinite; }
+    .steam-path.s2{ animation-delay:.9s; }
+    .steam-path.s3{ animation-delay:1.8s; }
   }
   @keyframes steamRise{
-    0%{ transform:translateY(6px) scaleX(1); opacity:0; }
-    25%{ opacity:.75; }
-    100%{ transform:translateY(-58px) scaleX(1.7); opacity:0; }
+    0%{ opacity:0; transform:translateY(14px) scaleY(.9); }
+    25%{ opacity:.45; }
+    65%{ opacity:.2; }
+    100%{ opacity:0; transform:translateY(-22px) scaleY(1.08); }
   }
 
-  .spotlight-poster{
-    position:relative; z-index:3; width:78%; margin-left:14%; aspect-ratio:1/1;
-    border-radius:14px; overflow:hidden; background:var(--charcoal-deeper);
-    box-shadow:0 30px 60px -18px rgba(0,0,0,.55);
-    transform:rotate(-3deg);
-    transition:transform .5s cubic-bezier(.2,.8,.2,1);
-  }
-  .spotlight-visual:hover .spotlight-poster{ transform:rotate(0deg) scale(1.02); }
-  .spotlight-poster img{ width:100%; height:100%; object-fit:cover; cursor:pointer; }
-  .spotlight-poster::before{
-    content:''; position:absolute; inset:-2px; border-radius:16px; padding:2px;
-    background:conic-gradient(from 0deg, var(--orange-light), var(--cream), var(--orange), var(--orange-light));
-    -webkit-mask:linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    -webkit-mask-composite:xor; mask-composite:exclude;
-    opacity:.9; pointer-events:none;
-  }
-  @media (prefers-reduced-motion:no-preference){
-    .spotlight-poster::before{ animation:glowSpin 5s linear infinite; }
-  }
-  @keyframes glowSpin{ to{ filter:hue-rotate(20deg); } }
+  /* ===== INTRO / PHILOSOPHY BAND ===== */
+  .section-intro{ background:var(--orange-sat); padding-block:var(--sect-pad); position:relative; overflow:hidden; }
+  .intro-grid{ display:grid; grid-template-columns:1.1fr .9fr; gap:clamp(2rem,5vw,4rem); align-items:center; }
+  @media (max-width:900px){ .intro-grid{ grid-template-columns:1fr; gap:2rem; } }
+  .section-intro .eyebrow{ color:var(--charcoal-deeper); }
+  .intro-grid h2{ color:var(--charcoal-deeper); font-size:clamp(1.8rem, 5vw, 3.6rem); margin-top:.35rem; }
+  .intro-grid p{ color:rgba(38,43,44,.85); font-weight:600; margin-top:.9rem; font-size:clamp(.9rem, 1.7vw, 1.05rem); line-height:1.6; max-width:32rem; }
+  .intro-quote{ font-size:clamp(1.05rem, 2vw, 1.5rem); line-height:1.5; color:var(--charcoal-deeper); position:relative; padding-left:1.4rem; border-left:3px solid var(--charcoal-deeper); }
 
-  .spotlight-tag{
-    position:absolute; top:-14px; left:6%; z-index:5;
-    background:var(--charcoal-deeper); color:var(--cream);
-    font-family:'Bebas Neue',sans-serif; letter-spacing:.08em; font-size:clamp(.8rem, 1.6vw, 1rem);
-    padding:.4rem .9rem; border-radius:999px; box-shadow:0 10px 22px -8px rgba(0,0,0,.5);
-    display:inline-flex; align-items:center; gap:.4rem;
+  /* ===== STICKY SUBNAV ===== */
+  .menu-subnav{
+    position:sticky; top:0; z-index:70; background:rgba(24,27,28,.97); backdrop-filter:blur(14px);
+    border-bottom:1px solid rgba(247,242,234,.1); box-shadow:0 12px 30px -18px rgba(0,0,0,.6);
+    padding-block: .85rem;
   }
-  .spotlight-tag::before{ content:''; width:7px; height:7px; border-radius:50%; background:var(--orange-light); box-shadow:0 0 0 0 rgba(243,166,99,.7); }
-  @media (prefers-reduced-motion:no-preference){
-    .spotlight-tag::before{ animation:pulseDot 1.8s ease-out infinite; }
+  .subnav-inner{ display:flex; align-items:center; gap:1rem; flex-wrap:wrap; justify-content:space-between; }
+  .subnav-chips{
+    display:flex; align-items:center; gap:.5rem; overflow-x:auto; scrollbar-width:none; -webkit-overflow-scrolling:touch;
+    padding-block:.15rem; flex:1 1 auto; min-width:0;
   }
-  @keyframes pulseDot{
-    0%{ box-shadow:0 0 0 0 rgba(243,166,99,.55); }
-    70%{ box-shadow:0 0 0 9px rgba(243,166,99,0); }
-    100%{ box-shadow:0 0 0 0 rgba(243,166,99,0); }
+  .subnav-chips::-webkit-scrollbar{ display:none; }
+  .subnav-chip{
+    flex-shrink:0; padding:.5rem 1rem; border-radius:999px; border:1.5px solid rgba(247,242,234,.18);
+    color:rgba(247,242,234,.78); font-size:.78rem; font-weight:700; letter-spacing:.01em;
+    transition:background .3s ease, border-color .3s ease, color .3s ease, transform .3s ease;
+    white-space:nowrap; -webkit-tap-highlight-color:transparent;
   }
+  .subnav-chip:hover{ border-color:var(--orange-light); color:var(--cream); transform:translateY(-2px); }
+  .subnav-chip.active{ background:var(--orange); border-color:var(--orange); color:var(--charcoal-deeper); }
 
-  .spotlight-info{ color:var(--charcoal-deeper); }
-  .spotlight-daytag{
-    display:inline-block; font-size:.7rem; font-weight:800; letter-spacing:.2em; text-transform:uppercase;
-    background:var(--charcoal-deeper); color:var(--orange-light); padding:.3rem .7rem; border-radius:5px;
+  .subnav-search{ position:relative; flex-shrink:0; width:clamp(200px, 22vw, 260px); }
+  .subnav-search input{
+    width:100%; background:rgba(247,242,234,.08); border:1.5px solid rgba(247,242,234,.16);
+    border-radius:999px; padding:.6rem 2.4rem .6rem 2.2rem; color:var(--cream); font-size:.85rem;
+    font-family:'Manrope',sans-serif; transition:border-color .3s ease, background .3s ease;
   }
-  .spotlight-info h3{ font-family:'Bebas Neue',sans-serif; font-size:clamp(2rem, 5.5vw, 3.6rem); line-height:1; margin-top:.7rem; }
-  .spotlight-info p{ font-size:clamp(.88rem, 1.7vw, 1.02rem); line-height:1.6; margin-top:.85rem; max-width:32rem; color:rgba(38,43,44,.85); font-weight:500; }
-
-  .today-badge{
-    display:inline-flex; align-items:center; gap:clamp(.9rem, 2vw, 1.3rem); margin-top:1.75rem;
-    background:var(--charcoal-deeper); border-radius:14px; padding:.85rem clamp(1.1rem, 2.5vw, 1.5rem);
-    box-shadow:0 10px 22px -10px rgba(0,0,0,.5);
-  }
-  .today-badge-label{ font-size:.68rem; font-weight:800; letter-spacing:.16em; text-transform:uppercase; color:var(--orange-light); }
-  .today-badge-day{ font-family:'Bebas Neue',sans-serif; font-size:clamp(1.4rem, 3.2vw, 2rem); color:var(--cream); letter-spacing:.03em; line-height:1; }
-  .today-badge-note{ font-size:.72rem; color:rgba(247,242,234,.6); margin-top:.2rem; }
-
-  .spotlight-actions{ display:flex; flex-wrap:wrap; gap:.85rem; margin-top:2rem; }
-
-  /* ===== GRID / FILTER SECTION ===== */
-  .section-grid{ background:var(--charcoal-sat); padding-block:var(--sect-pad); scroll-margin-top:90px; }
-  .grid-head{ max-width:40rem; margin-bottom:clamp(1.75rem, 3vw, 2.5rem); }
-  .section-grid .eyebrow{ color:var(--orange-light); }
-  .grid-head h2{ color:var(--cream); font-size:clamp(1.8rem, 5vw, 4rem); margin-top:.35rem; }
-  .grid-head p{ color:rgba(247,242,234,.72); margin-top:.85rem; font-weight:500; font-size:clamp(.85rem, 1.8vw, 1rem); max-width:36rem; }
-
-  .filter-row{ display:flex; flex-wrap:wrap; gap:.65rem; margin-bottom:clamp(2rem, 4vw, 3rem); }
-  .filter-chip{
-    border:1.5px solid rgba(247,242,234,.25); background:rgba(247,242,234,.05); color:var(--cream);
-    font-weight:700; font-size:.82rem; letter-spacing:.02em; padding:.55rem 1.1rem; border-radius:999px;
-    cursor:pointer; transition:background .3s ease, border-color .3s ease, color .3s ease, transform .3s ease;
+  .subnav-search input::placeholder{ color:rgba(247,242,234,.5); }
+  .subnav-search input:focus{ outline:none; border-color:var(--orange); background:rgba(247,242,234,.13); }
+  .subnav-search svg.search-icon{ position:absolute; left:.75rem; top:50%; transform:translateY(-50%); width:14px; height:14px; color:rgba(247,242,234,.55); pointer-events:none; }
+  .subnav-clear{
+    position:absolute; right:.5rem; top:50%; transform:translateY(-50%); width:22px; height:22px; border-radius:50%;
+    display:none; align-items:center; justify-content:center; background:rgba(247,242,234,.14); border:none; cursor:pointer; color:var(--cream);
     -webkit-tap-highlight-color:transparent;
   }
-  .filter-chip:hover{ border-color:var(--orange-light); transform:translateY(-2px); }
-  .filter-chip.active{ background:var(--orange); border-color:var(--orange); color:var(--charcoal-deeper); }
+  .subnav-clear.show{ display:flex; }
+  .subnav-clear svg{ width:11px; height:11px; }
 
-  .poster-grid{
-    display:grid; grid-template-columns:repeat(4, 1fr);
-    grid-template-areas:
-      "leko leko exq soul"
-      "leko leko kabza kabza";
-    grid-template-rows:repeat(2, minmax(240px, 1fr));
-    gap:clamp(1rem, 2vw, 1.4rem);
-  }
-  @media (max-width:980px){
-    .poster-grid{
-      grid-template-columns:1fr 1fr; grid-template-rows:auto;
-      grid-template-areas:
-        "leko leko"
-        "exq soul"
-        "kabza kabza";
-    }
-  }
-  @media (max-width:620px){
-    .poster-grid{ grid-template-columns:1fr; grid-template-areas:"leko" "exq" "soul" "kabza"; }
-  }
-  .card-lekompo{ grid-area:leko; }
-  .card-exquisite{ grid-area:exq; }
-  .card-soul{ grid-area:soul; }
-  .card-kabza{ grid-area:kabza; }
-
-  .poster-card{
-    position:relative; border-radius:16px; overflow:hidden; cursor:pointer;
-    background:var(--charcoal-deeper); min-height:240px;
-    transform-style:preserve-3d; transition:transform .35s cubic-bezier(.2,.75,.2,1), box-shadow .35s ease;
-    -webkit-tap-highlight-color:transparent;
-  }
-  .poster-card:hover{ box-shadow:0 22px 44px -16px rgba(0,0,0,.6); }
-  .poster-card:active{ transform:scale(.985) !important; }
-  .poster-card.is-hidden{ display:none; }
-
-  .poster-card img{
-    position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
-    transition:transform .8s cubic-bezier(.2,.7,.2,1), filter .5s ease;
-    filter:saturate(.92) brightness(.82);
-  }
-  .poster-card:hover img{ transform:scale(1.07); filter:saturate(1.05) brightness(.9); }
-  .poster-card::after{
-    content:''; position:absolute; inset:0;
-    background:linear-gradient(180deg, rgba(24,27,28,.05) 0%, rgba(24,27,28,.2) 45%, rgba(24,27,28,.95) 100%);
+  @media (max-width:760px){
+    .subnav-inner{ flex-direction:column; align-items:stretch; }
+    .subnav-search{ width:100%; }
   }
 
-  .poster-card.card-next{ box-shadow:0 0 0 3px var(--orange), 0 22px 50px -14px rgba(225,138,63,.55); }
+  /* ===== MENU CATEGORY SECTIONS ===== */
+  .menu-cat{ padding-block:var(--sect-pad); scroll-margin-top:150px; }
+  .menu-cat.bg-cream{ background:var(--cream); color:var(--charcoal-deeper); }
+  .menu-cat.bg-dark{ background:var(--charcoal-deeper); color:var(--cream); }
+  .menu-cat.bg-sat{ background:var(--charcoal-sat); color:var(--cream); }
+  .menu-cat.bg-feature{ background:var(--orange-sat); color:var(--charcoal-deeper); }
+  .menu-cat.is-empty{ display:none; }
+
+  .cat-head{ display:grid; grid-template-columns:1.3fr auto; gap:clamp(1.5rem,3vw,2.5rem); align-items:end; margin-bottom:clamp(2rem, 4vw, 3rem); }
+  @media (max-width:760px){ .cat-head{ grid-template-columns:1fr; } }
+  .cat-index{ font-family:'Space Mono',monospace; font-size:.7rem; opacity:.55; letter-spacing:.1em; }
+  .bg-cream .eyebrow{ color:var(--orange-dark); }
+  .bg-dark .eyebrow, .bg-sat .eyebrow{ color:var(--orange-light); }
+  .bg-feature .eyebrow{ color:var(--charcoal-deeper); }
+  .cat-head h2{ font-size:clamp(1.7rem, 5vw, 3.4rem); margin-top:.35rem; }
+  .cat-desc{ margin-top:.65rem; font-weight:500; font-size:clamp(.85rem, 1.6vw, 1rem); max-width:32rem; line-height:1.55; }
+  .bg-cream .cat-desc{ color:rgba(38,43,44,.75); }
+  .bg-dark .cat-desc, .bg-sat .cat-desc{ color:rgba(247,242,234,.72); }
+  .bg-feature .cat-desc{ color:rgba(38,43,44,.82); }
+
+  .cat-thumb{
+    position:relative; width:clamp(120px, 20vw, 200px); aspect-ratio:1/1; border-radius:16px; overflow:hidden;
+    box-shadow:0 20px 40px -16px rgba(0,0,0,.5); flex-shrink:0; justify-self:end;
+  }
+  @media (max-width:760px){ .cat-thumb{ width:100%; max-width:260px; aspect-ratio:16/9; justify-self:start; } }
+  .cat-thumb.is-clickable{ cursor:pointer; }
+  .cat-thumb img{ width:100%; height:100%; object-fit:cover; }
   @media (prefers-reduced-motion:no-preference){
-    .poster-card.card-next{ animation:nextGlow 2.4s ease-in-out infinite; }
+    .cat-thumb img{ animation:slowZoom 11s ease-in-out infinite alternate; transition:transform .6s ease; }
+    .cat-thumb.is-clickable:hover img{ animation-play-state:paused; transform:scale(1.14); }
   }
-  @keyframes nextGlow{
-    0%,100%{ box-shadow:0 0 0 3px var(--orange), 0 22px 50px -14px rgba(225,138,63,.4); }
-    50%{ box-shadow:0 0 0 3px var(--orange-light), 0 26px 56px -12px rgba(225,138,63,.75); }
+  @keyframes slowZoom{ from{ transform:scale(1); } to{ transform:scale(1.09); } }
+  .cat-thumb-hint{
+    position:absolute; inset-inline:0; bottom:0; padding:.5rem .7rem; display:flex; align-items:center; gap:.35rem;
+    background:linear-gradient(0deg, rgba(24,27,28,.88), transparent); color:var(--cream);
+    font-size:.62rem; font-weight:800; letter-spacing:.1em; text-transform:uppercase; opacity:0; transition:opacity .3s ease;
   }
+  .cat-thumb.is-clickable:hover .cat-thumb-hint{ opacity:1; }
+  .cat-thumb-hint svg{ width:11px; height:11px; }
 
-  .poster-ribbon{
-    position:absolute; top:14px; left:14px; z-index:3;
-    background:var(--orange); color:var(--charcoal-deeper);
-    font-family:'Bebas Neue',sans-serif; letter-spacing:.06em; font-size:.85rem;
-    padding:.3rem .7rem; border-radius:999px; display:none; align-items:center; gap:.35rem;
+  .subgroup-title{
+    font-family:'Bebas Neue',sans-serif; font-size:clamp(1.05rem, 2.1vw, 1.4rem); letter-spacing:.04em;
+    margin:clamp(1.75rem, 3.5vw, 2.75rem) 0 .35rem; padding-top:clamp(1.25rem,2.5vw,1.75rem);
   }
-  .poster-card.card-next .poster-ribbon{ display:inline-flex; }
-  .poster-ribbon::before{ content:''; width:6px; height:6px; border-radius:50%; background:var(--charcoal-deeper); }
+  .subgroup-title:first-child{ margin-top:0; padding-top:0; }
+  .bg-cream .subgroup-title{ color:var(--orange-dark); border-top:1px solid rgba(38,43,44,.12); }
+  .bg-dark .subgroup-title, .bg-sat .subgroup-title{ color:var(--orange-light); border-top:1px solid rgba(247,242,234,.12); }
+  .bg-feature .subgroup-title{ color:var(--charcoal-deeper); border-top:1px solid rgba(38,43,44,.18); }
+  .subgroup-title:first-child{ border-top:none; }
+  .subgroup-note{ font-size:.75rem; font-weight:600; opacity:.6; margin-top:-.2rem; margin-bottom:.5rem; }
 
-  .poster-gallery-badge{
-    position:absolute; top:14px; right:14px; z-index:3;
-    background:rgba(24,27,28,.65); backdrop-filter:blur(6px); color:var(--cream);
-    font-size:.7rem; font-weight:700; letter-spacing:.05em;
-    padding:.3rem .6rem; border-radius:999px; display:flex; align-items:center; gap:.3rem;
-  }
-  .poster-gallery-badge svg{ width:12px; height:12px; }
+  .dish-grid{ display:grid; grid-template-columns:repeat(2, 1fr); gap:0 clamp(1.75rem, 3.5vw, 3.5rem); }
+  @media (max-width:820px){ .dish-grid{ grid-template-columns:1fr; } }
 
-  .poster-card-body{ position:absolute; left:0; right:0; bottom:0; z-index:2; padding:clamp(1rem, 2.2vw, 1.5rem); }
-  .poster-tag{
-    display:inline-block; font-size:.65rem; font-weight:800; letter-spacing:.2em; text-transform:uppercase;
-    color:var(--orange-light); margin-bottom:.4rem;
-  }
-  .poster-card-body h3{ font-family:'Bebas Neue',sans-serif; color:var(--white); font-size:clamp(1.3rem, 2.6vw, 2.1rem); letter-spacing:.02em; line-height:1; }
-  .poster-card-body p.poster-desc{ color:rgba(247,242,234,.78); font-size:.83rem; margin-top:.4rem; line-height:1.45; max-width:26rem; }
-  .poster-countdown{
-    display:inline-flex; align-items:center; gap:.4rem; margin-top:.7rem;
-    font-family:'Space Mono',monospace; font-size:.72rem; color:var(--orange-light); font-weight:700;
-    letter-spacing:.02em;
-  }
-  .poster-countdown::before{ content:'●'; font-size:.55rem; }
+  .dish-row{ padding:clamp(.85rem, 2vw, 1.1rem) 0; border-bottom:1px dashed; transition:background .3s ease, padding-left .3s ease, border-color .3s ease; border-radius:6px; }
+  .bg-cream .dish-row{ border-color:rgba(38,43,44,.16); }
+  .bg-dark .dish-row, .bg-sat .dish-row{ border-color:rgba(247,242,234,.16); }
+  .bg-feature .dish-row{ border-color:rgba(38,43,44,.22); }
+  .dish-row:hover{ padding-left:.6rem; background:rgba(24,27,28,.05); }
+  .bg-dark .dish-row:hover, .bg-sat .dish-row:hover{ background:rgba(247,242,234,.05); }
+  .dish-row.is-hidden{ display:none; }
 
-  .card-kabza .poster-card-body h3{ font-size:clamp(1.5rem, 3vw, 2.4rem); }
+  .dish-top{ display:flex; align-items:baseline; justify-content:space-between; gap:1rem; }
+  .dish-name{ font-family:'Bebas Neue',sans-serif; font-size:clamp(1.05rem, 2vw, 1.3rem); letter-spacing:.02em; display:flex; align-items:center; gap:.5rem; flex-wrap:wrap; line-height:1.15; }
+  .dish-price{ font-family:'Space Mono',monospace; font-weight:700; font-size:clamp(.88rem, 1.5vw, 1rem); white-space:nowrap; flex-shrink:0; }
+  .bg-cream .dish-price{ color:var(--orange-dark); }
+  .bg-dark .dish-price, .bg-sat .dish-price{ color:var(--orange-light); }
+  .bg-feature .dish-price{ color:var(--charcoal-deeper); }
+  .dish-desc{ font-size:.83rem; line-height:1.55; margin-top:.3rem; max-width:30rem; }
+  .bg-cream .dish-desc{ color:rgba(38,43,44,.7); }
+  .bg-dark .dish-desc, .bg-sat .dish-desc{ color:rgba(247,242,234,.65); }
+  .bg-feature .dish-desc{ color:rgba(38,43,44,.78); }
+
+  .dish-tag{
+    font-size:.58rem; font-weight:800; letter-spacing:.08em; text-transform:uppercase;
+    padding:.18rem .5rem; border-radius:999px; display:inline-flex; align-items:center; line-height:1;
+  }
+  .dish-tag.chef{ background:var(--orange); color:var(--charcoal-deeper); }
+  .dish-tag.popular{ background:var(--charcoal-deeper); color:var(--orange-light); }
+  .bg-feature .dish-tag.popular{ background:var(--charcoal-deeper); color:var(--orange-light); }
+  .dish-tag.spicy{ border:1.5px solid currentColor; opacity:.8; }
+  .dish-tag.veg{ border:1.5px solid currentColor; opacity:.8; }
+
+  .no-results{ display:none; text-align:center; padding:clamp(3rem,8vw,5rem) 1rem; background:var(--charcoal-deeper); }
+  .no-results.show{ display:block; }
+  .no-results h3{ font-family:'Bebas Neue',sans-serif; color:var(--cream); font-size:clamp(1.4rem,3vw,2rem); }
+  .no-results p{ color:rgba(247,242,234,.65); margin-top:.5rem; }
+
+  /* ===== KITCHEN MARQUEE BREAK ===== */
+  .section-kitchen{ background:var(--charcoal-deeper); padding-block:var(--sect-pad); overflow:hidden; }
+  .kitchen-head{ max-width:36rem; margin-bottom:clamp(1.75rem,3.5vw,2.75rem); }
+  .section-kitchen .eyebrow{ color:var(--orange-light); }
+  .kitchen-head h2{ color:var(--cream); font-size:clamp(1.7rem, 5vw, 3.4rem); margin-top:.35rem; }
+  .kitchen-quote{ color:rgba(247,242,234,.85); font-size:clamp(1rem, 1.9vw, 1.4rem); line-height:1.5; margin-top:.75rem; max-width:34rem; }
+
+  .meal-marquee{
+    overflow:hidden; width:100%;
+    -webkit-mask-image:linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+    mask-image:linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+  }
+  .meal-track{ display:flex; width:max-content; gap:clamp(.5rem, 1vw, 1.1rem); animation: mealScroll 46s linear infinite; }
+  .meal-marquee:hover .meal-track{ animation-play-state:paused; }
+  .meal-item{ position:relative; overflow:hidden; cursor:pointer; flex:0 0 auto; width:clamp(210px, 22vw, 320px); aspect-ratio:4/5; border-radius:16px; }
+  .meal-item img{ width:100%; height:100%; object-fit:cover; transition:transform .8s ease; }
+  .meal-item:hover img{ transform:scale(1.07); }
+  .meal-item::after{ content:''; position:absolute; inset:0; box-shadow:inset 0 0 0 1px rgba(247,242,234,.08); pointer-events:none; border-radius:16px; }
+  @keyframes mealScroll{ from{ transform:translateX(0); } to{ transform:translateX(-50%); } }
+  @media (max-width:720px){ .meal-item{ width:clamp(160px, 55vw, 240px); } .meal-track{ animation-duration:34s; } }
+  @media (prefers-reduced-motion:reduce){ .meal-track{ animation:none; } }
 
   /* ===== CTA BAND ===== */
   .section-cta{ background:var(--charcoal-deeper); padding-block:clamp(3rem, 8vw, 6rem) clamp(2.5rem, 6vw, 4rem); text-align:center; }
@@ -415,6 +388,7 @@
   .cta-title{ color:var(--cream); font-size:clamp(1.8rem, 6vw, 3.6rem); margin-top:.5rem; }
   .cta-sub{ color:rgba(247,242,234,.7); max-width:34rem; margin:.9rem auto 0; font-size:clamp(.85rem, 1.6vw, 1rem); line-height:1.6; }
   .cta-actions{ display:flex; flex-wrap:wrap; justify-content:center; gap:.85rem; margin-top:2rem; }
+  .price-note{ color:rgba(247,242,234,.45); font-size:.72rem; margin-top:2.5rem; max-width:34rem; margin-inline:auto; line-height:1.6; }
 
   /* ===== FOOTER (matches site) ===== */
   .site-footer{ background:var(--charcoal-deeper); color:var(--cream); }
@@ -445,48 +419,38 @@
   .to-top svg{ width:16px; height:16px; color:var(--cream); }
   .to-top:hover svg{ color:var(--charcoal-deeper); }
 
-  /* ===== Poster Lightbox ===== */
-  .poster-lightbox{
+  /* ===== Board Lightbox (full-screen menu boards) ===== */
+  .board-lightbox{
     position:fixed; inset:0; z-index:500; background:rgba(10,11,11,.94); backdrop-filter:blur(8px);
     display:flex; align-items:center; justify-content:center; opacity:0; visibility:hidden;
     transition:opacity .35s ease, visibility 0s linear .35s;
   }
-  .poster-lightbox.open{ opacity:1; visibility:visible; transition:opacity .35s ease; }
-  .lb-stage{ position:relative; width:100%; max-width:640px; max-height:82svh; margin-inline:auto; padding:0 clamp(1rem,4vw,2rem); }
+  .board-lightbox.open{ opacity:1; visibility:visible; transition:opacity .35s ease; }
+  .lb-stage{ position:relative; width:100%; max-width:600px; max-height:82svh; margin-inline:auto; padding:0 clamp(1rem,4vw,2rem); }
   .lb-stage img{ width:100%; height:100%; max-height:82svh; object-fit:contain; border-radius:10px; margin-inline:auto; transform:scale(.94); transition:transform .4s cubic-bezier(.2,.8,.2,1); }
-  .poster-lightbox.open .lb-stage img{ transform:scale(1); }
+  .board-lightbox.open .lb-stage img{ transform:scale(1); }
   .lb-caption{ text-align:center; color:var(--cream); font-size:.85rem; margin-top:1rem; opacity:.75; }
-  .lb-close, .lb-nav{
+  .lb-close{
     position:absolute; width:44px; height:44px; border-radius:50%; border:none; cursor:pointer;
     background:rgba(247,242,234,.1); color:var(--cream); display:flex; align-items:center; justify-content:center;
     transition:background .3s ease, transform .3s ease; -webkit-tap-highlight-color:transparent; z-index:2;
+    top:clamp(.75rem,3vw,1.5rem); right:clamp(.75rem,3vw,1.5rem);
   }
   .lb-close:hover{ background:var(--orange); color:var(--charcoal-deeper); transform:rotate(90deg); }
-  .lb-nav:hover{ background:var(--orange); color:var(--charcoal-deeper); }
-  .lb-close{ top:clamp(.75rem,3vw,1.5rem); right:clamp(.75rem,3vw,1.5rem); }
-  .lb-prev{ left:clamp(.5rem,2vw,1rem); top:50%; transform:translateY(-50%); }
-  .lb-next{ right:clamp(.5rem,2vw,1rem); top:50%; transform:translateY(-50%); }
-  .lb-prev:hover, .lb-next:hover{ transform:translateY(-50%); }
-  .lb-close svg, .lb-nav svg{ width:18px; height:18px; }
+  .lb-close svg{ width:18px; height:18px; }
 
   /* ===== Reveal on scroll ===== */
   .reveal{ opacity:1; transform:none; }
   @media (prefers-reduced-motion:no-preference){
     .reveal{ opacity:0; transform:translateY(26px); transition:opacity .85s ease, transform .85s cubic-bezier(.2,.7,.2,1); }
     .reveal.in-view{ opacity:1; transform:none; }
-    .reveal-stagger.in-view .poster-card:nth-child(1){ transition-delay:.05s; }
-    .reveal-stagger.in-view .poster-card:nth-child(2){ transition-delay:.15s; }
-    .reveal-stagger.in-view .poster-card:nth-child(3){ transition-delay:.25s; }
-    .reveal-stagger.in-view .poster-card:nth-child(4){ transition-delay:.35s; }
   }
 
   :focus-visible{ outline:2px solid var(--orange); outline-offset:3px; }
 
   @media (max-width:768px){
     button, a, [role="button"]{ min-height:44px; }
-    .page-hero{ padding-top:56px; min-height:70svh; }
-    .countdown{ gap:.45rem; }
-    .cd-unit{ min-width:50px; padding:.5rem .5rem; }
+    .page-hero{ padding-top:56px; min-height:66svh; }
   }
   input, textarea, select{ font-size:16px; }
 </style>
@@ -536,153 +500,495 @@
   <!-- ================= PAGE HERO ================= -->
   <section class="page-hero">
     <div class="page-hero-media">
-      <img src="https://i.postimg.cc/vmBpC9KY/meal-2.jpg" alt="Chef's plate at PV Lifestyle" fetchpriority="high">
+      <img src="https://i.postimg.cc/mDk66stX/meal-6.jpg" alt="Signature dish at PV Lifestyle" fetchpriority="high">
     </div>
     <div class="page-hero-scrim"></div>
 
+    <div class="hero-steam" aria-hidden="true">
+      <svg viewBox="0 0 120 160" xmlns="http://www.w3.org/2000/svg">
+        <path class="steam-path s1" d="M20 150 C 8 118, 32 112, 20 80 C 8 48, 32 42, 20 10"/>
+        <path class="steam-path s2" d="M60 150 C 48 118, 72 112, 60 80 C 48 48, 72 42, 60 10"/>
+        <path class="steam-path s3" d="M100 150 C 88 118, 112 112, 100 80 C 88 48, 112 42, 100 10"/>
+      </svg>
+    </div>
+
     <div class="page-hero-content">
       <div class="page-crumb"><a href="index.html">Home</a><span aria-hidden="true">/</span><span>Menu</span></div>
-      <span class="eyebrow page-hero-eyebrow">Mokopane · The Kitchen</span>
-      <h1 class="page-hero-title">MENU</h1>
-      <p class="page-hero-sub">Five categories, one philosophy — fresh, bold, and made to share. Every card below is the full category, tap to view it up close.</p>
+      <span class="eyebrow page-hero-eyebrow">Mokopane · Fresh &amp; Made To Share</span>
+      <h1 class="page-hero-title">OUR MENU</h1>
+      <p class="page-hero-sub">Wraps and seafood, burgers, traditional Limpopo favourites, stone-baked pizza, sharing platters, sides, sweets and a full bar list — everything we cook, all in one place.</p>
 
       <div class="page-hero-stats">
-        <div class="hstat"><b>5</b><span>Categories</span></div>
-        <div class="hstat"><b>6</b><span>Signature Dishes</span></div>
+        <div class="hstat"><b>8</b><span>Categories</span></div>
+        <div class="hstat"><b>60+</b><span>Dishes &amp; Drinks</span></div>
         <div class="hstat"><b>1</b><span>Ideal Atmosphere</span></div>
       </div>
+
+      <div class="page-hero-actions">
+        <a href="#starters" class="cta-btn">Start Browsing</a>
+        <a href="index.html#reserve" class="btn-outline">Reserve a Table</a>
+      </div>
     </div>
   </section>
 
-  <div class="angle-divider angle-one" aria-hidden="true"></div>
+  <div class="angle-divider" aria-hidden="true" style="--seg-from:var(--charcoal-deeper); --seg-to:var(--orange-sat);"></div>
 
-  <!-- ================= SPOTLIGHT / NEXT UP ================= -->
-  <section class="section-spotlight" id="spotlight">
+  <!-- ================= INTRO / PHILOSOPHY ================= -->
+  <section class="section-intro">
+    <div class="container intro-grid">
+      <div class="reveal">
+        <span class="eyebrow">Fresh · Bold · Made To Share</span>
+        <h2 class="font-display">Everything We're Cooking</h2>
+        <p>From a quick wrap between meetings to a platter built for the whole table — every dish is fresh, thoughtfully prepared, and made for good company. Browse by category below, or search for something specific.</p>
+      </div>
+      <p class="intro-quote font-quote reveal">"The freshest ingredients, thoughtfully prepared, alongside a drinks list worth lingering over."</p>
+    </div>
+  </section>
+
+  <div class="angle-divider" aria-hidden="true" style="--seg-from:var(--orange-sat); --seg-to:var(--charcoal-deeper);"></div>
+
+  <!-- ================= STICKY SUBNAV ================= -->
+  <div class="menu-subnav" id="menuSubnav">
+    <div class="container subnav-inner">
+      <div class="subnav-chips" id="subnavChips" role="tablist" aria-label="Jump to menu category">
+        <a href="#starters" class="subnav-chip" data-cat="starters">Starters</a>
+        <a href="#seafood" class="subnav-chip" data-cat="seafood">Wraps &amp; Sea Food</a>
+        <a href="#burgers" class="subnav-chip" data-cat="burgers">Burgers</a>
+        <a href="#traditional" class="subnav-chip" data-cat="traditional">Traditional</a>
+        <a href="#pizza" class="subnav-chip" data-cat="pizza">Pizza</a>
+        <a href="#platters" class="subnav-chip" data-cat="platters">Platters</a>
+        <a href="#sides" class="subnav-chip" data-cat="sides">Sides &amp; Sweets</a>
+        <a href="#bar" class="subnav-chip" data-cat="bar">Bar</a>
+      </div>
+      <div class="subnav-search">
+        <svg class="search-icon" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path stroke-linecap="round" d="M21 21l-4.3-4.3"/></svg>
+        <input type="text" id="menuSearch" placeholder="Search the menu…" aria-label="Search the menu">
+        <button class="subnav-clear" id="subnavClear" aria-label="Clear search">
+          <svg fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 6l12 12M18 6L6 18"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= STARTERS & SHARERS ================= -->
+  <section class="menu-cat bg-cream" id="starters">
     <div class="container">
-      <div class="spotlight-head reveal">
-        <span class="eyebrow">Coming Up Next</span>
-        <h2 class="font-display">The Next Night Out</h2>
-        <p>Our lineup runs on a live clock — whichever night is closest takes the spotlight.</p>
+      <div class="cat-head reveal">
+        <div>
+          <span class="eyebrow">To Begin</span>
+          <h2 class="font-display">Starters &amp; Sharers</h2>
+          <p class="cat-desc">Small plates built for the middle of the table — order a few and pass them around.</p>
+        </div>
+        <div class="cat-thumb">
+          <img src="https://i.postimg.cc/qMcVKpn2/meal-3.jpg" alt="Fresh preparation at PV Lifestyle" loading="lazy">
+        </div>
       </div>
 
-      <div class="spotlight-grid">
-        <div class="spotlight-visual reveal">
-          <div class="tonearm">
-            <div class="tonearm-body"></div>
-            <div class="tonearm-pivot"></div>
-            <div class="tonearm-head"></div>
-          </div>
-          <div class="vinyl" aria-hidden="true"></div>
-          <div class="spotlight-poster" id="spotlightPosterWrap">
-            <span class="spotlight-tag" id="spotlightTag">Next Up</span>
-            <img id="spotlightImg" src="https://i.postimg.cc/dVRhmbHN/kabza.png" alt="Upcoming event poster" loading="eager">
+      <div class="dish-grid reveal">
+        <div class="dish-row">
+          <div class="dish-top"><span class="dish-name">Peri-Peri Chicken Livers <span class="dish-tag spicy">Spicy</span></span><span class="dish-price">R75</span></div>
+          <p class="dish-desc">Sautéed in a fiery peri-peri butter, finished with fresh parsley and toasted ciabatta.</p>
+        </div>
+        <div class="dish-row">
+          <div class="dish-top"><span class="dish-name">Golden Calamari Strips <span class="dish-tag popular">Most Loved</span></span><span class="dish-price">R95</span></div>
+          <p class="dish-desc">Lightly fried, served with tartare sauce and a wedge of lemon.</p>
+        </div>
+        <div class="dish-row">
+          <div class="dish-top"><span class="dish-name">Loaded Potato Skins</span><span class="dish-price">R80</span></div>
+          <p class="dish-desc">Crispy skins piled with bacon, melted cheddar and sour cream.</p>
+        </div>
+        <div class="dish-row">
+          <div class="dish-top"><span class="dish-name">Grilled Halloumi <span class="dish-tag veg">Veg</span></span><span class="dish-price">R85</span></div>
+          <p class="dish-desc">Char-grilled halloumi drizzled with sweet chilli glaze and toasted seeds.</p>
+        </div>
+        <div class="dish-row">
+          <div class="dish-top"><span class="dish-name">Beef &amp; Chakalaka Spring Rolls <span class="dish-tag spicy">Spicy</span></span><span class="dish-price">R80</span></div>
+          <p class="dish-desc">Crisp pastry rolls filled with spiced beef and chakalaka relish.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="angle-divider" aria-hidden="true" style="--seg-from:var(--cream); --seg-to:var(--charcoal-deeper);"></div>
+
+  <!-- ================= WRAPS & SEA FOOD ================= -->
+  <section class="menu-cat bg-dark" id="seafood">
+    <div class="container">
+      <div class="cat-head reveal">
+        <div>
+          <span class="eyebrow">Ocean &amp; Grain</span>
+          <h2 class="font-display">Wraps &amp; Sea Food</h2>
+          <p class="cat-desc">Fresh off the grill and out of the fryer — light enough for lunch, hearty enough for dinner.</p>
+        </div>
+        <div class="cat-thumb is-clickable" data-board="https://i.postimg.cc/bv1yLr6v/PV-Wraps-and-Sea-Food-copy-1024x1024.jpg" data-title="Wraps &amp; Sea Food — Full Menu Board" tabindex="0" role="button" aria-label="View full Wraps and Sea Food menu board">
+          <img src="https://i.postimg.cc/bv1yLr6v/PV-Wraps-and-Sea-Food-copy-1024x1024.jpg" alt="Wraps and Sea Food menu board" loading="lazy">
+          <div class="cat-thumb-hint">
+            <svg fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+            View full board
           </div>
         </div>
+      </div>
 
-        <div class="spotlight-info reveal">
-          <span class="spotlight-daytag" id="spotlightDay">Special</span>
-          <h3 class="font-display" id="spotlightTitle">Kabza De Small — Live</h3>
-          <p id="spotlightDesc">The King of Amapiano takes over the PV Lifestyle decks for one night only.</p>
-
-          <div class="countdown" id="countdown" aria-live="polite">
-            <div class="cd-unit"><b id="cdDays">00</b><span>Days</span></div>
-            <div class="cd-sep">:</div>
-            <div class="cd-unit"><b id="cdHours">00</b><span>Hrs</span></div>
-            <div class="cd-sep">:</div>
-            <div class="cd-unit"><b id="cdMins">00</b><span>Min</span></div>
-            <div class="cd-sep">:</div>
-            <div class="cd-unit"><b id="cdSecs">00</b><span>Sec</span></div>
-          </div>
-
-          <div class="spotlight-actions">
-            <a href="index.html#reserve" class="cta-btn">Reserve a Table</a>
-            <a href="#lineup" class="btn-outline dark">See Full Lineup</a>
-          </div>
+      <div class="dish-grid reveal">
+        <div class="dish-row">
+          <div class="dish-top"><span class="dish-name">Prawn &amp; Avo Wrap <span class="dish-tag popular">Most Loved</span></span><span class="dish-price">R155</span></div>
+          <p class="dish-desc">Grilled prawns, avocado and sweet chilli mayo in a warm tortilla.</p>
+        </div>
+        <div class="dish-row">
+          <div class="dish-top"><span class="dish-name">Line Fish of the Day <span class="dish-tag chef">Chef's Pick</span></span><span class="dish-price">R195</span></div>
+          <p class="dish-desc">Pan-seared catch of the day, lemon butter sauce, seasonal vegetables.</p>
+        </div>
+        <div class="dish-row">
+          <div class="dish-top"><span class="dish-name">Calamari &amp; Chips</span><span class="dish-price">R145</span></div>
+          <p class="dish-desc">Fresh calamari tubes, tartare sauce, skin-on fries.</p>
+        </div>
+        <div class="dish-row">
+          <div class="dish-top"><span class="dish-name">Chicken Caesar Wrap</span><span class="dish-price">R110</span></div>
+          <p class="dish-desc">Grilled chicken, cos lettuce, parmesan and Caesar dressing.</p>
+        </div>
+        <div class="dish-row">
+          <div class="dish-top"><span class="dish-name">Golden Hake &amp; Chips</span><span class="dish-price">R135</span></div>
+          <p class="dish-desc">Battered hake fillet, mushy peas, tartare sauce.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <div class="angle-divider angle-two" aria-hidden="true"></div>
+  <div class="angle-divider" aria-hidden="true" style="--seg-from:var(--charcoal-deeper); --seg-to:var(--cream);"></div>
 
-  <!-- ================= FULL LINEUP GRID ================= -->
-  <section class="section-grid" id="lineup">
+  <!-- ================= BURGERS ================= -->
+  <section class="menu-cat bg-cream" id="burgers">
     <div class="container">
-      <div class="grid-head reveal">
-        <span class="eyebrow">Full Lineup</span>
-        <h2 class="font-display">Every Night, Every Poster</h2>
-        <p>Weekly residencies and one-off special guests — tap any poster for the full flyer.</p>
+      <div class="cat-head reveal">
+        <div>
+          <span class="eyebrow">Between The Buns</span>
+          <h2 class="font-display">Burgers</h2>
+          <p class="cat-desc">Flame-grilled patties, toasted buns, served with a side of skin-on fries.</p>
+        </div>
+        <div class="cat-thumb is-clickable" data-board="https://i.postimg.cc/fyqDk9bG/PV-main-Burgersl-copy-1024x1024.jpg" data-title="Burgers — Full Menu Board" tabindex="0" role="button" aria-label="View full Burgers menu board">
+          <img src="https://i.postimg.cc/fyqDk9bG/PV-main-Burgersl-copy-1024x1024.jpg" alt="Burgers menu board" loading="lazy">
+          <div class="cat-thumb-hint">
+            <svg fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+            View full board
+          </div>
+        </div>
       </div>
 
-      <div class="filter-row reveal" id="filterRow" role="tablist" aria-label="Filter events">
-        <button class="filter-chip active" data-filter="all" role="tab" aria-selected="true">All Nights</button>
-        <button class="filter-chip" data-filter="weekly" role="tab" aria-selected="false">Weekly Series</button>
-        <button class="filter-chip" data-filter="special" role="tab" aria-selected="false">Special Guests</button>
-      </div>
-
-      <div class="poster-grid reveal reveal-stagger" id="posterGrid">
-
-        <article class="poster-card card-lekompo" data-tag="weekly" data-event="lekompo" tabindex="0" role="button" aria-label="View Lekompo Fridays posters">
-          <div class="poster-ribbon">Next Up</div>
-          <span class="poster-gallery-badge"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 15l5-5 4 4 5-5 4 4"/></svg>3 posters</span>
-          <img src="https://i.postimg.cc/Y0xCMbf1/leko.jpg" alt="Lekompo Fridays poster" loading="eager">
-          <div class="poster-card-body">
-            <span class="poster-tag">Weekly Series</span>
-            <h3>Lekompo Fridays</h3>
-            <p class="poster-desc">Kick the weekend off with the rhythms of Limpopo — good music, good company, good vibes all night.</p>
-            <p class="poster-countdown" data-countdown="lekompo">Calculating…</p>
-          </div>
-        </article>
-
-        <article class="poster-card card-exquisite" data-tag="weekly" data-event="exquisite" tabindex="0" role="button" aria-label="View Exquisite Saturdays poster">
-          <div class="poster-ribbon">Next Up</div>
-          <img src="https://i.postimg.cc/8z5209sL/Save-Clip-App-731158340-18016681901908826-3553037399421413566-n.jpg" alt="Exquisite Saturdays poster" loading="lazy">
-          <div class="poster-card-body">
-            <span class="poster-tag">Weekly Series</span>
-            <h3>Exquisite Saturdays</h3>
-            <p class="poster-desc">An elevated night out — fine drinks, curated sounds, unforgettable energy.</p>
-            <p class="poster-countdown" data-countdown="exquisite">Calculating…</p>
-          </div>
-        </article>
-
-        <article class="poster-card card-soul" data-tag="weekly" data-event="soul" tabindex="0" role="button" aria-label="View Sunday Soul Session poster">
-          <div class="poster-ribbon">Next Up</div>
-          <img src="https://i.postimg.cc/BnVr9pKS/Save-Clip-App-730332015-18016384001908826-7760478953285662725-n.jpg" alt="Sunday Soul Session poster" loading="lazy">
-          <div class="poster-card-body">
-            <span class="poster-tag">Weekly Series</span>
-            <h3>Sunday Soul Session</h3>
-            <p class="poster-desc">Wind the week down with soulful sounds and a laid-back atmosphere.</p>
-            <p class="poster-countdown" data-countdown="soul">Calculating…</p>
-          </div>
-        </article>
-
-        <article class="poster-card card-kabza" data-tag="special" data-event="kabza" tabindex="0" role="button" aria-label="View Kabza De Small poster">
-          <div class="poster-ribbon">Next Up</div>
-          <img src="https://i.postimg.cc/dVRhmbHN/kabza.png" alt="Kabza De Small live poster" loading="lazy">
-          <div class="poster-card-body">
-            <span class="poster-tag">Special Guest</span>
-            <h3>Kabza De Small — Live</h3>
-            <p class="poster-desc">The King of Amapiano takes over the decks for one night only.</p>
-            <p class="poster-countdown" data-countdown="kabza">Calculating…</p>
-          </div>
-        </article>
-
+      <div class="dish-grid reveal">
+        <div class="dish-row">
+          <div class="dish-top"><span class="dish-name">The PV Classic</span><span class="dish-price">R120</span></div>
+          <p class="dish-desc">200g beef patty, cheddar, lettuce, tomato, house sauce.</p>
+        </div>
+        <div class="dish-row">
+          <div class="dish-top"><span class="dish-name">Bacon &amp; Blue Cheese <span class="dish-tag chef">Chef's Pick</span></span><span class="dish-price">R145</span></div>
+          <p class="dish-desc">Beef patty, crispy bacon, blue cheese, caramelised onion.</p>
+        </div>
+        <div class="dish-row">
+          <div class="dish-top"><span class="dish-name">Spicy Buttermilk Chicken <span class="dish-tag spicy">Spicy</span></span><span class="dish-price">R130</span></div>
+          <p class="dish-desc">Fried buttermilk chicken, jalapeños, sriracha mayo.</p>
+        </div>
+        <div class="dish-row">
+          <div class="dish-top"><span class="dish-name">Mushroom &amp; Swiss</span><span class="dish-price">R135</span></div>
+          <p class="dish-desc">Beef patty, sautéed mushrooms, melted Swiss cheese.</p>
+        </div>
+        <div class="dish-row">
+          <div class="dish-top"><span class="dish-name">The Garden Burger <span class="dish-tag veg">Veg</span></span><span class="dish-price">R115</span></div>
+          <p class="dish-desc">Grilled halloumi and portobello patty, rocket, garlic aioli.</p>
+        </div>
       </div>
     </div>
   </section>
 
-  <div class="angle-divider angle-three" aria-hidden="true"></div>
+  <div class="angle-divider" aria-hidden="true" style="--seg-from:var(--cream); --seg-to:var(--charcoal-sat);"></div>
+
+  <!-- ================= TRADITIONAL CUISINES ================= -->
+  <section class="menu-cat bg-sat" id="traditional">
+    <div class="container">
+      <div class="cat-head reveal">
+        <div>
+          <span class="eyebrow">Limpopo Roots</span>
+          <h2 class="font-display">Traditional Cuisines</h2>
+          <p class="cat-desc">Slow-cooked, generously spiced, and served the way it's meant to be — with pap.</p>
+        </div>
+        <div class="cat-thumb is-clickable" data-board="https://i.postimg.cc/0239sDFw/PV-main-Tradition-Cuisines-copy-1024x1024.jpg" data-title="Traditional Cuisines — Full Menu Board" tabindex="0" role="button" aria-label="View full Traditional Cuisines menu board">
+          <img src="https://i.postimg.cc/0239sDFw/PV-main-Tradition-Cuisines-copy-1024x1024.jpg" alt="Traditional Cuisines menu board" loading="lazy">
+          <div class="cat-thumb-hint">
+            <svg fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+            View full board
+          </div>
+        </div>
+      </div>
+
+      <div class="dish-grid reveal">
+        <div class="dish-row">
+          <div class="dish-top"><span class="dish-name">Pap, Chakalaka &amp; Grilled Steak</span><span class="dish-price">R185</span></div>
+          <p class="dish-desc">300g rump steak, soft pap, chakalaka and gravy.</p>
+        </div>
+        <div class="dish-row">
+          <div class="dish-top"><span class="dish-name">Slow-Braised Oxtail <span class="dish-tag chef">Chef's Pick</span> <span class="dish-tag popular">Most Loved</span></span><span class="dish-price">R215</span></div>
+          <p class="dish-desc">Fall-off-the-bone oxtail stew, your choice of pap or rice.</p>
+        </div>
+        <div class="dish-row">
+          <div class="dish-top"><span class="dish-name">Tripe &amp; Pap</span><span class="dish-price">R150</span></div>
+          <p class="dish-desc">Traditionally spiced, slow-cooked tripe with soft pap.</p>
+        </div>
+        <div class="dish-row">
+          <div class="dish-top"><span class="dish-name">Umleqwa Chicken</span><span class="dish-price">R165</span></div>
+          <p class="dish-desc">Free-range chicken slow-cooked with onion and spice, served with pap.</p>
+        </div>
+        <div class="dish-row">
+          <div class="dish-top"><span class="dish-name">Beef Short Rib Potjie</span><span class="dish-price">R195</span></div>
+          <p class="dish-desc">Rich, slow-simmered potjie stew, your choice of rice or pap.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="angle-divider" aria-hidden="true" style="--seg-from:var(--charcoal-sat); --seg-to:var(--cream);"></div>
+
+  <!-- ================= PIZZA ================= -->
+  <section class="menu-cat bg-cream" id="pizza">
+    <div class="container">
+      <div class="cat-head reveal">
+        <div>
+          <span class="eyebrow">Stone-Baked</span>
+          <h2 class="font-display">Pizza</h2>
+          <p class="cat-desc">30cm, stone-baked to order — thin, blistered crust every time.</p>
+        </div>
+        <div class="cat-thumb is-clickable" data-board="https://i.postimg.cc/fyyh4RvX/PV-Pizza-copy-1024x1024.jpg" data-title="Pizza — Full Menu Board" tabindex="0" role="button" aria-label="View full Pizza menu board">
+          <img src="https://i.postimg.cc/fyyh4RvX/PV-Pizza-copy-1024x1024.jpg" alt="Pizza menu board" loading="lazy">
+          <div class="cat-thumb-hint">
+            <svg fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+            View full board
+          </div>
+        </div>
+      </div>
+
+      <div class="dish-grid reveal">
+        <div class="dish-row">
+          <div class="dish-top"><span class="dish-name">Margherita <span class="dish-tag veg">Veg</span></span><span class="dish-price">R105</span></div>
+          <p class="dish-desc">Napolitana sauce, mozzarella, fresh basil.</p>
+        </div>
+        <div class="dish-row">
+          <div class="dish-top"><span class="dish-name">Regina</span><span class="dish-price">R120</span></div>
+          <p class="dish-desc">Ham, mushroom, mozzarella.</p>
+        </div>
+        <div class="dish-row">
+          <div class="dish-top"><span class="dish-name">PV Meat Lovers <span class="dish-tag popular">Most Loved</span></span><span class="dish-price">R160</span></div>
+          <p class="dish-desc">Beef, chicken, bacon, boerewors, peppadew.</p>
+        </div>
+        <div class="dish-row">
+          <div class="dish-top"><span class="dish-name">Peri-Peri Chicken <span class="dish-tag spicy">Spicy</span></span><span class="dish-price">R145</span></div>
+          <p class="dish-desc">Chicken, peppers, mozzarella, peri-peri drizzle.</p>
+        </div>
+        <div class="dish-row">
+          <div class="dish-top"><span class="dish-name">BBQ Rib Pizza</span><span class="dish-price">R155</span></div>
+          <p class="dish-desc">Pulled rib meat, BBQ sauce, red onion, mozzarella.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="angle-divider" aria-hidden="true" style="--seg-from:var(--cream); --seg-to:var(--charcoal-deeper);"></div>
+
+  <!-- ================= FROM THE KITCHEN (marquee break) ================= -->
+  <section class="section-kitchen">
+    <div class="container">
+      <div class="kitchen-head reveal">
+        <span class="eyebrow">The Kitchen</span>
+        <h2 class="font-display">A Taste Before You Choose</h2>
+        <p class="kitchen-quote font-quote">"Every plate leaves our kitchen exactly as it should — fresh, generous, and worth the wait."</p>
+      </div>
+    </div>
+
+    <div class="meal-marquee reveal">
+      <div class="meal-track">
+        <div class="meal-item" data-board="https://i.postimg.cc/mDk66stX/meal-6.jpg" data-title="Signature Dish"><img src="https://i.postimg.cc/mDk66stX/meal-6.jpg" alt="Signature dish at PV Lifestyle" loading="lazy"></div>
+        <div class="meal-item" data-board="https://i.postimg.cc/m27RSYxh/meal-5.jpg" data-title="Plated Meal"><img src="https://i.postimg.cc/m27RSYxh/meal-5.jpg" alt="Plated meal at PV Lifestyle" loading="lazy"></div>
+        <div class="meal-item" data-board="https://i.postimg.cc/DZW34sdf/meal-4.jpg" data-title="Dish Detail"><img src="https://i.postimg.cc/DZW34sdf/meal-4.jpg" alt="Dish detail at PV Lifestyle" loading="lazy"></div>
+        <div class="meal-item" data-board="https://i.postimg.cc/qMcVKpn2/meal-3.jpg" data-title="Fresh Preparation"><img src="https://i.postimg.cc/qMcVKpn2/meal-3.jpg" alt="Fresh preparation at PV Lifestyle" loading="lazy"></div>
+        <div class="meal-item" data-board="https://i.postimg.cc/vmBpC9KY/meal-2.jpg" data-title="Chef's Plate"><img src="https://i.postimg.cc/vmBpC9KY/meal-2.jpg" alt="Chef's plate at PV Lifestyle" loading="lazy"></div>
+        <div class="meal-item" data-board="https://i.postimg.cc/0jp37Czh/meal-1.jpg" data-title="Table Setting"><img src="https://i.postimg.cc/0jp37Czh/meal-1.jpg" alt="Table setting at PV Lifestyle" loading="lazy"></div>
+        <div class="meal-item" data-board="https://i.postimg.cc/mDk66stX/meal-6.jpg" data-title="Signature Dish" aria-hidden="true"><img src="https://i.postimg.cc/mDk66stX/meal-6.jpg" alt="" loading="lazy"></div>
+        <div class="meal-item" data-board="https://i.postimg.cc/m27RSYxh/meal-5.jpg" data-title="Plated Meal" aria-hidden="true"><img src="https://i.postimg.cc/m27RSYxh/meal-5.jpg" alt="" loading="lazy"></div>
+        <div class="meal-item" data-board="https://i.postimg.cc/DZW34sdf/meal-4.jpg" data-title="Dish Detail" aria-hidden="true"><img src="https://i.postimg.cc/DZW34sdf/meal-4.jpg" alt="" loading="lazy"></div>
+        <div class="meal-item" data-board="https://i.postimg.cc/qMcVKpn2/meal-3.jpg" data-title="Fresh Preparation" aria-hidden="true"><img src="https://i.postimg.cc/qMcVKpn2/meal-3.jpg" alt="" loading="lazy"></div>
+        <div class="meal-item" data-board="https://i.postimg.cc/vmBpC9KY/meal-2.jpg" data-title="Chef's Plate" aria-hidden="true"><img src="https://i.postimg.cc/vmBpC9KY/meal-2.jpg" alt="" loading="lazy"></div>
+        <div class="meal-item" data-board="https://i.postimg.cc/0jp37Czh/meal-1.jpg" data-title="Table Setting" aria-hidden="true"><img src="https://i.postimg.cc/0jp37Czh/meal-1.jpg" alt="" loading="lazy"></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="angle-divider" aria-hidden="true" style="--seg-from:var(--charcoal-deeper); --seg-to:var(--orange-sat);"></div>
+
+  <!-- ================= PLATTERS (featured) ================= -->
+  <section class="menu-cat bg-feature" id="platters">
+    <div class="container">
+      <div class="cat-head reveal">
+        <div>
+          <span class="eyebrow">Made To Share</span>
+          <h2 class="font-display">Platters</h2>
+          <p class="cat-desc">The centrepiece of the table — built for groups, big appetites, and long nights.</p>
+        </div>
+        <div class="cat-thumb is-clickable" data-board="https://i.postimg.cc/8cjxKn1x/PV-PLATTERS-copy-1024x1024.jpg" data-title="Platters — Full Menu Board" tabindex="0" role="button" aria-label="View full Platters menu board">
+          <img src="https://i.postimg.cc/8cjxKn1x/PV-PLATTERS-copy-1024x1024.jpg" alt="Platters menu board" loading="lazy">
+          <div class="cat-thumb-hint">
+            <svg fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+            View full board
+          </div>
+        </div>
+      </div>
+
+      <div class="dish-grid reveal">
+        <div class="dish-row">
+          <div class="dish-top"><span class="dish-name">The PV Meat Platter <span class="dish-tag chef">Chef's Pick</span></span><span class="dish-price">R480</span></div>
+          <p class="dish-desc">Rump, boerewors, chicken wings, ribs, pap &amp; chakalaka. Serves 2–3.</p>
+        </div>
+        <div class="dish-row">
+          <div class="dish-top"><span class="dish-name">Seafood Platter</span><span class="dish-price">R560</span></div>
+          <p class="dish-desc">Prawns, calamari, hake and mussels in lemon butter. Serves 2.</p>
+        </div>
+        <div class="dish-row">
+          <div class="dish-top"><span class="dish-name">Braai Platter for 4 <span class="dish-tag popular">Most Loved</span></span><span class="dish-price">R690</span></div>
+          <p class="dish-desc">Mixed grill of wors, chops and chicken, salad, pap.</p>
+        </div>
+        <div class="dish-row">
+          <div class="dish-top"><span class="dish-name">Sharing Wing Platter <span class="dish-tag spicy">Spicy</span></span><span class="dish-price">R350</span></div>
+          <p class="dish-desc">20 flame-grilled wings, choice of two sauces.</p>
+        </div>
+        <div class="dish-row">
+          <div class="dish-top"><span class="dish-name">Vegetarian Platter <span class="dish-tag veg">Veg</span></span><span class="dish-price">R310</span></div>
+          <p class="dish-desc">Halloumi, grilled vegetables, hummus, falafel, pita.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="angle-divider" aria-hidden="true" style="--seg-from:var(--orange-sat); --seg-to:var(--cream);"></div>
+
+  <!-- ================= SIDES & SWEET ENDINGS ================= -->
+  <section class="menu-cat bg-cream" id="sides">
+    <div class="container">
+      <div class="cat-head reveal">
+        <div>
+          <span class="eyebrow">Round It Out</span>
+          <h2 class="font-display">Sides &amp; Sweet Endings</h2>
+          <p class="cat-desc">The extras that finish the meal — savoury on the side, sweet at the end.</p>
+        </div>
+        <div class="cat-thumb">
+          <img src="https://i.postimg.cc/m27RSYxh/meal-5.jpg" alt="Plated meal at PV Lifestyle" loading="lazy">
+        </div>
+      </div>
+
+      <h3 class="subgroup-title font-display">Sides &amp; Salads</h3>
+      <div class="dish-grid reveal">
+        <div class="dish-row"><div class="dish-top"><span class="dish-name">Skin-on Fries <span class="dish-tag veg">Veg</span></span><span class="dish-price">R38</span></div></div>
+        <div class="dish-row"><div class="dish-top"><span class="dish-name">Creamy Mash <span class="dish-tag veg">Veg</span></span><span class="dish-price">R40</span></div></div>
+        <div class="dish-row"><div class="dish-top"><span class="dish-name">Greek Salad <span class="dish-tag veg">Veg</span></span><span class="dish-price">R58</span></div></div>
+        <div class="dish-row"><div class="dish-top"><span class="dish-name">Pap &amp; Gravy <span class="dish-tag veg">Veg</span></span><span class="dish-price">R32</span></div></div>
+        <div class="dish-row"><div class="dish-top"><span class="dish-name">Garlic Bread <span class="dish-tag veg">Veg</span></span><span class="dish-price">R42</span></div></div>
+        <div class="dish-row"><div class="dish-top"><span class="dish-name">Coleslaw <span class="dish-tag veg">Veg</span></span><span class="dish-price">R35</span></div></div>
+      </div>
+
+      <h3 class="subgroup-title font-display">Something Sweet</h3>
+      <div class="dish-grid reveal">
+        <div class="dish-row">
+          <div class="dish-top"><span class="dish-name">Malva Pudding &amp; Custard <span class="dish-tag popular">Most Loved</span></span><span class="dish-price">R65</span></div>
+          <p class="dish-desc">Warm, syrup-soaked sponge with a generous pour of custard.</p>
+        </div>
+        <div class="dish-row">
+          <div class="dish-top"><span class="dish-name">Chocolate Lava Cake <span class="dish-tag chef">Chef's Pick</span></span><span class="dish-price">R75</span></div>
+          <p class="dish-desc">Molten centre, vanilla ice cream on the side.</p>
+        </div>
+        <div class="dish-row">
+          <div class="dish-top"><span class="dish-name">Cheesecake of the Day</span><span class="dish-price">R68</span></div>
+          <p class="dish-desc">Ask your server about today's flavour.</p>
+        </div>
+        <div class="dish-row">
+          <div class="dish-top"><span class="dish-name">Ice Cream Sundae</span><span class="dish-price">R58</span></div>
+          <p class="dish-desc">Three scoops, chocolate sauce, wafer, cherry on top.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="angle-divider" aria-hidden="true" style="--seg-from:var(--cream); --seg-to:var(--charcoal-deeper);"></div>
+
+  <!-- ================= BAR & REFRESHMENTS ================= -->
+  <section class="menu-cat bg-dark" id="bar">
+    <div class="container">
+      <div class="cat-head reveal">
+        <div>
+          <span class="eyebrow">The Bar</span>
+          <h2 class="font-display">Bar &amp; Refreshments</h2>
+          <p class="cat-desc">Craft cocktails, a full spirits list, wine by the glass or bottle, and the soft stuff too.</p>
+        </div>
+        <div class="cat-thumb">
+          <img src="https://i.postimg.cc/DZW34sdf/meal-4.jpg" alt="Ambience at PV Lifestyle" loading="lazy">
+        </div>
+      </div>
+
+      <h3 class="subgroup-title font-display">Cocktails</h3>
+      <div class="dish-grid reveal">
+        <div class="dish-row">
+          <div class="dish-top"><span class="dish-name">Espresso Martini <span class="dish-tag popular">Most Loved</span></span><span class="dish-price">R100</span></div>
+        </div>
+        <div class="dish-row">
+          <div class="dish-top"><span class="dish-name">PV Sunset</span><span class="dish-price">R90</span></div>
+          <p class="dish-desc">Tequila, passion fruit, lime.</p>
+        </div>
+        <div class="dish-row">
+          <div class="dish-top"><span class="dish-name">Mojito</span><span class="dish-price">R85</span></div>
+        </div>
+        <div class="dish-row">
+          <div class="dish-top"><span class="dish-name">Pornstar Martini</span><span class="dish-price">R100</span></div>
+        </div>
+        <div class="dish-row">
+          <div class="dish-top"><span class="dish-name">Whiskey Sour</span><span class="dish-price">R95</span></div>
+        </div>
+      </div>
+
+      <h3 class="subgroup-title font-display">Spirits <span class="subgroup-note">— per tot</span></h3>
+      <div class="dish-grid reveal">
+        <div class="dish-row"><div class="dish-top"><span class="dish-name">Johnnie Walker Black</span><span class="dish-price">R58</span></div></div>
+        <div class="dish-row"><div class="dish-top"><span class="dish-name">Jack Daniel's</span><span class="dish-price">R52</span></div></div>
+        <div class="dish-row"><div class="dish-top"><span class="dish-name">Absolut Vodka</span><span class="dish-price">R48</span></div></div>
+        <div class="dish-row"><div class="dish-top"><span class="dish-name">Hennessy VS</span><span class="dish-price">R78</span></div></div>
+        <div class="dish-row"><div class="dish-top"><span class="dish-name">Bombay Sapphire Gin</span><span class="dish-price">R52</span></div></div>
+      </div>
+
+      <h3 class="subgroup-title font-display">Wine <span class="subgroup-note">— glass / bottle</span></h3>
+      <div class="dish-grid reveal">
+        <div class="dish-row"><div class="dish-top"><span class="dish-name">House Red</span><span class="dish-price">R70 / R240</span></div></div>
+        <div class="dish-row"><div class="dish-top"><span class="dish-name">House White</span><span class="dish-price">R70 / R240</span></div></div>
+        <div class="dish-row"><div class="dish-top"><span class="dish-name">Sparkling Rosé</span><span class="dish-price">R78 / R270</span></div></div>
+      </div>
+
+      <h3 class="subgroup-title font-display">Soft Drinks &amp; More</h3>
+      <div class="dish-grid reveal">
+        <div class="dish-row"><div class="dish-top"><span class="dish-name">Soft Drinks</span><span class="dish-price">R28</span></div></div>
+        <div class="dish-row"><div class="dish-top"><span class="dish-name">Still / Sparkling Water</span><span class="dish-price">R28</span></div></div>
+        <div class="dish-row"><div class="dish-top"><span class="dish-name">Fresh Juice</span><span class="dish-price">R38</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="no-results" id="noResults">
+    <h3 class="font-display">Nothing matches "<span id="noResultsQuery"></span>"</h3>
+    <p>Try a different dish name, or clear your search to see the full menu.</p>
+  </div>
 
   <!-- ================= CTA BAND ================= -->
   <section class="section-cta">
     <div class="container">
-      <span class="eyebrow">Don't Miss It</span>
+      <span class="eyebrow">Ready When You Are</span>
       <h2 class="font-display cta-title">Your Table Is Waiting</h2>
-      <p class="cta-sub">Seats fill up fast on show nights. Reserve ahead and settle in before the doors get busy.</p>
+      <p class="cta-sub">Bring the appetite — we'll handle the rest. Reserve ahead and settle in before the doors get busy.</p>
       <div class="cta-actions">
         <a href="index.html#reserve" class="cta-btn">Reserve a Table</a>
         <a href="https://www.instagram.com/pv.lifestyle2022/" target="_blank" rel="noopener noreferrer" class="btn-outline">Follow on Instagram</a>
       </div>
+      <p class="price-note">All prices are in South African Rand (ZAR) and include VAT. Menu items, availability and prices may vary seasonally — please ask your server about today's specials and allergens.</p>
     </div>
   </section>
 
@@ -711,7 +1017,7 @@
         <li><a href="index.html#hero">Home</a></li>
         <li><a href="events.html">Events</a></li>
         <li><a href="index.html#experience">Experience</a></li>
-        <li><a href="index.html#menu">Menu</a></li>
+        <li><a href="menu.html">Menu</a></li>
         <li><a href="index.html#visit">Visit Us</a></li>
       </ul>
     </div>
@@ -758,234 +1064,18 @@
   </div>
 </footer>
 
-<!-- ================= POSTER LIGHTBOX ================= -->
-<div class="poster-lightbox" id="posterLightbox" role="dialog" aria-modal="true" aria-label="Event poster viewer" aria-hidden="true">
+<!-- ================= BOARD LIGHTBOX ================= -->
+<div class="board-lightbox" id="boardLightbox" role="dialog" aria-modal="true" aria-label="Menu board viewer" aria-hidden="true">
   <button class="lb-close" id="lbClose" aria-label="Close">
     <svg fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 6l12 12M18 6L6 18"/></svg>
-  </button>
-  <button class="lb-nav lb-prev" id="lbPrev" aria-label="Previous poster">
-    <svg fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 6l-6 6 6 6"/></svg>
   </button>
   <div class="lb-stage">
     <img id="lbImage" src="" alt="">
     <p class="lb-caption" id="lbCaption"></p>
   </div>
-  <button class="lb-nav lb-next" id="lbNext" aria-label="Next poster">
-    <svg fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 6l6 6-6 6"/></svg>
-  </button>
 </div>
 
 <script>
-  // ============================================================
-  // EVENT CONFIG — edit here to update nights, times, and dates.
-  // "recurring" is the JS getDay() index: Sun=0, Mon=1 ... Sat=6.
-  // For one-off shows (like a special guest), set "fixedDate"
-  // instead of "recurring" — format: 'YYYY-MM-DDTHH:MM:SS'
-  // ============================================================
-  const EVENTS = {
-    lekompo: {
-      title: 'Lekompo Fridays',
-      tagLabel: 'Weekly Series',
-      day: 'Friday',
-      recurring: 5, startHour: 20, startMin: 0,
-      desc: "Kick the weekend off with the rhythms of Limpopo — good music, good company, good vibes all night.",
-      images: [
-        'https://i.postimg.cc/Y0xCMbf1/leko.jpg',
-        'https://i.postimg.cc/Ghr4VsJv/fabr.jpg',
-        'https://i.postimg.cc/SNyFWJhT/Save-Clip-App-730332036-18016859684908826-276558060762799520-n.jpg'
-      ]
-    },
-    exquisite: {
-      title: 'Exquisite Saturdays',
-      tagLabel: 'Weekly Series',
-      day: 'Saturday',
-      recurring: 6, startHour: 20, startMin: 0,
-      desc: "An elevated night out — fine drinks, curated sounds, unforgettable energy.",
-      images: ['https://i.postimg.cc/8z5209sL/Save-Clip-App-731158340-18016681901908826-3553037399421413566-n.jpg']
-    },
-    soul: {
-      title: 'Sunday Soul Session',
-      tagLabel: 'Weekly Series',
-      day: 'Sunday',
-      recurring: 0, startHour: 14, startMin: 0,
-      desc: "Wind the week down with soulful sounds and a laid-back atmosphere.",
-      images: ['https://i.postimg.cc/BnVr9pKS/Save-Clip-App-730332015-18016384001908826-7760478953285662725-n.jpg']
-    },
-    kabza: {
-      title: 'Kabza De Small — Live',
-      tagLabel: 'Special Guest',
-      day: 'Special',
-      fixedDate: '2026-08-01T21:00:00', // TODO: set the real show date/time
-      desc: "The King of Amapiano takes over the PV Lifestyle decks for one night only. Early arrival strongly recommended.",
-      images: ['https://i.postimg.cc/dVRhmbHN/kabza.png']
-    }
-  };
-
-  function nextOccurrence(ev) {
-    if (ev.fixedDate) return new Date(ev.fixedDate);
-    const now = new Date();
-    const d = new Date(now);
-    d.setHours(ev.startHour, ev.startMin, 0, 0);
-    let diffDays = (ev.recurring - now.getDay() + 7) % 7;
-    if (diffDays === 0 && d <= now) diffDays = 7;
-    d.setDate(now.getDate() + diffDays);
-    return d;
-  }
-
-  function pad(n) { return String(n).padStart(2, '0'); }
-
-  function formatRelative(target) {
-    const diff = Math.max(0, target - new Date());
-    const days = Math.floor(diff / 86400000);
-    const hours = Math.floor((diff % 86400000) / 3600000);
-    if (diff <= 0) return "Happening now";
-    if (days === 0) return `Tonight · in ${hours}h`;
-    if (days === 1) return "Tomorrow night";
-    return `In ${days} days`;
-  }
-
-  // Compute ordering once per tick
-  let orderedIds = [];
-  function recompute() {
-    orderedIds = Object.keys(EVENTS)
-      .map(id => ({ id, when: nextOccurrence(EVENTS[id]) }))
-      .sort((a, b) => a.when - b.when)
-      .map(x => x.id);
-  }
-  recompute();
-
-  const nextId = () => orderedIds[0];
-
-  // ---- Spotlight ----
-  const spotlightImg = document.getElementById('spotlightImg');
-  const spotlightTitle = document.getElementById('spotlightTitle');
-  const spotlightDesc = document.getElementById('spotlightDesc');
-  const spotlightDay = document.getElementById('spotlightDay');
-  const spotlightTag = document.getElementById('spotlightTag');
-  let renderedSpotlightId = null;
-
-  function renderSpotlight() {
-    const id = nextId();
-    if (id !== renderedSpotlightId) {
-      const ev = EVENTS[id];
-      spotlightImg.src = ev.images[0];
-      spotlightImg.alt = ev.title + ' poster';
-      spotlightTitle.textContent = ev.title;
-      spotlightDesc.textContent = ev.desc;
-      spotlightDay.textContent = ev.day;
-      spotlightTag.textContent = ev.tagLabel === 'Special Guest' ? 'Special Guest' : 'This Week';
-      renderedSpotlightId = id;
-    }
-    const target = nextOccurrence(EVENTS[id]);
-    const diff = Math.max(0, target - new Date());
-    document.getElementById('cdDays').textContent = pad(Math.floor(diff / 86400000));
-    document.getElementById('cdHours').textContent = pad(Math.floor((diff % 86400000) / 3600000));
-    document.getElementById('cdMins').textContent = pad(Math.floor((diff % 3600000) / 60000));
-    document.getElementById('cdSecs').textContent = pad(Math.floor((diff % 60000) / 1000));
-  }
-
-  // ---- Card badges + mini countdowns ----
-  const cards = document.querySelectorAll('.poster-card');
-  function renderCards() {
-    const soonest = nextId();
-    cards.forEach(card => {
-      const id = card.dataset.event;
-      card.classList.toggle('card-next', id === soonest);
-      const label = card.querySelector(`[data-countdown="${id}"]`);
-      if (label) label.textContent = formatRelative(nextOccurrence(EVENTS[id]));
-    });
-  }
-
-  function tick() {
-    recompute();
-    renderSpotlight();
-    renderCards();
-  }
-  tick();
-  setInterval(tick, 1000);
-
-  // ---- Filter chips ----
-  const filterRow = document.getElementById('filterRow');
-  filterRow.addEventListener('click', (e) => {
-    const btn = e.target.closest('.filter-chip');
-    if (!btn) return;
-    filterRow.querySelectorAll('.filter-chip').forEach(c => {
-      c.classList.toggle('active', c === btn);
-      c.setAttribute('aria-selected', c === btn ? 'true' : 'false');
-    });
-    const filter = btn.dataset.filter;
-    cards.forEach(card => {
-      const show = filter === 'all' || card.dataset.tag === filter;
-      card.classList.toggle('is-hidden', !show);
-    });
-  });
-
-  // ---- Poster Lightbox ----
-  class PosterLightbox {
-    constructor() {
-      this.el = document.getElementById('posterLightbox');
-      this.img = document.getElementById('lbImage');
-      this.caption = document.getElementById('lbCaption');
-      this.closeBtn = document.getElementById('lbClose');
-      this.prevBtn = document.getElementById('lbPrev');
-      this.nextBtn = document.getElementById('lbNext');
-      this.images = [];
-      this.title = '';
-      this.index = 0;
-
-      this.closeBtn.addEventListener('click', () => this.close());
-      this.prevBtn.addEventListener('click', () => this.step(-1));
-      this.nextBtn.addEventListener('click', () => this.step(1));
-      this.el.addEventListener('click', (e) => { if (e.target === this.el) this.close(); });
-      document.addEventListener('keydown', (e) => {
-        if (this.el.getAttribute('aria-hidden') === 'true') return;
-        if (e.key === 'Escape') this.close();
-        if (e.key === 'ArrowLeft') this.step(-1);
-        if (e.key === 'ArrowRight') this.step(1);
-      });
-    }
-    open(eventId, startIndex = 0) {
-      const ev = EVENTS[eventId];
-      this.images = ev.images;
-      this.title = ev.title;
-      this.index = startIndex;
-      this.render();
-      this.el.classList.add('open');
-      this.el.setAttribute('aria-hidden', 'false');
-      document.body.classList.add('lightbox-open');
-      this.closeBtn.focus();
-    }
-    close() {
-      this.el.classList.remove('open');
-      this.el.setAttribute('aria-hidden', 'true');
-      document.body.classList.remove('lightbox-open');
-    }
-    step(dir) {
-      this.index = (this.index + dir + this.images.length) % this.images.length;
-      this.render();
-    }
-    render() {
-      this.img.src = this.images[this.index];
-      this.img.alt = this.title + ' poster';
-      const multi = this.images.length > 1;
-      this.caption.textContent = multi ? `${this.title} — ${this.index + 1} of ${this.images.length}` : this.title;
-      this.prevBtn.style.display = multi ? 'flex' : 'none';
-      this.nextBtn.style.display = multi ? 'flex' : 'none';
-    }
-  }
-  const posterLightbox = new PosterLightbox();
-
-  cards.forEach(card => {
-    const open = () => posterLightbox.open(card.dataset.event, 0);
-    card.addEventListener('click', open);
-    card.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); }
-    });
-  });
-  document.getElementById('spotlightPosterWrap').addEventListener('click', () => {
-    posterLightbox.open(nextId(), 0);
-  });
-
   // ---- Header scroll effect ----
   const siteHeader = document.getElementById('siteHeader');
   function onScroll() { siteHeader.classList.toggle('is-scrolled', window.scrollY > 50); }
@@ -1020,24 +1110,107 @@
           io.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+    }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
     revealEls.forEach(el => io.observe(el));
   } else {
     revealEls.forEach(el => el.classList.add('in-view'));
   }
 
-  // ---- 3D tilt on pointer-fine devices ----
-  if (window.matchMedia('(hover:hover) and (pointer:fine)').matches) {
-    cards.forEach(card => {
-      card.addEventListener('mousemove', (e) => {
-        const r = card.getBoundingClientRect();
-        const x = (e.clientX - r.left) / r.width - 0.5;
-        const y = (e.clientY - r.top) / r.height - 0.5;
-        card.style.transform = `perspective(900px) rotateY(${x * 6}deg) rotateX(${-y * 6}deg) translateY(-4px)`;
-      });
-      card.addEventListener('mouseleave', () => { card.style.transform = ''; });
-    });
+  // ---- Scrollspy for sticky subnav ----
+  const catSections = document.querySelectorAll('.menu-cat');
+  const subnavChips = document.querySelectorAll('.subnav-chip');
+  function setActiveChip(id) {
+    subnavChips.forEach(chip => chip.classList.toggle('active', chip.dataset.cat === id));
   }
+  if ('IntersectionObserver' in window) {
+    const spy = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) setActiveChip(entry.target.id);
+      });
+    }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
+    catSections.forEach(sec => spy.observe(sec));
+  }
+
+  // ---- Board lightbox (menu category boards + kitchen gallery) ----
+  const boardLightbox = document.getElementById('boardLightbox');
+  const lbImage = document.getElementById('lbImage');
+  const lbCaption = document.getElementById('lbCaption');
+  const lbClose = document.getElementById('lbClose');
+
+  function openBoard(src, title) {
+    lbImage.src = src;
+    lbImage.alt = title || 'Menu board';
+    lbCaption.textContent = title || '';
+    boardLightbox.classList.add('open');
+    boardLightbox.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('lightbox-open');
+    lbClose.focus();
+  }
+  function closeBoard() {
+    boardLightbox.classList.remove('open');
+    boardLightbox.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('lightbox-open');
+  }
+  lbClose.addEventListener('click', closeBoard);
+  boardLightbox.addEventListener('click', (e) => { if (e.target === boardLightbox) closeBoard(); });
+  document.addEventListener('keydown', (e) => {
+    if (boardLightbox.getAttribute('aria-hidden') === 'true') return;
+    if (e.key === 'Escape') closeBoard();
+  });
+
+  document.querySelectorAll('[data-board]').forEach(el => {
+    const open = () => openBoard(el.dataset.board, el.dataset.title || '');
+    el.addEventListener('click', open);
+    if (el.hasAttribute('tabindex')) {
+      el.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); }
+      });
+    }
+  });
+
+  // ---- Live menu search ----
+  const searchInput = document.getElementById('menuSearch');
+  const clearBtn = document.getElementById('subnavClear');
+  const noResults = document.getElementById('noResults');
+  const noResultsQuery = document.getElementById('noResultsQuery');
+  const dishRows = Array.from(document.querySelectorAll('.dish-row'));
+
+  // Precompute searchable text for each dish row
+  dishRows.forEach(row => { row.dataset.search = row.textContent.toLowerCase(); });
+
+  function runSearch() {
+    const query = searchInput.value.trim().toLowerCase();
+    clearBtn.classList.toggle('show', query.length > 0);
+
+    if (!query) {
+      dishRows.forEach(row => row.classList.remove('is-hidden'));
+      catSections.forEach(sec => sec.classList.remove('is-empty'));
+      noResults.classList.remove('show');
+      return;
+    }
+
+    let totalVisible = 0;
+    catSections.forEach(sec => {
+      const rows = sec.querySelectorAll('.dish-row');
+      let visibleInSection = 0;
+      rows.forEach(row => {
+        const match = row.dataset.search.includes(query);
+        row.classList.toggle('is-hidden', !match);
+        if (match) { visibleInSection++; totalVisible++; }
+      });
+      sec.classList.toggle('is-empty', visibleInSection === 0);
+    });
+
+    noResultsQuery.textContent = searchInput.value.trim();
+    noResults.classList.toggle('show', totalVisible === 0);
+  }
+
+  searchInput.addEventListener('input', runSearch);
+  clearBtn.addEventListener('click', () => {
+    searchInput.value = '';
+    runSearch();
+    searchInput.focus();
+  });
 
   // ---- Footer year ----
   document.getElementById('year').textContent = new Date().getFullYear();
