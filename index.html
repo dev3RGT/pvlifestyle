@@ -813,6 +813,44 @@
 
   :focus-visible{ outline:2px solid var(--orange); outline-offset:3px; }
 
+  /* ===== FIREBASE LOADING STATES ===== */
+  .fb-loading{ opacity:0; transform:translateY(20px); transition:opacity .6s ease, transform .6s cubic-bezier(.22,.8,.25,1); }
+  .fb-loaded{ opacity:1; transform:translateY(0); }
+  .fb-hidden{ display:none !important; }
+
+  .global-loader{
+    position:fixed; inset:0; z-index:500;
+    background:var(--charcoal-deeper);
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    transition:opacity .5s ease, visibility .5s ease;
+  }
+  .global-loader.done{ opacity:0; visibility:hidden; pointer-events:none; }
+  .global-loader .brand-chip{
+    display:inline-flex; align-items:center; background:var(--cream);
+    border-radius:16px; padding:.5rem .9rem; margin-bottom:1.5rem;
+    box-shadow:0 10px 24px -12px rgba(0,0,0,.55);
+    animation:pulse 2s ease infinite;
+  }
+  .global-loader .brand-chip img{ height:48px; }
+  .global-loader p{ color:var(--gray); font-size:.9rem; font-weight:600; letter-spacing:.05em; }
+  .global-loader .loader-bar{
+    width:140px; height:3px; background:rgba(247,242,234,.1); border-radius:999px;
+    margin-top:1.25rem; overflow:hidden;
+  }
+  .global-loader .loader-bar::after{
+    content:''; display:block; width:40%; height:100%; background:var(--orange);
+    border-radius:999px; animation:loaderSlide 1.2s ease infinite;
+  }
+  @keyframes loaderSlide{
+    0%{ transform:translateX(-150%); }
+    100%{ transform:translateX(350%); }
+  }
+  @keyframes pulseLoader{
+    0%,100%{ opacity:1; }
+    50%{ opacity:.6; }
+  }
+
+
   /* ===== RESPONSIVE OPTIMIZATIONS ===== */
   @media (max-width:1024px){
     .hero-content{ padding: 0 clamp(1rem, 4vw, 2.5rem) clamp(1.5rem, 5vw, 4rem); }
@@ -882,6 +920,15 @@
 <base target="_blank">
 </head>
 <body>
+<!-- ================= GLOBAL LOADER ================= -->
+<div class="global-loader" id="globalLoader">
+  <div class="brand-chip">
+    <img src="https://i.postimg.cc/DZh18dK7/pvlogo-removebg-preview.png" alt="PV Lifestyle">
+  </div>
+  <p>Loading content...</p>
+  <div class="loader-bar"></div>
+</div>
+
 
 <!-- ================= COMING EVENTS POPUP ================= -->
 <div class="events-modal" id="eventsModal" role="dialog" aria-modal="true" aria-labelledby="eventsModalTitle" aria-hidden="true">
@@ -1012,7 +1059,7 @@
   <div class="angle-divider angle-one" aria-hidden="true"></div>
 
   <!-- ================= EVENTS / CAROUSEL ================= -->
-  <section class="section-events" id="events">
+  <section class="section-events fb-loading" id="events">
     <div class="container">
       <div class="events-head reveal">
         <div>
@@ -1063,7 +1110,7 @@
   <div class="angle-divider angle-two" aria-hidden="true"></div>
 
   <!-- ================= EXPERIENCE ================= -->
-  <section class="section-experience" id="experience">
+  <section class="section-experience fb-loading" id="experience">
     <div class="container">
       <div class="exp-head reveal">
         <span class="eyebrow">Signature Nights</span>
@@ -1105,7 +1152,7 @@
   <div class="angle-divider angle-three" aria-hidden="true"></div>
 
   <!-- ================= OUR MENU (COVERFLOW CAROUSEL) ===== -->
-  <section class="section-menu-cats" id="menu">
+  <section class="section-menu-cats fb-loading" id="menu">
     <div class="container">
       <div class="menucats-head reveal">
         <span class="eyebrow">Explore</span>
@@ -1165,7 +1212,7 @@
   <div class="angle-divider angle-four" aria-hidden="true"></div>
 
   <!-- ================= MENU / RESTAURANT GALLERY ===== -->
-  <section class="section-menu" id="kitchen">
+  <section class="section-menu fb-loading" id="kitchen">
     <div class="container">
       <div class="menu-head">
         <div class="reveal">
@@ -1204,7 +1251,7 @@
   <div class="angle-divider angle-five" aria-hidden="true"></div>
 
   <!-- ================= ATMOSPHERE / AMBIENCE GALLERY ===== -->
-  <section class="section-atmosphere" id="atmosphere">
+  <section class="section-atmosphere fb-loading" id="atmosphere">
     <div class="container">
       <div class="atmosphere-head reveal">
         <span class="eyebrow">The Atmosphere</span>
@@ -1230,7 +1277,7 @@
   </section>
 
   <!-- ================= VISIT / LOCATION & RESERVATION ===== -->
-  <section class="section-visit" id="reserve">
+  <section class="section-visit fb-loading" id="reserve">
     <div class="container">
       <div class="visit-head">
         <div class="reveal">
@@ -1330,7 +1377,7 @@
 </div>
 
 <!-- ================= FOOTER ================= -->
-<footer class="site-footer" id="visit">
+<footer class="site-footer fb-loading" id="visit">
   <div class="container footer-top">
 
     <div class="footer-brand">
@@ -1828,7 +1875,7 @@
 </script>
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-  import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+  import { getDatabase, ref, onValue, set } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
   const firebaseConfig = {
     apiKey: "AIzaSyCh7Ute6LeSAxcNDEQwZg5m0cA4ujnLCfg",
@@ -1843,9 +1890,39 @@
   const app = initializeApp(firebaseConfig);
   const db = getDatabase(app);
 
+  // Track which sections have loaded from Firebase
+  const loadedSections = new Set();
+  const totalSections = 9;
+
+  function hideLoader() {
+    const loader = document.getElementById('globalLoader');
+    if (loader) loader.classList.add('done');
+  }
+
+  function checkAllLoaded() {
+    if (loadedSections.size >= totalSections) {
+      setTimeout(hideLoader, 300);
+    }
+  }
+
+  function markLoaded(selector) {
+    const el = document.querySelector(selector);
+    if (el) {
+      el.classList.remove('fb-loading');
+      el.classList.add('fb-loaded');
+    }
+    loadedSections.add(selector);
+    checkAllLoaded();
+  }
+
   const updateText = (selector, text) => {
     const el = document.querySelector(selector);
     if (el && text !== undefined && text !== null) el.textContent = text;
+  };
+
+  const updateHtml = (selector, html) => {
+    const el = document.querySelector(selector);
+    if (el && html !== undefined && html !== null) el.innerHTML = html;
   };
 
   const updateAttr = (selector, attr, val) => {
@@ -1853,236 +1930,218 @@
     if (el && val !== undefined && val !== null) el.setAttribute(attr, val);
   };
 
+  // Helper to sync list items from Firebase to DOM elements
+  function syncListItems(dbPath, selector, syncFn, sectionSelector) {
+    onValue(ref(db, dbPath), (snap) => {
+      const data = snap.val();
+      if (data) {
+        const items = Object.values(data).sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
+        const elements = document.querySelectorAll(selector);
+        items.forEach((item, idx) => {
+          if (elements[idx]) syncFn(elements[idx], item, idx);
+        });
+      }
+      if (sectionSelector) markLoaded(sectionSelector);
+    });
+  }
+
   // --- POPUP (EVENTS MODAL) ---
   onValue(ref(db, 'content/popup'), (snap) => {
     const data = snap.val();
-    if (!data) return;
-    updateText('.events-modal-head .eyebrow', data.eyebrow);
-    updateText('#eventsModalTitle', data.heading);
-    updateText('.events-modal-head > p', data.subheading);
-    updateText('#eventsModalReserve', data.ctaText);
+    if (data) {
+      updateText('.events-modal-head .eyebrow', data.eyebrow);
+      updateText('#eventsModalTitle', data.heading);
+      updateText('.events-modal-head > p', data.subheading);
+      updateText('#eventsModalReserve', data.ctaText);
 
-    const modal = document.getElementById('eventsModal');
-    if (modal) {
-      if (data.enabled === false) {
-        modal.style.display = 'none';
-        modal.classList.remove('open');
-        document.body.classList.remove('events-modal-open');
-      } else {
-        modal.style.display = '';
+      const modal = document.getElementById('eventsModal');
+      if (modal) {
+        if (data.enabled === false) {
+          modal.style.display = 'none';
+          modal.classList.remove('open');
+          document.body.classList.remove('events-modal-open');
+        } else {
+          modal.style.display = '';
+        }
       }
     }
+    loadedSections.add('popup');
+    checkAllLoaded();
   });
-  onValue(ref(db, 'content/popup/slides'), (snap) => {
-    const data = snap.val();
-    if (!data) return;
-    const items = Object.values(data).sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
-    const slides = document.querySelectorAll('.events-modal-slide');
-    items.forEach((item, idx) => {
-      if (slides[idx]) {
-        const img = slides[idx].querySelector('img');
-        if (img && item.url) img.src = item.url;
-      }
-    });
+  syncListItems('content/popup/slides', '.events-modal-slide', (el, item) => {
+    const img = el.querySelector('img');
+    if (img && item.url) img.src = item.url;
   });
 
   // --- HERO SECTION ---
   onValue(ref(db, 'content/hero'), (snap) => {
     const data = snap.val();
-    if (!data) return;
-    updateText('.hero-eyebrow', data.eyebrow);
-    updateText('.hero-title', data.title);
-    updateText('.hero-subhead', data.subhead);
-    const cta1 = document.querySelector('.hero-actions .cta-btn');
-    const cta2 = document.querySelector('.hero-actions .btn-outline');
-    if (cta1 && data.cta1Text) cta1.textContent = data.cta1Text;
-    if (cta2 && data.cta2Text) cta2.textContent = data.cta2Text;
+    if (data) {
+      updateText('.hero-eyebrow', data.eyebrow);
+      updateText('.hero-title', data.title);
+      updateText('.hero-subhead', data.subhead);
+      const cta1 = document.querySelector('.hero-actions .cta-btn');
+      const cta2 = document.querySelector('.hero-actions .btn-outline');
+      if (cta1 && data.cta1Text) cta1.textContent = data.cta1Text;
+      if (cta2 && data.cta2Text) cta2.textContent = data.cta2Text;
+    }
+    loadedSections.add('hero');
+    checkAllLoaded();
   });
-  onValue(ref(db, 'content/hero/slides'), (snap) => {
-    const data = snap.val();
-    if (!data) return;
-    const items = Object.values(data).sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
-    const slides = document.querySelectorAll('.hero-slide');
-    items.forEach((item, idx) => {
-      if (slides[idx]) {
-        const img = slides[idx].querySelector('img');
-        if (img && item.url) img.src = item.url;
-      }
-    });
+  syncListItems('content/hero/slides', '.hero-slide', (el, item) => {
+    const img = el.querySelector('img');
+    if (img && item.url) img.src = item.url;
   });
 
   // --- THIS WEEK AT PV (EVENTS COVERFLOW) ---
   onValue(ref(db, 'content/thisWeek'), (snap) => {
     const data = snap.val();
-    if (!data) return;
-    updateText('.events-head .eyebrow', data.eyebrow);
-    updateText('.events-head h2', data.heading);
-    updateText('.events-head p', data.subheading);
+    if (data) {
+      updateText('.events-head .eyebrow', data.eyebrow);
+      updateText('.events-head h2', data.heading);
+      updateText('.events-head p', data.subheading);
+    }
   });
-  onValue(ref(db, 'content/thisWeek/slides'), (snap) => {
-    const data = snap.val();
-    if (!data) return;
-    const items = Object.values(data).sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
-    const slides = document.querySelectorAll('#coverflowTrack .coverflow-slide');
-    items.forEach((item, idx) => {
-      if (slides[idx]) {
-        const img = slides[idx].querySelector('img');
-        const day = slides[idx].querySelector('.day');
-        const name = slides[idx].querySelector('.name');
-        if (img && item.url) img.src = item.url;
-        if (day && item.day) day.textContent = item.day;
-        if (name && item.name) name.textContent = item.name;
-      }
-    });
-  });
+  syncListItems('content/thisWeek/slides', '#coverflowTrack .coverflow-slide', (el, item) => {
+    const img = el.querySelector('img');
+    const day = el.querySelector('.day');
+    const name = el.querySelector('.name');
+    if (img && item.url) img.src = item.url;
+    if (day && item.day) day.textContent = item.day;
+    if (name && item.name) name.textContent = item.name;
+  }, '.section-events');
 
   // --- EXPERIENCE ---
   onValue(ref(db, 'content/experience'), (snap) => {
     const data = snap.val();
-    if (!data) return;
-    updateText('.exp-head .eyebrow', data.eyebrow);
-    updateText('.exp-head h2', data.heading);
-    updateText('.exp-head p', data.subheading);
+    if (data) {
+      updateText('.exp-head .eyebrow', data.eyebrow);
+      updateText('.exp-head h2', data.heading);
+      updateText('.exp-head p', data.subheading);
+    }
   });
-  onValue(ref(db, 'content/experience/cards'), (snap) => {
-    const data = snap.val();
-    if (!data) return;
-    const items = Object.values(data).sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
-    const cards = document.querySelectorAll('.exp-grid .exp-card');
-    items.forEach((item, idx) => {
-      if (cards[idx]) {
-        const img = cards[idx].querySelector('img');
-        const day = cards[idx].querySelector('.exp-day');
-        const title = cards[idx].querySelector('h3');
-        const desc = cards[idx].querySelector('p');
-        if (img && item.url) img.src = item.url;
-        if (day && item.day) day.textContent = item.day;
-        if (title && item.title) title.textContent = item.title;
-        if (desc && item.desc) desc.textContent = item.desc;
-      }
-    });
-  });
+  syncListItems('content/experience/cards', '.exp-grid .exp-card', (el, item) => {
+    const img = el.querySelector('img');
+    const day = el.querySelector('.exp-day');
+    const title = el.querySelector('h3');
+    const desc = el.querySelector('p');
+    if (img && item.url) img.src = item.url;
+    if (day && item.day) day.textContent = item.day;
+    if (title && item.title) title.textContent = item.title;
+    if (desc && item.desc) desc.textContent = item.desc;
+  }, '.section-experience');
 
   // --- OUR MENU (MENU CATEGORIES) ---
   onValue(ref(db, 'content/ourMenu'), (snap) => {
     const data = snap.val();
-    if (!data) return;
-    updateText('.menucats-head .eyebrow', data.eyebrow);
-    updateText('.menucats-head h2', data.heading);
-    updateText('.menucats-head p', data.subheading);
+    if (data) {
+      updateText('.menucats-head .eyebrow', data.eyebrow);
+      updateText('.menucats-head h2', data.heading);
+      updateText('.menucats-head p', data.subheading);
+    }
   });
-  onValue(ref(db, 'content/ourMenu/slides'), (snap) => {
-    const data = snap.val();
-    if (!data) return;
-    const items = Object.values(data).sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
-    const slides = document.querySelectorAll('#menucatsTrack .menucats-slide');
-    items.forEach((item, idx) => {
-      if (slides[idx]) {
-        const img = slides[idx].querySelector('img');
-        const label = slides[idx].querySelector('.label');
-        const name = slides[idx].querySelector('.name');
-        if (img && item.url) img.src = item.url;
-        if (label && item.label) label.textContent = item.label;
-        if (name && item.name) {
-          name.innerHTML = item.name.replace(/\n/g, '<br>');
-        }
-      }
-    });
-  });
+  syncListItems('content/ourMenu/slides', '#menucatsTrack .menucats-slide', (el, item) => {
+    const img = el.querySelector('img');
+    const label = el.querySelector('.label');
+    const name = el.querySelector('.name');
+    if (img && item.url) img.src = item.url;
+    if (label && item.label) label.textContent = item.label;
+    if (name && item.name) name.innerHTML = item.name.replace(/\n/g, '<br>');
+  }, '.section-menu-cats');
 
   // --- KITCHEN GALLERY (MEAL MARQUEE) ---
   onValue(ref(db, 'content/kitchen'), (snap) => {
     const data = snap.val();
-    if (!data) return;
-    updateText('.section-menu .eyebrow', data.eyebrow);
-    updateText('.menu-head h2', data.heading);
-    updateText('.menu-subheading', data.subheading);
-    updateText('.menu-quote', data.quote);
+    if (data) {
+      updateText('.section-menu .eyebrow', data.eyebrow);
+      updateText('.menu-head h2', data.heading);
+      updateText('.menu-subheading', data.subheading);
+      updateText('.menu-quote', data.quote);
+    }
   });
-  onValue(ref(db, 'content/kitchen/images'), (snap) => {
-    const data = snap.val();
-    if (!data) return;
-    const items = Object.values(data).sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
-    const allItems = document.querySelectorAll('.meal-item');
-    items.forEach((item, idx) => {
-      [allItems[idx], allItems[idx + 6]].forEach(el => {
-        if (!el) return;
-        const img = el.querySelector('img');
-        if (img && item.url) {
-          img.src = item.url;
-          if (item.title) {
-            img.alt = item.title;
-            el.dataset.title = item.title;
-          }
-        }
-      });
-    });
-  });
+  syncListItems('content/kitchen/images', '.meal-item', (el, item) => {
+    const img = el.querySelector('img');
+    if (img && item.url) {
+      img.src = item.url;
+      if (item.title) {
+        img.alt = item.title;
+        el.dataset.title = item.title;
+      }
+    }
+  }, '.section-menu');
 
   // --- ATMOSPHERE GALLERY ---
   onValue(ref(db, 'content/atmosphere'), (snap) => {
     const data = snap.val();
-    if (!data) return;
-    updateText('.section-atmosphere .eyebrow', data.eyebrow);
-    updateText('.atmosphere-head h2', data.heading);
-    updateText('.atmosphere-head p', data.subheading);
+    if (data) {
+      updateText('.section-atmosphere .eyebrow', data.eyebrow);
+      updateText('.atmosphere-head h2', data.heading);
+      updateText('.atmosphere-head p', data.subheading);
+    }
   });
-  onValue(ref(db, 'content/atmosphere/images'), (snap) => {
-    const data = snap.val();
-    if (!data) return;
-    const items = Object.values(data).sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
-    const galleryItems = document.querySelectorAll('.atmosphere-item');
-    items.forEach((item, idx) => {
-      if (galleryItems[idx]) {
-        const img = galleryItems[idx].querySelector('img');
-        if (img && item.url) {
-          img.src = item.url;
-          if (item.title) {
-            img.alt = item.title;
-            galleryItems[idx].dataset.title = item.title;
-          }
-        }
+  syncListItems('content/atmosphere/images', '.atmosphere-item', (el, item) => {
+    const img = el.querySelector('img');
+    if (img && item.url) {
+      img.src = item.url;
+      if (item.title) {
+        img.alt = item.title;
+        el.dataset.title = item.title;
       }
-    });
-  });
+    }
+  }, '.section-atmosphere');
 
   // --- VISIT & RESERVE ---
   onValue(ref(db, 'content/visit'), (snap) => {
     const data = snap.val();
-    if (!data) return;
-    updateText('.section-visit .eyebrow', data.eyebrow);
-    updateText('.visit-head h2', data.heading);
-    updateText('.visit-subheading', data.subheading);
-    updateText('.visit-quote', data.quote);
+    if (data) {
+      updateText('.section-visit .eyebrow', data.eyebrow);
+      updateText('.visit-head h2', data.heading);
+      updateText('.visit-subheading', data.subheading);
+      updateText('.visit-quote', data.quote);
+    }
   });
   onValue(ref(db, 'content/visit/images'), (snap) => {
     const data = snap.val();
-    if (!data) return;
-    const items = Object.values(data).sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
-    const section = document.getElementById('reserve');
-    if (section && items[0] && items[0].url) {
-      section.style.backgroundImage = `linear-gradient(rgba(24, 27, 28, 0.88), rgba(24, 27, 28, 0.92)), url('${items[0].url}')`;
-      section.style.backgroundSize = 'cover';
-      section.style.backgroundPosition = 'center';
+    if (data) {
+      const items = Object.values(data).sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
+      const section = document.getElementById('reserve');
+      if (section && items[0] && items[0].url) {
+        section.style.backgroundImage = `linear-gradient(rgba(24, 27, 28, 0.88), rgba(24, 27, 28, 0.92)), url('${items[0].url}')`;
+        section.style.backgroundSize = 'cover';
+        section.style.backgroundPosition = 'center';
+      }
     }
+    markLoaded('.section-visit');
   });
 
   // --- FOOTER ---
   onValue(ref(db, 'content/footer'), (snap) => {
     const data = snap.val();
-    if (!data) return;
-    updateText('.footer-heading', data.heading);
-    updateText('.footer-subheading', data.subheading);
-    updateText('.footer-brand > p:last-of-type', data.brandText);
-    updateText('.footer-brand .tagline', data.tagline);
+    if (data) {
+      updateText('.footer-heading', data.heading);
+      updateText('.footer-subheading', data.subheading);
+      updateText('.footer-brand > p:last-of-type', data.brandText);
+      updateText('.footer-brand .tagline', data.tagline);
+    }
   });
   onValue(ref(db, 'content/footer/images'), (snap) => {
     const data = snap.val();
-    if (!data) return;
-    const items = Object.values(data).sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
-    const logo = document.querySelector('.footer-brand .brand-chip img');
-    if (logo && items[0] && items[0].url) logo.src = items[0].url;
+    if (data) {
+      const items = Object.values(data).sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
+      const logo = document.querySelector('.footer-brand .brand-chip img');
+      if (logo && items[0] && items[0].url) logo.src = items[0].url;
+    }
+    markLoaded('.site-footer');
   });
+
+  // Fallback: hide loader after 5 seconds even if not all loaded
+  setTimeout(() => {
+    document.querySelectorAll('.fb-loading').forEach(el => {
+      el.classList.remove('fb-loading');
+      el.classList.add('fb-loaded');
+    });
+    hideLoader();
+  }, 5000);
 </script>
 </body>
 </html>
