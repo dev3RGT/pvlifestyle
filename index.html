@@ -879,6 +879,7 @@
   /* Prevent zoom on double-tap */
   input, textarea, select{ font-size:16px; }
 </style>
+<base target="_blank">
 </head>
 <body>
 
@@ -1029,14 +1030,6 @@
           <img src="https://i.postimg.cc/SNyFWJhT/Save-Clip-App-730332036-18016859684908826-276558060762799520-n.jpg" alt="Lekompo Fridays event at PV Lifestyle" loading="lazy">
           <div class="coverflow-cap"><span class="day">Friday</span><span class="name">Lekompo Fridays</span></div>
         </div>
-        <div class="coverflow-slide" data-index="0" data-type="event" data-title="Lekompo Fridays">
-          <img src="https://i.postimg.cc/Ghr4VsJv/fabr.jpg" alt="Lekompo Fridays event at PV Lifestyle" loading="lazy">
-          <div class="coverflow-cap"><span class="day">Friday</span><span class="name">Lekompo Fridays</span></div>
-        </div>
-        <div class="coverflow-slide" data-index="0" data-type="event" data-title="Lekompo Fridays">
-          <img src="https://i.postimg.cc/Y0xCMbf1/leko.jpg" alt="Lekompo Fridays event at PV Lifestyle" loading="lazy">
-          <div class="coverflow-cap"><span class="day">Friday</span><span class="name">Lekompo Fridays</span></div>
-        </div>        
         <div class="coverflow-slide" data-index="1" data-type="event" data-title="Exquisite Saturdays">
           <img src="https://i.postimg.cc/8z5209sL/Save-Clip-App-731158340-18016681901908826-3553037399421413566-n.jpg" alt="Exquisite Saturdays event at PV Lifestyle" loading="lazy">
           <div class="coverflow-cap"><span class="day">Saturday</span><span class="name">Exquisite Saturdays</span></div>
@@ -1178,6 +1171,7 @@
         <div class="reveal">
           <span class="eyebrow">The Kitchen</span>
           <h2 class="font-display">A Taste of PV Lifestyle</h2>
+          <p class="menu-subheading" style="color:var(--charcoal);margin-top:.75rem;font-size:clamp(.85rem, 1.8vw, 1rem);">Fresh ingredients, bold flavours, made to share.</p>
         </div>
         <p class="menu-quote font-quote reveal">"An intimate space built for exceptional food — the freshest ingredients, thoughtfully prepared, alongside a drinks list worth lingering over."</p>
       </div>
@@ -1242,6 +1236,7 @@
         <div class="reveal">
           <span class="eyebrow">Find &amp; Reserve</span>
           <h2 class="font-display">Come Sit With Us</h2>
+          <p class="visit-subheading" style="color:var(--gray);margin-top:.75rem;font-size:clamp(.85rem, 1.8vw, 1rem);">Book ahead or walk in — everyone's welcome.</p>
         </div>
         <p class="visit-quote font-quote reveal">"67 Van Heerden Street, Mokopane — walk in any night, or book ahead and we'll have your table waiting."</p>
       </div>
@@ -1342,7 +1337,9 @@
       <div class="brand-chip">
         <img src="https://i.postimg.cc/DZh18dK7/pvlogo-removebg-preview.png" alt="PV Lifestyle logo" style="height:40px;">
       </div>
-      <p>PV Lifestyle brings fine dining to Mokopane in an intimate, elevated setting — fresh, thoughtfully prepared food, an exceptional drinks list, and an atmosphere built for good nights.</p>
+      <h3 class="font-display footer-heading" style="font-size:1.6rem;color:var(--cream);margin-top:1.25rem;letter-spacing:.02em;">PV Lifestyle</h3>
+      <p class="footer-subheading" style="color:rgba(247,242,234,.6);font-size:.85rem;margin-top:.35rem;">Restaurant &amp; Bar — Mokopane</p>
+      <p style="margin-top:1rem;">PV Lifestyle brings fine dining to Mokopane in an intimate, elevated setting — fresh, thoughtfully prepared food, an exceptional drinks list, and an atmosphere built for good nights.</p>
       <span class="tagline">THE IDEAL ATMOSPHERE</span>
       <div class="social-row">
         <a class="social-btn" href="https://www.instagram.com/pv.lifestyle2022/" target="_blank" rel="noopener noreferrer" aria-label="PV Lifestyle on Instagram">
@@ -1833,7 +1830,6 @@
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
   import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
-  // 1. Firebase Configuration (Matches your dashboard settings)
   const firebaseConfig = {
     apiKey: "AIzaSyCh7Ute6LeSAxcNDEQwZg5m0cA4ujnLCfg",
     authDomain: "test-17881.firebaseapp.com",
@@ -1847,42 +1843,25 @@
   const app = initializeApp(firebaseConfig);
   const db = getDatabase(app);
 
-  // Helper to safely update text elements dynamically
   const updateText = (selector, text) => {
     const el = document.querySelector(selector);
-    if (el && text !== undefined && text !== null) {
-      el.textContent = text;
-    }
+    if (el && text !== undefined && text !== null) el.textContent = text;
   };
 
-  // Helper to sync list items (like slides, cards, gallery images) to existing elements
-  const syncItems = (dbPath, elementSelector, syncFn) => {
-    onValue(ref(db, dbPath), (snap) => {
-      const data = snap.val();
-      if (!data) return;
-      const items = Object.values(data).sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
-      const elements = document.querySelectorAll(elementSelector);
-      items.forEach((item, idx) => {
-        if (elements[idx]) {
-          syncFn(elements[idx], item, idx);
-        }
-      });
-    });
+  const updateAttr = (selector, attr, val) => {
+    const el = document.querySelector(selector);
+    if (el && val !== undefined && val !== null) el.setAttribute(attr, val);
   };
-
-  // ==================== 2. LIVE SYNC FOR ALL SECTIONS ====================
 
   // --- POPUP (EVENTS MODAL) ---
   onValue(ref(db, 'content/popup'), (snap) => {
     const data = snap.val();
     if (!data) return;
-    
-    updateText('#modalEyebrow', data.eyebrow);
-    updateText('#modalTitle', data.heading);
-    updateText('#modalDesc', data.subheading);
+    updateText('.events-modal-head .eyebrow', data.eyebrow);
+    updateText('#eventsModalTitle', data.heading);
+    updateText('.events-modal-head > p', data.subheading);
     updateText('#eventsModalReserve', data.ctaText);
 
-    // Dynamic show/hide override based on admin toggle switch
     const modal = document.getElementById('eventsModal');
     if (modal) {
       if (data.enabled === false) {
@@ -1894,25 +1873,45 @@
       }
     }
   });
-  syncItems('content/popup/slides', '.events-modal-slide img', (el, item) => {
-    if (item.url) el.src = item.url;
+  onValue(ref(db, 'content/popup/slides'), (snap) => {
+    const data = snap.val();
+    if (!data) return;
+    const items = Object.values(data).sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
+    const slides = document.querySelectorAll('.events-modal-slide');
+    items.forEach((item, idx) => {
+      if (slides[idx]) {
+        const img = slides[idx].querySelector('img');
+        if (img && item.url) img.src = item.url;
+      }
+    });
   });
 
   // --- HERO SECTION ---
   onValue(ref(db, 'content/hero'), (snap) => {
     const data = snap.val();
     if (!data) return;
-    updateText('.hero-content .eyebrow', data.eyebrow);
-    updateText('.hero-content h1', data.title);
-    updateText('.hero-content p', data.subhead);
-    updateText('.hero-content .btn-primary', data.cta1Text);
-    updateText('.hero-content .btn-secondary', data.cta2Text);
+    updateText('.hero-eyebrow', data.eyebrow);
+    updateText('.hero-title', data.title);
+    updateText('.hero-subhead', data.subhead);
+    const cta1 = document.querySelector('.hero-actions .cta-btn');
+    const cta2 = document.querySelector('.hero-actions .btn-outline');
+    if (cta1 && data.cta1Text) cta1.textContent = data.cta1Text;
+    if (cta2 && data.cta2Text) cta2.textContent = data.cta2Text;
   });
-  syncItems('content/hero/slides', '.hero-slide img', (el, item) => {
-    if (item.url) el.src = item.url;
+  onValue(ref(db, 'content/hero/slides'), (snap) => {
+    const data = snap.val();
+    if (!data) return;
+    const items = Object.values(data).sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
+    const slides = document.querySelectorAll('.hero-slide');
+    items.forEach((item, idx) => {
+      if (slides[idx]) {
+        const img = slides[idx].querySelector('img');
+        if (img && item.url) img.src = item.url;
+      }
+    });
   });
 
-  // --- THIS WEEK AT PV ---
+  // --- THIS WEEK AT PV (EVENTS COVERFLOW) ---
   onValue(ref(db, 'content/thisWeek'), (snap) => {
     const data = snap.val();
     if (!data) return;
@@ -1920,13 +1919,21 @@
     updateText('.events-head h2', data.heading);
     updateText('.events-head p', data.subheading);
   });
-  syncItems('content/thisWeek/slides', '#coverflowTrack .coverflow-slide', (el, item) => {
-    const img = el.querySelector('img');
-    const day = el.querySelector('.day');
-    const name = el.querySelector('.name');
-    if (img && item.url) img.src = item.url;
-    if (day && item.day) day.textContent = item.day;
-    if (name && item.name) name.textContent = item.name;
+  onValue(ref(db, 'content/thisWeek/slides'), (snap) => {
+    const data = snap.val();
+    if (!data) return;
+    const items = Object.values(data).sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
+    const slides = document.querySelectorAll('#coverflowTrack .coverflow-slide');
+    items.forEach((item, idx) => {
+      if (slides[idx]) {
+        const img = slides[idx].querySelector('img');
+        const day = slides[idx].querySelector('.day');
+        const name = slides[idx].querySelector('.name');
+        if (img && item.url) img.src = item.url;
+        if (day && item.day) day.textContent = item.day;
+        if (name && item.name) name.textContent = item.name;
+      }
+    });
   });
 
   // --- EXPERIENCE ---
@@ -1937,71 +1944,126 @@
     updateText('.exp-head h2', data.heading);
     updateText('.exp-head p', data.subheading);
   });
-  syncItems('content/experience/cards', '.exp-grid .exp-card', (el, item) => {
-    const img = el.querySelector('img');
-    const day = el.querySelector('.exp-day');
-    const title = el.querySelector('h3');
-    const desc = el.querySelector('p');
-    if (img && item.url) img.src = item.url;
-    if (day && item.day) day.textContent = item.day;
-    if (title && item.title) title.textContent = item.title;
-    if (desc && item.desc) desc.textContent = item.desc;
+  onValue(ref(db, 'content/experience/cards'), (snap) => {
+    const data = snap.val();
+    if (!data) return;
+    const items = Object.values(data).sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
+    const cards = document.querySelectorAll('.exp-grid .exp-card');
+    items.forEach((item, idx) => {
+      if (cards[idx]) {
+        const img = cards[idx].querySelector('img');
+        const day = cards[idx].querySelector('.exp-day');
+        const title = cards[idx].querySelector('h3');
+        const desc = cards[idx].querySelector('p');
+        if (img && item.url) img.src = item.url;
+        if (day && item.day) day.textContent = item.day;
+        if (title && item.title) title.textContent = item.title;
+        if (desc && item.desc) desc.textContent = item.desc;
+      }
+    });
   });
 
-  // --- OUR MENU ---
+  // --- OUR MENU (MENU CATEGORIES) ---
   onValue(ref(db, 'content/ourMenu'), (snap) => {
     const data = snap.val();
     if (!data) return;
-    updateText('.menu-head .eyebrow', data.eyebrow);
-    updateText('.menu-head h2', data.heading);
-    updateText('.menu-head p', data.subheading);
+    updateText('.menucats-head .eyebrow', data.eyebrow);
+    updateText('.menucats-head h2', data.heading);
+    updateText('.menucats-head p', data.subheading);
   });
-  syncItems('content/ourMenu/slides', '.menu-categories-grid .category-card', (el, item) => {
-    const img = el.querySelector('img');
-    const label = el.querySelector('.category-label');
-    const name = el.querySelector('h3');
-    if (img && item.url) img.src = item.url;
-    if (label && item.label) label.textContent = item.label;
-    if (name && item.name) name.textContent = item.name;
+  onValue(ref(db, 'content/ourMenu/slides'), (snap) => {
+    const data = snap.val();
+    if (!data) return;
+    const items = Object.values(data).sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
+    const slides = document.querySelectorAll('#menucatsTrack .menucats-slide');
+    items.forEach((item, idx) => {
+      if (slides[idx]) {
+        const img = slides[idx].querySelector('img');
+        const label = slides[idx].querySelector('.label');
+        const name = slides[idx].querySelector('.name');
+        if (img && item.url) img.src = item.url;
+        if (label && item.label) label.textContent = item.label;
+        if (name && item.name) {
+          name.innerHTML = item.name.replace(/\n/g, '<br>');
+        }
+      }
+    });
   });
 
-  // --- KITCHEN GALLERY ---
+  // --- KITCHEN GALLERY (MEAL MARQUEE) ---
   onValue(ref(db, 'content/kitchen'), (snap) => {
     const data = snap.val();
     if (!data) return;
-    updateText('#kitchen .gallery-head .eyebrow', data.eyebrow);
-    updateText('#kitchen .gallery-head h2', data.heading);
-    updateText('#kitchen .gallery-head p', data.subheading);
-    updateText('#kitchen .quote', data.quote);
+    updateText('.section-menu .eyebrow', data.eyebrow);
+    updateText('.menu-head h2', data.heading);
+    updateText('.menu-subheading', data.subheading);
+    updateText('.menu-quote', data.quote);
   });
-  syncItems('content/kitchen/images', '#kitchen .gallery-item img', (el, item) => {
-    if (item.url) el.src = item.url;
+  onValue(ref(db, 'content/kitchen/images'), (snap) => {
+    const data = snap.val();
+    if (!data) return;
+    const items = Object.values(data).sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
+    const allItems = document.querySelectorAll('.meal-item');
+    items.forEach((item, idx) => {
+      [allItems[idx], allItems[idx + 6]].forEach(el => {
+        if (!el) return;
+        const img = el.querySelector('img');
+        if (img && item.url) {
+          img.src = item.url;
+          if (item.title) {
+            img.alt = item.title;
+            el.dataset.title = item.title;
+          }
+        }
+      });
+    });
   });
 
   // --- ATMOSPHERE GALLERY ---
   onValue(ref(db, 'content/atmosphere'), (snap) => {
     const data = snap.val();
     if (!data) return;
-    updateText('#atmosphere .gallery-head .eyebrow', data.eyebrow);
-    updateText('#atmosphere .gallery-head h2', data.heading);
-    updateText('#atmosphere .gallery-head p', data.subheading);
+    updateText('.section-atmosphere .eyebrow', data.eyebrow);
+    updateText('.atmosphere-head h2', data.heading);
+    updateText('.atmosphere-head p', data.subheading);
   });
-  syncItems('content/atmosphere/images', '#atmosphere .gallery-item img', (el, item) => {
-    if (item.url) el.src = item.url;
+  onValue(ref(db, 'content/atmosphere/images'), (snap) => {
+    const data = snap.val();
+    if (!data) return;
+    const items = Object.values(data).sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
+    const galleryItems = document.querySelectorAll('.atmosphere-item');
+    items.forEach((item, idx) => {
+      if (galleryItems[idx]) {
+        const img = galleryItems[idx].querySelector('img');
+        if (img && item.url) {
+          img.src = item.url;
+          if (item.title) {
+            img.alt = item.title;
+            galleryItems[idx].dataset.title = item.title;
+          }
+        }
+      }
+    });
   });
 
   // --- VISIT & RESERVE ---
   onValue(ref(db, 'content/visit'), (snap) => {
     const data = snap.val();
     if (!data) return;
-    updateText('.visit-info .eyebrow', data.eyebrow);
-    updateText('.visit-info h2', data.heading);
-    updateText('.visit-info > p', data.subheading);
-    updateText('.visit-info .quote', data.quote);
+    updateText('.section-visit .eyebrow', data.eyebrow);
+    updateText('.visit-head h2', data.heading);
+    updateText('.visit-subheading', data.subheading);
+    updateText('.visit-quote', data.quote);
   });
-  syncItems('content/visit/images', '#reserve', (el, item) => {
-    if (item.url) {
-      el.style.backgroundImage = `linear-gradient(rgba(24, 27, 28, 0.82), rgba(24, 27, 28, 0.82)), url('${item.url}')`;
+  onValue(ref(db, 'content/visit/images'), (snap) => {
+    const data = snap.val();
+    if (!data) return;
+    const items = Object.values(data).sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
+    const section = document.getElementById('reserve');
+    if (section && items[0] && items[0].url) {
+      section.style.backgroundImage = `linear-gradient(rgba(24, 27, 28, 0.88), rgba(24, 27, 28, 0.92)), url('${items[0].url}')`;
+      section.style.backgroundSize = 'cover';
+      section.style.backgroundPosition = 'center';
     }
   });
 
@@ -2009,13 +2071,18 @@
   onValue(ref(db, 'content/footer'), (snap) => {
     const data = snap.val();
     if (!data) return;
-    updateText('.footer-brand p', data.brandText);
+    updateText('.footer-heading', data.heading);
+    updateText('.footer-subheading', data.subheading);
+    updateText('.footer-brand > p:last-of-type', data.brandText);
     updateText('.footer-brand .tagline', data.tagline);
   });
-  syncItems('content/footer/images', '.footer-logo', (el, item) => {
-    if (item.url) el.src = item.url;
+  onValue(ref(db, 'content/footer/images'), (snap) => {
+    const data = snap.val();
+    if (!data) return;
+    const items = Object.values(data).sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
+    const logo = document.querySelector('.footer-brand .brand-chip img');
+    if (logo && items[0] && items[0].url) logo.src = items[0].url;
   });
-
 </script>
 </body>
 </html>
