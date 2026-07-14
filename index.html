@@ -1829,6 +1829,117 @@
   }
 
 </script>
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+  import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
+  // 1. Connect to the exact same DB as the Admin Dashboard
+  const firebaseConfig = {
+    apiKey: "AIzaSyCh7Ute6LeSAxcNDEQwZg5m0cA4ujnLCfg",
+    authDomain: "test-17881.firebaseapp.com",
+    projectId: "test-17881",
+    storageBucket: "test-17881.firebasestorage.app",
+    messagingSenderId: "1057428047643",
+    appId: "1:1057428047643:web:f3801c0d933225a5cd35be",
+    databaseURL: "https://test-17881-default-rtdb.firebaseio.com"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getDatabase(app);
+
+  // Helper to cleanly update text without breaking existing HTML
+  const updateText = (selector, text) => {
+    const el = document.querySelector(selector);
+    if (el && text) el.textContent = text;
+  };
+
+  // 2. Sync Hero Section
+  onValue(ref(db, 'content/hero'), (snap) => {
+    const data = snap.val();
+    if (!data) return;
+    
+    updateText('.hero-eyebrow', data.eyebrow);
+    updateText('.hero-title', data.title);
+    updateText('.hero-subhead', data.subhead);
+
+    // Sync Images
+    if (data.slides) {
+      const slideVals = Object.values(data.slides).sort((a, b) => a.order - b.order);
+      const slideEls = document.querySelectorAll('.hero-slide img');
+      slideVals.forEach((s, i) => { 
+          if (slideEls[i] && s.url) slideEls[i].src = s.url; 
+      });
+    }
+  });
+
+  // 3. Sync Events (This Week)
+  onValue(ref(db, 'content/thisWeek'), (snap) => {
+    const data = snap.val();
+    if (!data) return;
+    
+    updateText('.events-head .eyebrow', data.eyebrow);
+    updateText('.events-head h2', data.heading);
+    updateText('.events-head p', data.subheading);
+
+    if (data.slides) {
+      const slideVals = Object.values(data.slides).sort((a, b) => a.order - b.order);
+      const slideEls = document.querySelectorAll('#coverflowTrack .coverflow-slide');
+      slideVals.forEach((s, i) => {
+        if (slideEls[i]) {
+          const img = slideEls[i].querySelector('img');
+          const day = slideEls[i].querySelector('.day');
+          const name = slideEls[i].querySelector('.name');
+          
+          if (img && s.url) img.src = s.url;
+          if (day && s.day) day.textContent = s.day;
+          if (name && s.name) name.textContent = s.name;
+        }
+      });
+    }
+  });
+
+  // 4. Sync Experience Cards
+  onValue(ref(db, 'content/experience'), (snap) => {
+    const data = snap.val();
+    if (!data) return;
+    
+    updateText('.exp-head .eyebrow', data.eyebrow);
+    updateText('.exp-head h2', data.heading);
+    updateText('.exp-head p', data.subheading);
+
+    if (data.cards) {
+      const cardVals = Object.values(data.cards).sort((a, b) => a.order - b.order);
+      const cardEls = document.querySelectorAll('.exp-card');
+      cardVals.forEach((c, i) => {
+        if (cardEls[i]) {
+          const img = cardEls[i].querySelector('img');
+          const day = cardEls[i].querySelector('.exp-day');
+          const title = cardEls[i].querySelector('h3');
+          const desc = cardEls[i].querySelector('p');
+          
+          if (img && c.url) img.src = c.url;
+          if (day && c.day) day.textContent = c.day;
+          if (title && c.title) title.textContent = c.title;
+          if (desc && c.desc) desc.textContent = c.desc;
+        }
+      });
+    }
+  });
+  
+  // 5. Sync Popup (Events Modal Toggle)
+  onValue(ref(db, 'content/popup'), (snap) => {
+    const data = snap.val();
+    if (!data) return;
+    
+    // Force close the popup in real-time if the admin flips the toggle switch to off
+    if(data.enabled === false) {
+       const modal = document.getElementById('eventsModal');
+       if (modal) {
+           modal.classList.remove('open');
+           document.body.classList.remove('events-modal-open');
+       }
+    }
+  });
+</script>
 </body>
 </html>
