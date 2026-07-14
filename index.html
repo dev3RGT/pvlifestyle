@@ -1833,7 +1833,7 @@
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
   import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
-  // 1. Connect to the exact same DB as the Admin Dashboard
+  // 1. Firebase Configuration (Matches your dashboard settings)
   const firebaseConfig = {
     apiKey: "AIzaSyCh7Ute6LeSAxcNDEQwZg5m0cA4ujnLCfg",
     authDomain: "test-17881.firebaseapp.com",
@@ -1847,99 +1847,175 @@
   const app = initializeApp(firebaseConfig);
   const db = getDatabase(app);
 
-  // Helper to cleanly update text without breaking existing HTML
+  // Helper to safely update text elements dynamically
   const updateText = (selector, text) => {
     const el = document.querySelector(selector);
-    if (el && text) el.textContent = text;
+    if (el && text !== undefined && text !== null) {
+      el.textContent = text;
+    }
   };
 
-  // 2. Sync Hero Section
-  onValue(ref(db, 'content/hero'), (snap) => {
-    const data = snap.val();
-    if (!data) return;
-    
-    updateText('.hero-eyebrow', data.eyebrow);
-    updateText('.hero-title', data.title);
-    updateText('.hero-subhead', data.subhead);
-
-    // Sync Images
-    if (data.slides) {
-      const slideVals = Object.values(data.slides).sort((a, b) => a.order - b.order);
-      const slideEls = document.querySelectorAll('.hero-slide img');
-      slideVals.forEach((s, i) => { 
-          if (slideEls[i] && s.url) slideEls[i].src = s.url; 
-      });
-    }
-  });
-
-  // 3. Sync Events (This Week)
-  onValue(ref(db, 'content/thisWeek'), (snap) => {
-    const data = snap.val();
-    if (!data) return;
-    
-    updateText('.events-head .eyebrow', data.eyebrow);
-    updateText('.events-head h2', data.heading);
-    updateText('.events-head p', data.subheading);
-
-    if (data.slides) {
-      const slideVals = Object.values(data.slides).sort((a, b) => a.order - b.order);
-      const slideEls = document.querySelectorAll('#coverflowTrack .coverflow-slide');
-      slideVals.forEach((s, i) => {
-        if (slideEls[i]) {
-          const img = slideEls[i].querySelector('img');
-          const day = slideEls[i].querySelector('.day');
-          const name = slideEls[i].querySelector('.name');
-          
-          if (img && s.url) img.src = s.url;
-          if (day && s.day) day.textContent = s.day;
-          if (name && s.name) name.textContent = s.name;
+  // Helper to sync list items (like slides, cards, gallery images) to existing elements
+  const syncItems = (dbPath, elementSelector, syncFn) => {
+    onValue(ref(db, dbPath), (snap) => {
+      const data = snap.val();
+      if (!data) return;
+      const items = Object.values(data).sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
+      const elements = document.querySelectorAll(elementSelector);
+      items.forEach((item, idx) => {
+        if (elements[idx]) {
+          syncFn(elements[idx], item, idx);
         }
       });
-    }
-  });
+    });
+  };
 
-  // 4. Sync Experience Cards
-  onValue(ref(db, 'content/experience'), (snap) => {
-    const data = snap.val();
-    if (!data) return;
-    
-    updateText('.exp-head .eyebrow', data.eyebrow);
-    updateText('.exp-head h2', data.heading);
-    updateText('.exp-head p', data.subheading);
+  // ==================== 2. LIVE SYNC FOR ALL SECTIONS ====================
 
-    if (data.cards) {
-      const cardVals = Object.values(data.cards).sort((a, b) => a.order - b.order);
-      const cardEls = document.querySelectorAll('.exp-card');
-      cardVals.forEach((c, i) => {
-        if (cardEls[i]) {
-          const img = cardEls[i].querySelector('img');
-          const day = cardEls[i].querySelector('.exp-day');
-          const title = cardEls[i].querySelector('h3');
-          const desc = cardEls[i].querySelector('p');
-          
-          if (img && c.url) img.src = c.url;
-          if (day && c.day) day.textContent = c.day;
-          if (title && c.title) title.textContent = c.title;
-          if (desc && c.desc) desc.textContent = c.desc;
-        }
-      });
-    }
-  });
-  
-  // 5. Sync Popup (Events Modal Toggle)
+  // --- POPUP (EVENTS MODAL) ---
   onValue(ref(db, 'content/popup'), (snap) => {
     const data = snap.val();
     if (!data) return;
     
-    // Force close the popup in real-time if the admin flips the toggle switch to off
-    if(data.enabled === false) {
-       const modal = document.getElementById('eventsModal');
-       if (modal) {
-           modal.classList.remove('open');
-           document.body.classList.remove('events-modal-open');
-       }
+    updateText('#modalEyebrow', data.eyebrow);
+    updateText('#modalTitle', data.heading);
+    updateText('#modalDesc', data.subheading);
+    updateText('#eventsModalReserve', data.ctaText);
+
+    // Dynamic show/hide override based on admin toggle switch
+    const modal = document.getElementById('eventsModal');
+    if (modal) {
+      if (data.enabled === false) {
+        modal.style.display = 'none';
+        modal.classList.remove('open');
+        document.body.classList.remove('events-modal-open');
+      } else {
+        modal.style.display = '';
+      }
     }
   });
+  syncItems('content/popup/slides', '.events-modal-slide img', (el, item) => {
+    if (item.url) el.src = item.url;
+  });
+
+  // --- HERO SECTION ---
+  onValue(ref(db, 'content/hero'), (snap) => {
+    const data = snap.val();
+    if (!data) return;
+    updateText('.hero-content .eyebrow', data.eyebrow);
+    updateText('.hero-content h1', data.title);
+    updateText('.hero-content p', data.subhead);
+    updateText('.hero-content .btn-primary', data.cta1Text);
+    updateText('.hero-content .btn-secondary', data.cta2Text);
+  });
+  syncItems('content/hero/slides', '.hero-slide img', (el, item) => {
+    if (item.url) el.src = item.url;
+  });
+
+  // --- THIS WEEK AT PV ---
+  onValue(ref(db, 'content/thisWeek'), (snap) => {
+    const data = snap.val();
+    if (!data) return;
+    updateText('.events-head .eyebrow', data.eyebrow);
+    updateText('.events-head h2', data.heading);
+    updateText('.events-head p', data.subheading);
+  });
+  syncItems('content/thisWeek/slides', '#coverflowTrack .coverflow-slide', (el, item) => {
+    const img = el.querySelector('img');
+    const day = el.querySelector('.day');
+    const name = el.querySelector('.name');
+    if (img && item.url) img.src = item.url;
+    if (day && item.day) day.textContent = item.day;
+    if (name && item.name) name.textContent = item.name;
+  });
+
+  // --- EXPERIENCE ---
+  onValue(ref(db, 'content/experience'), (snap) => {
+    const data = snap.val();
+    if (!data) return;
+    updateText('.exp-head .eyebrow', data.eyebrow);
+    updateText('.exp-head h2', data.heading);
+    updateText('.exp-head p', data.subheading);
+  });
+  syncItems('content/experience/cards', '.exp-grid .exp-card', (el, item) => {
+    const img = el.querySelector('img');
+    const day = el.querySelector('.exp-day');
+    const title = el.querySelector('h3');
+    const desc = el.querySelector('p');
+    if (img && item.url) img.src = item.url;
+    if (day && item.day) day.textContent = item.day;
+    if (title && item.title) title.textContent = item.title;
+    if (desc && item.desc) desc.textContent = item.desc;
+  });
+
+  // --- OUR MENU ---
+  onValue(ref(db, 'content/ourMenu'), (snap) => {
+    const data = snap.val();
+    if (!data) return;
+    updateText('.menu-head .eyebrow', data.eyebrow);
+    updateText('.menu-head h2', data.heading);
+    updateText('.menu-head p', data.subheading);
+  });
+  syncItems('content/ourMenu/slides', '.menu-categories-grid .category-card', (el, item) => {
+    const img = el.querySelector('img');
+    const label = el.querySelector('.category-label');
+    const name = el.querySelector('h3');
+    if (img && item.url) img.src = item.url;
+    if (label && item.label) label.textContent = item.label;
+    if (name && item.name) name.textContent = item.name;
+  });
+
+  // --- KITCHEN GALLERY ---
+  onValue(ref(db, 'content/kitchen'), (snap) => {
+    const data = snap.val();
+    if (!data) return;
+    updateText('#kitchen .gallery-head .eyebrow', data.eyebrow);
+    updateText('#kitchen .gallery-head h2', data.heading);
+    updateText('#kitchen .gallery-head p', data.subheading);
+    updateText('#kitchen .quote', data.quote);
+  });
+  syncItems('content/kitchen/images', '#kitchen .gallery-item img', (el, item) => {
+    if (item.url) el.src = item.url;
+  });
+
+  // --- ATMOSPHERE GALLERY ---
+  onValue(ref(db, 'content/atmosphere'), (snap) => {
+    const data = snap.val();
+    if (!data) return;
+    updateText('#atmosphere .gallery-head .eyebrow', data.eyebrow);
+    updateText('#atmosphere .gallery-head h2', data.heading);
+    updateText('#atmosphere .gallery-head p', data.subheading);
+  });
+  syncItems('content/atmosphere/images', '#atmosphere .gallery-item img', (el, item) => {
+    if (item.url) el.src = item.url;
+  });
+
+  // --- VISIT & RESERVE ---
+  onValue(ref(db, 'content/visit'), (snap) => {
+    const data = snap.val();
+    if (!data) return;
+    updateText('.visit-info .eyebrow', data.eyebrow);
+    updateText('.visit-info h2', data.heading);
+    updateText('.visit-info > p', data.subheading);
+    updateText('.visit-info .quote', data.quote);
+  });
+  syncItems('content/visit/images', '#reserve', (el, item) => {
+    if (item.url) {
+      el.style.backgroundImage = `linear-gradient(rgba(24, 27, 28, 0.82), rgba(24, 27, 28, 0.82)), url('${item.url}')`;
+    }
+  });
+
+  // --- FOOTER ---
+  onValue(ref(db, 'content/footer'), (snap) => {
+    const data = snap.val();
+    if (!data) return;
+    updateText('.footer-brand p', data.brandText);
+    updateText('.footer-brand .tagline', data.tagline);
+  });
+  syncItems('content/footer/images', '.footer-logo', (el, item) => {
+    if (item.url) el.src = item.url;
+  });
+
 </script>
 </body>
 </html>
