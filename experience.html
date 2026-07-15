@@ -474,20 +474,20 @@
   <!-- ================= PAGE HERO ================= -->
   <section class="page-hero" id="hero">
     <div class="page-hero-media">
-      <img src="https://i.postimg.cc/Hnmb6vkn/737383926-1067868902851763-8005089473605652688-n.jpg" alt="Weekend vibes at PV Lifestyle" fetchpriority="high">
+      <img id="heroImg" src="https://i.postimg.cc/Hnmb6vkn/737383926-1067868902851763-8005089473605652688-n.jpg" alt="Weekend vibes at PV Lifestyle" fetchpriority="high">
     </div>
     <div class="page-hero-scrim"></div>
 
     <div class="page-hero-content">
       <div class="page-crumb"><a href="index.html">Home</a><span aria-hidden="true">/</span><span>Experience</span></div>
-      <span class="eyebrow page-hero-eyebrow">Mokopane · The Vibe</span>
-      <h1 class="page-hero-title">THE EXPERIENCE</h1>
-      <p class="page-hero-sub">Golden-hour dinners that slide into late-night sets — this is what a night at PV Lifestyle actually feels like, hour by hour.</p>
+      <span class="eyebrow page-hero-eyebrow" id="heroEyebrow">Mokopane · The Vibe</span>
+      <h1 class="page-hero-title" id="heroTitle">THE EXPERIENCE</h1>
+      <p class="page-hero-sub" id="heroSub">Golden-hour dinners that slide into late-night sets — this is what a night at PV Lifestyle actually feels like, hour by hour.</p>
 
       <div class="page-hero-stats">
-        <div class="hstat"><b>3</b><span>Signature Nights</span></div>
-        <div class="hstat"><b>2AM</b><span>Last Call Fri–Sun</span></div>
-        <div class="hstat"><b>1</b><span>Ideal Atmosphere</span></div>
+        <div class="hstat"><b id="heroStat1Num">3</b><span id="heroStat1Label">Signature Nights</span></div>
+        <div class="hstat"><b id="heroStat2Num">2AM</b><span id="heroStat2Label">Last Call Fri–Sun</span></div>
+        <div class="hstat"><b id="heroStat3Num">1</b><span id="heroStat3Label">Ideal Atmosphere</span></div>
       </div>
     </div>
   </section>
@@ -498,12 +498,12 @@
   <section class="section-timeline" id="timeline">
     <div class="container">
       <div class="timeline-head reveal">
-        <span class="eyebrow">How The Night Unfolds</span>
-        <h2 class="font-display">From Golden Hour To Last Call</h2>
-        <p>Four moods, one evening — this is how a night at PV Lifestyle actually moves.</p>
+        <span class="eyebrow" id="timelineEyebrow">How The Night Unfolds</span>
+        <h2 class="font-display" id="timelineHeading">From Golden Hour To Last Call</h2>
+        <p id="timelineSubheading">Four moods, one evening — this is how a night at PV Lifestyle actually moves.</p>
       </div>
 
-      <div class="timeline-grid reveal reveal-stagger">
+      <div class="timeline-grid reveal reveal-stagger" id="timelineGrid">
         <article class="timeline-item">
           <div class="timeline-thumb">
             <img src="https://i.postimg.cc/bwrkVtpW/737569052-1067871179518202-3574143405590175365-n.jpg" alt="Golden hour at PV Lifestyle" loading="lazy">
@@ -605,9 +605,9 @@
   <section class="section-gallery" id="gallery">
     <div class="container">
       <div class="gallery-head reveal">
-        <span class="eyebrow">The Full Gallery</span>
-        <h2 class="font-display">The Ideal Atmosphere, In Frame</h2>
-        <p>Every one of these nights looked like this. Tap any photo for the full-screen view.</p>
+        <span class="eyebrow" id="galleryEyebrow">The Full Gallery</span>
+        <h2 class="font-display" id="galleryHeading">The Ideal Atmosphere, In Frame</h2>
+        <p id="gallerySubheading">Every one of these nights looked like this. Tap any photo for the full-screen view.</p>
       </div>
 
       <div class="vibe-ticker reveal">
@@ -673,9 +673,9 @@
   <!-- ================= CTA BAND ================= -->
   <section class="section-cta">
     <div class="container">
-      <span class="eyebrow">Ready When You Are</span>
-      <h2 class="font-display cta-title">Your Night Starts Here</h2>
-      <p class="cta-sub">Reserve ahead, especially on signature nights — the good tables (and the good seats at the bar) go first.</p>
+      <span class="eyebrow" id="ctaEyebrow">Ready When You Are</span>
+      <h2 class="font-display cta-title" id="ctaHeading">Your Night Starts Here</h2>
+      <p class="cta-sub" id="ctaSubheading">Reserve ahead, especially on signature nights — the good tables (and the good seats at the bar) go first.</p>
       <div class="cta-actions">
         <a href="index.html#reserve" class="cta-btn">Reserve a Table</a>
         <a href="https://www.instagram.com/pv.lifestyle2022/" target="_blank" rel="noopener noreferrer" class="btn-outline">Follow on Instagram</a>
@@ -823,20 +823,9 @@
       this.prevBtn = document.getElementById('glPrev');
       this.nextBtn = document.getElementById('glNext');
 
-      const els = Array.from(document.querySelectorAll('.gallery-item'));
-      this.items = els.map(el => ({
-        src: el.querySelector('img').src,
-        title: el.dataset.title || 'PV Lifestyle'
-      }));
       this.index = 0;
       this.lastFocused = null;
-
-      els.forEach((el, i) => {
-        el.addEventListener('click', () => this.open(i));
-        el.addEventListener('keydown', (e) => {
-          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); this.open(i); }
-        });
-      });
+      this.bindItems();
 
       this.closeBtn.addEventListener('click', () => this.close());
       this.prevBtn.addEventListener('click', () => this.step(-1));
@@ -849,6 +838,22 @@
         if (e.key === 'ArrowRight') this.step(1);
       });
     }
+    // Re-scan the DOM for .gallery-item elements and rebind — call this
+    // after the gallery grid is re-rendered with live Firebase content.
+    bindItems() {
+      const els = Array.from(document.querySelectorAll('.gallery-item'));
+      this.items = els.map(el => ({
+        src: el.querySelector('img').src,
+        title: el.dataset.title || 'PV Lifestyle'
+      }));
+      els.forEach((el, i) => {
+        el.addEventListener('click', () => this.open(i));
+        el.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); this.open(i); }
+        });
+      });
+    }
+    refresh() { this.bindItems(); }
     open(i) {
       this.lastFocused = document.activeElement;
       this.index = i;
@@ -876,6 +881,7 @@
     }
   }
   const galleryLightbox = new GalleryLightbox();
+  window.galleryLightbox = galleryLightbox;
 
   // ---- Footer year ----
   document.getElementById('year').textContent = new Date().getFullYear();
@@ -899,11 +905,96 @@
   const app = initializeApp(firebaseConfig);
   const db = getDatabase(app);
 
-  const nightsEyebrow = document.getElementById('nightsEyebrow');
-  const nightsHeading = document.getElementById('nightsHeading');
-  const nightsSubheading = document.getElementById('nightsSubheading');
-  const nightsGrid = document.getElementById('nightsGrid');
+  function sortedList(obj) {
+    return obj ? Object.values(obj).sort((a, b) => (a.order ?? 0) - (b.order ?? 0)) : [];
+  }
+  function setText(id, value) {
+    if (!value) return;
+    const node = document.getElementById(id);
+    if (node) node.textContent = value;
+  }
 
+  // ===== PAGE HERO ===== content/expHero
+  onValue(ref(db, 'content/expHero'), (snap) => {
+    const data = snap.val();
+    if (!data) return;
+
+    setText('heroEyebrow', data.eyebrow);
+    setText('heroTitle', data.title);
+    setText('heroSub', data.subhead);
+    setText('heroStat1Num', data.stat1Number);
+    setText('heroStat1Label', data.stat1Label);
+    setText('heroStat2Num', data.stat2Number);
+    setText('heroStat2Label', data.stat2Label);
+    setText('heroStat3Num', data.stat3Number);
+    setText('heroStat3Label', data.stat3Label);
+
+    const images = sortedList(data.images);
+    if (images.length) {
+      const heroImg = document.getElementById('heroImg');
+      if (heroImg) {
+        heroImg.src = images[0].url;
+        heroImg.alt = data.title || heroImg.alt;
+      }
+    }
+  });
+
+  // ===== NIGHT TIMELINE ===== content/expTimeline
+  const timelineGrid = document.getElementById('timelineGrid');
+  function renderTimeline(items) {
+    if (!timelineGrid) return;
+    timelineGrid.innerHTML = '';
+    if (!items.length) return;
+
+    items.forEach((it) => {
+      const article = document.createElement('article');
+      article.className = 'timeline-item';
+
+      if (it.url) {
+        const thumb = document.createElement('div');
+        thumb.className = 'timeline-thumb';
+        const img = document.createElement('img');
+        img.src = it.url;
+        img.alt = it.title || 'PV Lifestyle';
+        img.loading = 'lazy';
+        thumb.appendChild(img);
+        article.appendChild(thumb);
+      }
+
+      const body = document.createElement('div');
+      body.className = 'timeline-body';
+
+      if (it.time) {
+        const time = document.createElement('span');
+        time.className = 'timeline-time font-mono';
+        time.textContent = it.time;
+        body.appendChild(time);
+      }
+
+      const h3 = document.createElement('h3');
+      h3.textContent = it.title || '';
+      body.appendChild(h3);
+
+      const p = document.createElement('p');
+      p.textContent = it.desc || '';
+      body.appendChild(p);
+
+      article.appendChild(body);
+      timelineGrid.appendChild(article);
+    });
+  }
+
+  onValue(ref(db, 'content/expTimeline'), (snap) => {
+    const data = snap.val();
+    if (!data) return;
+    setText('timelineEyebrow', data.eyebrow);
+    setText('timelineHeading', data.heading);
+    setText('timelineSubheading', data.subheading);
+    if (data.items) renderTimeline(sortedList(data.items));
+  });
+
+  // ===== SIGNATURE NIGHTS ===== content/experience
+  const nightsGrid = document.getElementById('nightsGrid');
   function renderCards(cards) {
     if (!nightsGrid) return;
     nightsGrid.innerHTML = '';
@@ -948,21 +1039,67 @@
     });
   }
 
-  // Real-time listener — any change the admin makes in the dashboard
-  // reflects here immediately, no page reload required.
   onValue(ref(db, 'content/experience'), (snap) => {
     const data = snap.val();
     if (!data) return;
+    setText('nightsEyebrow', data.eyebrow);
+    setText('nightsHeading', data.heading);
+    setText('nightsSubheading', data.subheading);
+    if (data.cards) renderCards(sortedList(data.cards));
+  });
 
-    if (nightsEyebrow && data.eyebrow) nightsEyebrow.textContent = data.eyebrow;
-    if (nightsHeading && data.heading) nightsHeading.textContent = data.heading;
-    if (nightsSubheading && data.subheading) nightsSubheading.textContent = data.subheading;
+  // ===== FULL GALLERY ===== content/expGallery
+  const galleryGrid = document.getElementById('galleryGrid');
+  function renderGallery(images) {
+    if (!galleryGrid) return;
+    galleryGrid.innerHTML = '';
+    if (!images.length) return;
 
-    const cardsData = data.cards;
-    if (cardsData) {
-      const cards = Object.values(cardsData).sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
-      renderCards(cards);
-    }
+    images.forEach((img, i) => {
+      const item = document.createElement('div');
+      // keep the original varied-tile layout rhythm going
+      const sizeClasses = ['g-big', '', '', 'g-tall', '', 'g-wide', '', '', '', '', 'g-big', ''];
+      const sizeClass = sizeClasses[i % sizeClasses.length];
+      item.className = 'gallery-item' + (sizeClass ? ' ' + sizeClass : '');
+      item.dataset.title = img.title || 'PV Lifestyle';
+      item.tabIndex = 0;
+      item.setAttribute('role', 'button');
+      item.setAttribute('aria-label', `View larger photo: ${img.title || 'PV Lifestyle'}`);
+
+      const imageEl = document.createElement('img');
+      imageEl.src = img.url;
+      imageEl.alt = img.title || 'PV Lifestyle';
+      imageEl.loading = 'lazy';
+      item.appendChild(imageEl);
+
+      const cap = document.createElement('span');
+      cap.className = 'gi-cap';
+      cap.textContent = img.title || '';
+      item.appendChild(cap);
+
+      galleryGrid.appendChild(item);
+    });
+
+    // rebind the lightbox to the freshly rendered gallery items
+    if (window.galleryLightbox) window.galleryLightbox.refresh();
+  }
+
+  onValue(ref(db, 'content/expGallery'), (snap) => {
+    const data = snap.val();
+    if (!data) return;
+    setText('galleryEyebrow', data.eyebrow);
+    setText('galleryHeading', data.heading);
+    setText('gallerySubheading', data.subheading);
+    if (data.images) renderGallery(sortedList(data.images));
+  });
+
+  // ===== CTA BAND ===== content/expCta
+  onValue(ref(db, 'content/expCta'), (snap) => {
+    const data = snap.val();
+    if (!data) return;
+    setText('ctaEyebrow', data.eyebrow);
+    setText('ctaHeading', data.heading);
+    setText('ctaSubheading', data.subheading);
   });
 </script>
 
