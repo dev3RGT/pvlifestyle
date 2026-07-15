@@ -327,29 +327,12 @@
   .filter-chip.active{ background:var(--orange); border-color:var(--orange); color:var(--charcoal-deeper); }
 
   .poster-grid{
-    display:grid; grid-template-columns:repeat(4, 1fr);
-    grid-template-areas:
-      "leko leko exq soul"
-      "leko leko kabza kabza";
-    grid-template-rows:repeat(2, minmax(240px, 1fr));
+    display:grid; grid-template-columns:repeat(auto-fill, minmax(270px, 1fr));
     gap:clamp(1rem, 2vw, 1.4rem);
   }
-  @media (max-width:980px){
-    .poster-grid{
-      grid-template-columns:1fr 1fr; grid-template-rows:auto;
-      grid-template-areas:
-        "leko leko"
-        "exq soul"
-        "kabza kabza";
-    }
-  }
   @media (max-width:620px){
-    .poster-grid{ grid-template-columns:1fr; grid-template-areas:"leko" "exq" "soul" "kabza"; }
+    .poster-grid{ grid-template-columns:1fr; }
   }
-  .card-lekompo{ grid-area:leko; }
-  .card-exquisite{ grid-area:exq; }
-  .card-soul{ grid-area:soul; }
-  .card-kabza{ grid-area:kabza; }
 
   .poster-card{
     position:relative; border-radius:16px; overflow:hidden; cursor:pointer;
@@ -626,52 +609,7 @@
       </div>
 
       <div class="poster-grid reveal reveal-stagger" id="posterGrid">
-
-        <article class="poster-card card-lekompo" data-tag="weekly" data-event="lekompo" tabindex="0" role="button" aria-label="View Lekompo Fridays posters">
-          <div class="poster-ribbon">Next Up</div>
-          <span class="poster-gallery-badge"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 15l5-5 4 4 5-5 4 4"/></svg>3 posters</span>
-          <img src="https://i.postimg.cc/Y0xCMbf1/leko.jpg" alt="Lekompo Fridays poster" loading="eager">
-          <div class="poster-card-body">
-            <span class="poster-tag">Weekly Series</span>
-            <h3>Lekompo Fridays</h3>
-            <p class="poster-desc">Kick the weekend off with the rhythms of Limpopo — good music, good company, good vibes all night.</p>
-            <p class="poster-countdown" data-countdown="lekompo">Calculating…</p>
-          </div>
-        </article>
-
-        <article class="poster-card card-exquisite" data-tag="weekly" data-event="exquisite" tabindex="0" role="button" aria-label="View Exquisite Saturdays poster">
-          <div class="poster-ribbon">Next Up</div>
-          <img src="https://i.postimg.cc/8z5209sL/Save-Clip-App-731158340-18016681901908826-3553037399421413566-n.jpg" alt="Exquisite Saturdays poster" loading="lazy">
-          <div class="poster-card-body">
-            <span class="poster-tag">Weekly Series</span>
-            <h3>Exquisite Saturdays</h3>
-            <p class="poster-desc">An elevated night out — fine drinks, curated sounds, unforgettable energy.</p>
-            <p class="poster-countdown" data-countdown="exquisite">Calculating…</p>
-          </div>
-        </article>
-
-        <article class="poster-card card-soul" data-tag="weekly" data-event="soul" tabindex="0" role="button" aria-label="View Sunday Soul Session poster">
-          <div class="poster-ribbon">Next Up</div>
-          <img src="https://i.postimg.cc/BnVr9pKS/Save-Clip-App-730332015-18016384001908826-7760478953285662725-n.jpg" alt="Sunday Soul Session poster" loading="lazy">
-          <div class="poster-card-body">
-            <span class="poster-tag">Weekly Series</span>
-            <h3>Sunday Soul Session</h3>
-            <p class="poster-desc">Wind the week down with soulful sounds and a laid-back atmosphere.</p>
-            <p class="poster-countdown" data-countdown="soul">Calculating…</p>
-          </div>
-        </article>
-
-        <article class="poster-card card-kabza" data-tag="special" data-event="kabza" tabindex="0" role="button" aria-label="View Kabza De Small poster">
-          <div class="poster-ribbon">Next Up</div>
-          <img src="https://i.postimg.cc/dVRhmbHN/kabza.png" alt="Kabza De Small live poster" loading="lazy">
-          <div class="poster-card-body">
-            <span class="poster-tag">Special Guest</span>
-            <h3>Kabza De Small — Live</h3>
-            <p class="poster-desc">The King of Amapiano takes over the decks for one night only.</p>
-            <p class="poster-countdown" data-countdown="kabza">Calculating…</p>
-          </div>
-        </article>
-
+        <!-- Cards are rendered here live from Firebase (content/events) -->
       </div>
     </div>
   </section>
@@ -780,54 +718,77 @@
   </button>
 </div>
 
-<script>
+<script type="module">
   // ============================================================
-  // EVENT CONFIG — edit here to update nights, times, and dates.
-  // "recurring" is the JS getDay() index: Sun=0, Mon=1 ... Sat=6.
-  // For one-off shows (like a special guest), set "fixedDate"
-  // instead of "recurring" — format: 'YYYY-MM-DDTHH:MM:SS'
+  // LIVE EVENTS — powered by the same Firebase Realtime Database
+  // used by the admin dashboard (content/events). Any change the
+  // admin makes (add / edit / reorder / delete an event or a
+  // poster image) appears here instantly for every visitor.
   // ============================================================
-  const EVENTS = {
-    lekompo: {
-      title: 'Lekompo Fridays',
-      tagLabel: 'Weekly Series',
-      day: 'Friday',
-      recurring: 5, startHour: 20, startMin: 0,
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+  import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyCh7Ute6LeSAxcNDEQwZg5m0cA4ujnLCfg",
+    authDomain: "test-17881.firebaseapp.com",
+    projectId: "test-17881",
+    storageBucket: "test-17881.firebasestorage.app",
+    messagingSenderId: "1057428047643",
+    appId: "1:1057428047643:web:f3801c0d933225a5cd35be",
+    databaseURL: "https://test-17881-default-rtdb.firebaseio.com"
+  };
+  const app = initializeApp(firebaseConfig);
+  const db = getDatabase(app);
+
+  // Fallback content, only used if Firebase has no data yet (e.g. offline / first paint)
+  const FALLBACK_RAW = {
+    lekompo: { title: 'Lekompo Fridays', tagLabel: 'Weekly Series', day: 'Friday', mode: 'recurring', recurring: 5, startHour: 20, startMin: 0, order: 0,
       desc: "Kick the weekend off with the rhythms of Limpopo — good music, good company, good vibes all night.",
-      images: [
-        'https://i.postimg.cc/Y0xCMbf1/leko.jpg',
-        'https://i.postimg.cc/Ghr4VsJv/fabr.jpg',
-        'https://i.postimg.cc/SNyFWJhT/Save-Clip-App-730332036-18016859684908826-276558060762799520-n.jpg'
-      ]
-    },
-    exquisite: {
-      title: 'Exquisite Saturdays',
-      tagLabel: 'Weekly Series',
-      day: 'Saturday',
-      recurring: 6, startHour: 20, startMin: 0,
+      images: { a: { url: 'https://i.postimg.cc/Y0xCMbf1/leko.jpg', order: 0 }, b: { url: 'https://i.postimg.cc/Ghr4VsJv/fabr.jpg', order: 1 }, c: { url: 'https://i.postimg.cc/SNyFWJhT/Save-Clip-App-730332036-18016859684908826-276558060762799520-n.jpg', order: 2 } } },
+    exquisite: { title: 'Exquisite Saturdays', tagLabel: 'Weekly Series', day: 'Saturday', mode: 'recurring', recurring: 6, startHour: 20, startMin: 0, order: 1,
       desc: "An elevated night out — fine drinks, curated sounds, unforgettable energy.",
-      images: ['https://i.postimg.cc/8z5209sL/Save-Clip-App-731158340-18016681901908826-3553037399421413566-n.jpg']
-    },
-    soul: {
-      title: 'Sunday Soul Session',
-      tagLabel: 'Weekly Series',
-      day: 'Sunday',
-      recurring: 0, startHour: 14, startMin: 0,
+      images: { a: { url: 'https://i.postimg.cc/8z5209sL/Save-Clip-App-731158340-18016681901908826-3553037399421413566-n.jpg', order: 0 } } },
+    soul: { title: 'Sunday Soul Session', tagLabel: 'Weekly Series', day: 'Sunday', mode: 'recurring', recurring: 0, startHour: 14, startMin: 0, order: 2,
       desc: "Wind the week down with soulful sounds and a laid-back atmosphere.",
-      images: ['https://i.postimg.cc/BnVr9pKS/Save-Clip-App-730332015-18016384001908826-7760478953285662725-n.jpg']
-    },
-    kabza: {
-      title: 'Kabza De Small — Live',
-      tagLabel: 'Special Guest',
-      day: 'Special',
-      fixedDate: '2026-08-01T21:00:00', // TODO: set the real show date/time
+      images: { a: { url: 'https://i.postimg.cc/BnVr9pKS/Save-Clip-App-730332015-18016384001908826-7760478953285662725-n.jpg', order: 0 } } },
+    kabza: { title: 'Kabza De Small — Live', tagLabel: 'Special Guest', day: 'Special', mode: 'fixed', fixedDate: '2026-08-01T21:00', order: 3,
       desc: "The King of Amapiano takes over the PV Lifestyle decks for one night only. Early arrival strongly recommended.",
-      images: ['https://i.postimg.cc/dVRhmbHN/kabza.png']
-    }
+      images: { a: { url: 'https://i.postimg.cc/dVRhmbHN/kabza.png', order: 0 } } }
   };
 
+  let EVENTS = {};      // normalized event objects, keyed by Firebase key
+  let orderedIds = [];  // display order in the grid (admin-controlled "order" field)
+  let soonestOrder = []; // sorted by next occurrence, for the spotlight + "Next Up" glow
+
+  function normalizeEvents(raw) {
+    const out = {};
+    Object.keys(raw || {}).forEach(key => {
+      const e = raw[key] || {};
+      const imgData = e.images || {};
+      const images = Object.keys(imgData)
+        .map(k => imgData[k])
+        .sort((a, b) => (a.order ?? 0) - (b.order ?? 0))
+        .map(i => i.url)
+        .filter(Boolean);
+      out[key] = {
+        title: e.title || 'Untitled Event',
+        tagLabel: e.tagLabel || 'Weekly Series',
+        day: e.day || '',
+        mode: e.mode || 'recurring',
+        recurring: e.recurring,
+        startHour: e.startHour ?? 20,
+        startMin: e.startMin ?? 0,
+        fixedDate: e.fixedDate || '',
+        desc: e.desc || '',
+        order: e.order ?? 0,
+        images: images.length ? images : ['https://i.postimg.cc/DZh18dK7/pvlogo-removebg-preview.png']
+      };
+    });
+    return out;
+  }
+
   function nextOccurrence(ev) {
-    if (ev.fixedDate) return new Date(ev.fixedDate);
+    if (ev.mode === 'fixed') return new Date(ev.fixedDate);
     const now = new Date();
     const d = new Date(now);
     d.setHours(ev.startHour, ev.startMin, 0, 0);
@@ -849,30 +810,62 @@
     return `In ${days} days`;
   }
 
-  // Compute ordering once per tick
-  let orderedIds = [];
-  function recompute() {
-    orderedIds = Object.keys(EVENTS)
-      .map(id => ({ id, when: nextOccurrence(EVENTS[id]) }))
-      .sort((a, b) => a.when - b.when)
-      .map(x => x.id);
-  }
-  recompute();
+  function tagSlug(tagLabel) { return tagLabel === 'Special Guest' ? 'special' : 'weekly'; }
 
-  const nextId = () => orderedIds[0];
-
-  // ---- Spotlight ----
+  // ---- DOM refs ----
+  const posterGrid = document.getElementById('posterGrid');
+  const filterRow = document.getElementById('filterRow');
   const spotlightImg = document.getElementById('spotlightImg');
   const spotlightTitle = document.getElementById('spotlightTitle');
   const spotlightDesc = document.getElementById('spotlightDesc');
   const spotlightDay = document.getElementById('spotlightDay');
   const spotlightTag = document.getElementById('spotlightTag');
+  const statUpcoming = document.getElementById('statUpcoming');
   let renderedSpotlightId = null;
 
+  function buildCardEl(id, ev, idx) {
+    const article = document.createElement('article');
+    article.className = 'poster-card';
+    article.dataset.tag = tagSlug(ev.tagLabel);
+    article.dataset.event = id;
+    article.tabIndex = 0;
+    article.setAttribute('role', 'button');
+    article.setAttribute('aria-label', `View ${ev.title} posters`);
+
+    const galleryBadge = ev.images.length > 1
+      ? `<span class="poster-gallery-badge"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 15l5-5 4 4 5-5 4 4"/></svg>${ev.images.length} posters</span>`
+      : '';
+
+    article.innerHTML = `
+      <div class="poster-ribbon">Next Up</div>
+      ${galleryBadge}
+      <img src="${ev.images[0]}" alt="${ev.title} poster" loading="${idx === 0 ? 'eager' : 'lazy'}">
+      <div class="poster-card-body">
+        <span class="poster-tag">${ev.tagLabel}</span>
+        <h3>${ev.title}</h3>
+        <p class="poster-desc">${ev.desc}</p>
+        <p class="poster-countdown" data-countdown="${id}">Calculating…</p>
+      </div>`;
+    return article;
+  }
+
+  function renderGrid() {
+    const activeFilter = filterRow.querySelector('.filter-chip.active')?.dataset.filter || 'all';
+    posterGrid.innerHTML = '';
+    orderedIds.forEach((id, idx) => {
+      const card = buildCardEl(id, EVENTS[id], idx);
+      if (activeFilter !== 'all' && card.dataset.tag !== activeFilter) card.classList.add('is-hidden');
+      posterGrid.appendChild(card);
+    });
+    if (statUpcoming) statUpcoming.textContent = orderedIds.length;
+    attachTilt();
+  }
+
   function renderSpotlight() {
-    const id = nextId();
+    const id = soonestOrder[0];
+    if (!id) return;
+    const ev = EVENTS[id];
     if (id !== renderedSpotlightId) {
-      const ev = EVENTS[id];
       spotlightImg.src = ev.images[0];
       spotlightImg.alt = ev.title + ' poster';
       spotlightTitle.textContent = ev.title;
@@ -881,7 +874,7 @@
       spotlightTag.textContent = ev.tagLabel === 'Special Guest' ? 'Special Guest' : 'This Week';
       renderedSpotlightId = id;
     }
-    const target = nextOccurrence(EVENTS[id]);
+    const target = nextOccurrence(ev);
     const diff = Math.max(0, target - new Date());
     document.getElementById('cdDays').textContent = pad(Math.floor(diff / 86400000));
     document.getElementById('cdHours').textContent = pad(Math.floor((diff % 86400000) / 3600000));
@@ -889,28 +882,39 @@
     document.getElementById('cdSecs').textContent = pad(Math.floor((diff % 60000) / 1000));
   }
 
-  // ---- Card badges + mini countdowns ----
-  const cards = document.querySelectorAll('.poster-card');
-  function renderCards() {
-    const soonest = nextId();
-    cards.forEach(card => {
+  function renderCardBadges() {
+    const soonest = soonestOrder[0];
+    posterGrid.querySelectorAll('.poster-card').forEach(card => {
       const id = card.dataset.event;
       card.classList.toggle('card-next', id === soonest);
       const label = card.querySelector(`[data-countdown="${id}"]`);
-      if (label) label.textContent = formatRelative(nextOccurrence(EVENTS[id]));
+      if (label && EVENTS[id]) label.textContent = formatRelative(nextOccurrence(EVENTS[id]));
     });
   }
 
   function tick() {
-    recompute();
+    if (!Object.keys(EVENTS).length) return;
+    soonestOrder = Object.keys(EVENTS)
+      .map(id => ({ id, when: nextOccurrence(EVENTS[id]) }))
+      .sort((a, b) => a.when - b.when)
+      .map(x => x.id);
     renderSpotlight();
-    renderCards();
+    renderCardBadges();
   }
-  tick();
+
+  // ---- Live Firebase sync (realtime — fires on every admin change) ----
+  onValue(ref(db, 'content/events'), (snap) => {
+    const raw = snap.exists() ? snap.val() : FALLBACK_RAW;
+    EVENTS = normalizeEvents(raw);
+    orderedIds = Object.keys(EVENTS).sort((a, b) => (EVENTS[a].order ?? 0) - (EVENTS[b].order ?? 0));
+    renderedSpotlightId = null; // force spotlight image/text refresh after any data change
+    renderGrid();
+    tick();
+  });
+
   setInterval(tick, 1000);
 
   // ---- Filter chips ----
-  const filterRow = document.getElementById('filterRow');
   filterRow.addEventListener('click', (e) => {
     const btn = e.target.closest('.filter-chip');
     if (!btn) return;
@@ -919,13 +923,13 @@
       c.setAttribute('aria-selected', c === btn ? 'true' : 'false');
     });
     const filter = btn.dataset.filter;
-    cards.forEach(card => {
+    posterGrid.querySelectorAll('.poster-card').forEach(card => {
       const show = filter === 'all' || card.dataset.tag === filter;
       card.classList.toggle('is-hidden', !show);
     });
   });
 
-  // ---- Poster Lightbox ----
+  // ---- Poster Lightbox (event delegation so it works with dynamically-added cards) ----
   class PosterLightbox {
     constructor() {
       this.el = document.getElementById('posterLightbox');
@@ -951,6 +955,7 @@
     }
     open(eventId, startIndex = 0) {
       const ev = EVENTS[eventId];
+      if (!ev) return;
       this.images = ev.images;
       this.title = ev.title;
       this.index = startIndex;
@@ -980,15 +985,17 @@
   }
   const posterLightbox = new PosterLightbox();
 
-  cards.forEach(card => {
-    const open = () => posterLightbox.open(card.dataset.event, 0);
-    card.addEventListener('click', open);
-    card.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); }
-    });
+  posterGrid.addEventListener('click', (e) => {
+    const card = e.target.closest('.poster-card');
+    if (card) posterLightbox.open(card.dataset.event, 0);
+  });
+  posterGrid.addEventListener('keydown', (e) => {
+    if (e.key !== 'Enter' && e.key !== ' ') return;
+    const card = e.target.closest('.poster-card');
+    if (card) { e.preventDefault(); posterLightbox.open(card.dataset.event, 0); }
   });
   document.getElementById('spotlightPosterWrap').addEventListener('click', () => {
-    posterLightbox.open(nextId(), 0);
+    if (soonestOrder[0]) posterLightbox.open(soonestOrder[0], 0);
   });
 
   // ---- Header scroll effect ----
@@ -1031,9 +1038,10 @@
     revealEls.forEach(el => el.classList.add('in-view'));
   }
 
-  // ---- 3D tilt on pointer-fine devices ----
-  if (window.matchMedia('(hover:hover) and (pointer:fine)').matches) {
-    cards.forEach(card => {
+  // ---- 3D tilt on pointer-fine devices (re-attached each time the grid re-renders) ----
+  function attachTilt() {
+    if (!window.matchMedia('(hover:hover) and (pointer:fine)').matches) return;
+    posterGrid.querySelectorAll('.poster-card').forEach(card => {
       card.addEventListener('mousemove', (e) => {
         const r = card.getBoundingClientRect();
         const x = (e.clientX - r.left) / r.width - 0.5;
