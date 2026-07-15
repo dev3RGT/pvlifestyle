@@ -557,12 +557,12 @@
   <section class="section-nights" id="nights">
     <div class="container">
       <div class="nights-head reveal">
-        <span class="eyebrow">Three Nights, Three Moods</span>
-        <h2 class="font-display">Pick Your Night</h2>
-        <p>Every night at PV Lifestyle has its own personality. Here's what to expect.</p>
+        <span class="eyebrow" id="nightsEyebrow">Three Nights, Three Moods</span>
+        <h2 class="font-display" id="nightsHeading">Pick Your Night</h2>
+        <p id="nightsSubheading">Every night at PV Lifestyle has its own personality. Here's what to expect.</p>
       </div>
 
-      <div class="exp-grid reveal reveal-stagger">
+      <div class="exp-grid reveal reveal-stagger" id="nightsGrid">
         <article class="exp-card">
           <img src="https://i.postimg.cc/SNyFWJhT/Save-Clip-App-730332036-18016859684908826-276558060762799520-n.jpg" alt="Lekompo Fridays" loading="lazy">
           <div class="exp-body">
@@ -879,6 +879,91 @@
 
   // ---- Footer year ----
   document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
+<!-- ================= LIVE CONTENT SYNC (Firebase) ================= -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+  import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyCh7Ute6LeSAxcNDEQwZg5m0cA4ujnLCfg",
+    authDomain: "test-17881.firebaseapp.com",
+    projectId: "test-17881",
+    storageBucket: "test-17881.firebasestorage.app",
+    messagingSenderId: "1057428047643",
+    appId: "1:1057428047643:web:f3801c0d933225a5cd35be",
+    databaseURL: "https://test-17881-default-rtdb.firebaseio.com"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getDatabase(app);
+
+  const nightsEyebrow = document.getElementById('nightsEyebrow');
+  const nightsHeading = document.getElementById('nightsHeading');
+  const nightsSubheading = document.getElementById('nightsSubheading');
+  const nightsGrid = document.getElementById('nightsGrid');
+
+  function renderCards(cards) {
+    if (!nightsGrid) return;
+    nightsGrid.innerHTML = '';
+
+    if (!cards.length) {
+      nightsGrid.innerHTML = '<p style="color:var(--gray, #9aa3a3);">No signature nights added yet.</p>';
+      return;
+    }
+
+    cards.forEach((c) => {
+      const article = document.createElement('article');
+      article.className = 'exp-card';
+
+      if (c.url) {
+        const img = document.createElement('img');
+        img.src = c.url;
+        img.alt = c.title || 'PV Lifestyle';
+        img.loading = 'lazy';
+        article.appendChild(img);
+      }
+
+      const body = document.createElement('div');
+      body.className = 'exp-body';
+
+      if (c.day) {
+        const day = document.createElement('span');
+        day.className = 'exp-day';
+        day.textContent = c.day;
+        body.appendChild(day);
+      }
+
+      const h3 = document.createElement('h3');
+      h3.textContent = c.title || '';
+      body.appendChild(h3);
+
+      const p = document.createElement('p');
+      p.textContent = c.desc || '';
+      body.appendChild(p);
+
+      article.appendChild(body);
+      nightsGrid.appendChild(article);
+    });
+  }
+
+  // Real-time listener — any change the admin makes in the dashboard
+  // reflects here immediately, no page reload required.
+  onValue(ref(db, 'content/experience'), (snap) => {
+    const data = snap.val();
+    if (!data) return;
+
+    if (nightsEyebrow && data.eyebrow) nightsEyebrow.textContent = data.eyebrow;
+    if (nightsHeading && data.heading) nightsHeading.textContent = data.heading;
+    if (nightsSubheading && data.subheading) nightsSubheading.textContent = data.subheading;
+
+    const cardsData = data.cards;
+    if (cardsData) {
+      const cards = Object.values(cardsData).sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
+      renderCards(cards);
+    }
+  });
 </script>
 
 </body>
