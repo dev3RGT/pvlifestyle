@@ -826,21 +826,11 @@
   }
   .global-loader.done{ opacity:0; visibility:hidden; pointer-events:none; }
   .global-loader .brand-chip{
-    display:inline-flex; align-items:center; background:var(--cream);
-    border-radius:16px; padding:.5rem .9rem; margin-bottom:1.5rem;
-    box-shadow:0 10px 24px -12px rgba(0,0,0,.55);
+    display:inline-flex; align-items:center; background:transparent;
+    border-radius:16px; padding:.5rem .9rem;
     animation:pulse 2s ease infinite;
   }
-  .global-loader .brand-chip img{ height:48px; }
-  .global-loader p{ color:var(--gray); font-size:.9rem; font-weight:600; letter-spacing:.05em; }
-  .global-loader .loader-bar{
-    width:140px; height:3px; background:rgba(247,242,234,.1); border-radius:999px;
-    margin-top:1.25rem; overflow:hidden;
-  }
-  .global-loader .loader-bar::after{
-    content:''; display:block; width:40%; height:100%; background:var(--orange);
-    border-radius:999px; animation:loaderSlide 1.2s ease infinite;
-  }
+  .global-loader .brand-chip img{ height:48px; filter:brightness(0) invert(1); }
   @keyframes loaderSlide{
     0%{ transform:translateX(-150%); }
     100%{ transform:translateX(350%); }
@@ -924,8 +914,6 @@
   <div class="brand-chip">
     <img src="https://i.postimg.cc/DZh18dK7/pvlogo-removebg-preview.png" alt="PV Lifestyle">
   </div>
-  <p>Loading content...</p>
-  <div class="loader-bar"></div>
 </div>
 
 
@@ -1859,7 +1847,7 @@
       dot.addEventListener('click', () => { showSlide(i); startSlideshow(); });
     });
 
-    setTimeout(openEventsModal, 450);
+    window.openEventsModal = openEventsModal;
 
     eventsModalClose.addEventListener('click', closeEventsModal);
     eventsModalReserve.addEventListener('click', closeEventsModal);
@@ -1896,6 +1884,9 @@
   function hideLoader() {
     const loader = document.getElementById('globalLoader');
     if (loader) loader.classList.add('done');
+    setTimeout(() => {
+      if (typeof window.openEventsModal === 'function') window.openEventsModal();
+    }, 5000);
   }
 
   function checkAllLoaded() {
