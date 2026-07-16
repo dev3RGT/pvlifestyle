@@ -1075,7 +1075,83 @@
   </div>
 </div>
 
-<script>
+<script type="module">
+  // ---- Firebase realtime menu sync ----
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+  import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyCh7Ute6LeSAxcNDEQwZg5m0cA4ujnLCfg",
+    authDomain: "test-17881.firebaseapp.com",
+    projectId: "test-17881",
+    storageBucket: "test-17881.firebasestorage.app",
+    messagingSenderId: "1057428047643",
+    appId: "1:1057428047643:web:f3801c0d933225a5cd35be",
+    databaseURL: "https://test-17881-default-rtdb.firebaseio.com"
+  };
+
+  const fbApp = initializeApp(firebaseConfig);
+  const db = getDatabase(fbApp);
+
+  // Renders one dish row. Expects { name, price, desc?, tag?, tagLabel? }
+  function renderDishRow(d) {
+    const tag = d.tag ? ` <span class="dish-tag ${d.tag}">${d.tagLabel || ''}</span>` : '';
+    const desc = d.desc ? `<p class="dish-desc">${d.desc}</p>` : '';
+    return `<div class="dish-row">
+      <div class="dish-top"><span class="dish-name">${d.name}${tag}</span><span class="dish-price">${d.price}</span></div>
+      ${desc}
+    </div>`;
+  }
+
+  // Renders one category (updates head text/board image, rebuilds its dish group(s))
+  function renderCategory(catEl, cat) {
+    if (!cat) return;
+    if (cat.eyebrow != null) catEl.querySelector('.cat-head .eyebrow').textContent = cat.eyebrow;
+    if (cat.heading != null) catEl.querySelector('.cat-head h2').textContent = cat.heading;
+    if (cat.desc != null) catEl.querySelector('.cat-head .cat-desc').textContent = cat.desc;
+
+    const thumb = catEl.querySelector('.cat-thumb');
+    if (thumb && cat.board) {
+      thumb.classList.add('is-clickable');
+      thumb.setAttribute('tabindex', '0');
+      thumb.setAttribute('role', 'button');
+      thumb.dataset.board = cat.board.image;
+      thumb.dataset.title = cat.board.title || '';
+      thumb.querySelector('img').src = cat.board.image;
+    } else if (thumb && cat.thumbImage) {
+      thumb.querySelector('img').src = cat.thumbImage;
+    }
+
+    if (Array.isArray(cat.groups)) {
+      catEl.querySelectorAll('.subgroup-title, .dish-grid').forEach(n => n.remove());
+      const container = catEl.querySelector('.container');
+      cat.groups.forEach(g => {
+        if (g.title) {
+          const h3 = document.createElement('h3');
+          h3.className = 'subgroup-title font-display';
+          h3.innerHTML = g.title + (g.note ? ` <span class="subgroup-note">${g.note}</span>` : '');
+          container.appendChild(h3);
+        }
+        const grid = document.createElement('div');
+        grid.className = 'dish-grid reveal in-view';
+        grid.innerHTML = (g.dishes || []).map(renderDishRow).join('');
+        container.appendChild(grid);
+      });
+    }
+  }
+
+  // Applies a full { categoryId: {...} } snapshot from Firebase to the page
+  function applyMenuData(data) {
+    if (!data) return;
+    Object.keys(data).forEach(id => {
+      const catEl = document.getElementById(id);
+      if (catEl) renderCategory(catEl, data[id]);
+    });
+    if (window.refreshDishRows) window.refreshDishRows();
+  }
+
+  onValue(ref(db, 'menu/categories'), (snap) => applyMenuData(snap.val()));
+
   // ---- Header scroll effect ----
   const siteHeader = document.getElementById('siteHeader');
   function onScroll() { siteHeader.classList.toggle('is-scrolled', window.scrollY > 50); }
@@ -1158,14 +1234,14 @@
     if (e.key === 'Escape') closeBoard();
   });
 
-  document.querySelectorAll('[data-board]').forEach(el => {
-    const open = () => openBoard(el.dataset.board, el.dataset.title || '');
-    el.addEventListener('click', open);
-    if (el.hasAttribute('tabindex')) {
-      el.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); }
-      });
-    }
+  document.addEventListener('click', (e) => {
+    const el = e.target.closest('[data-board]');
+    if (el) openBoard(el.dataset.board, el.dataset.title || '');
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key !== 'Enter' && e.key !== ' ') return;
+    const el = e.target.closest('[data-board]');
+    if (el && el.hasAttribute('tabindex')) { e.preventDefault(); openBoard(el.dataset.board, el.dataset.title || ''); }
   });
 
   // ---- Live menu search ----
@@ -1173,10 +1249,15 @@
   const clearBtn = document.getElementById('subnavClear');
   const noResults = document.getElementById('noResults');
   const noResultsQuery = document.getElementById('noResultsQuery');
-  const dishRows = Array.from(document.querySelectorAll('.dish-row'));
+  let dishRows = [];
 
-  // Precompute searchable text for each dish row
-  dishRows.forEach(row => { row.dataset.search = row.textContent.toLowerCase(); });
+  // (Re)computes searchable text for each dish row. Re-run after Firebase swaps dish content in.
+  function refreshDishRows() {
+    dishRows = Array.from(document.querySelectorAll('.dish-row'));
+    dishRows.forEach(row => { row.dataset.search = row.textContent.toLowerCase(); });
+    runSearch();
+  }
+  window.refreshDishRows = refreshDishRows;
 
   function runSearch() {
     const query = searchInput.value.trim().toLowerCase();
@@ -1211,6 +1292,8 @@
     runSearch();
     searchInput.focus();
   });
+
+  refreshDishRows();
 
   // ---- Footer year ----
   document.getElementById('year').textContent = new Date().getFullYear();
