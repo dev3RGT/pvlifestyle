@@ -1093,6 +1093,12 @@
   const fbApp = initializeApp(firebaseConfig);
   const db = getDatabase(fbApp);
 
+  // Converts a Firebase object-of-pushkeys into an array sorted by its `order` field
+  function toSortedArray(obj) {
+    if (!obj) return [];
+    return Object.keys(obj).map(k => obj[k]).sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
+  }
+
   // Renders one dish row. Expects { name, price, desc?, tag?, tagLabel? }
   function renderDishRow(d) {
     const tag = d.tag ? ` <span class="dish-tag ${d.tag}">${d.tagLabel || ''}</span>` : '';
@@ -1122,10 +1128,10 @@
       thumb.querySelector('img').src = cat.thumbImage;
     }
 
-    if (Array.isArray(cat.groups)) {
+    if (cat.groups) {
       catEl.querySelectorAll('.subgroup-title, .dish-grid').forEach(n => n.remove());
       const container = catEl.querySelector('.container');
-      cat.groups.forEach(g => {
+      toSortedArray(cat.groups).forEach(g => {
         if (g.title) {
           const h3 = document.createElement('h3');
           h3.className = 'subgroup-title font-display';
@@ -1134,7 +1140,7 @@
         }
         const grid = document.createElement('div');
         grid.className = 'dish-grid reveal in-view';
-        grid.innerHTML = (g.dishes || []).map(renderDishRow).join('');
+        grid.innerHTML = toSortedArray(g.dishes).map(renderDishRow).join('');
         container.appendChild(grid);
       });
     }
@@ -1150,7 +1156,7 @@
     if (window.refreshDishRows) window.refreshDishRows();
   }
 
-  onValue(ref(db, 'menu/categories'), (snap) => applyMenuData(snap.val()));
+  onValue(ref(db, 'content/ourMenu/categories'), (snap) => applyMenuData(snap.val()));
 
   // ---- Header scroll effect ----
   const siteHeader = document.getElementById('siteHeader');
