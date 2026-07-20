@@ -84,7 +84,8 @@
   }
   .header-inner{ max-width:1280px; margin-inline:auto; display:flex; align-items:center; justify-content:space-between; gap:1rem; }
   .site-logo{ display:inline-flex; align-items:center; flex-shrink:0; }
-  .site-logo img{ height:clamp(68.4px, 12.96vw, 88.2px); width:auto; }
+  .site-logo img{ height:clamp(68.4px, 12.96vw, 88.2px); width:auto; filter:brightness(0) invert(1); transition:filter .35s ease; }
+  .site-header.is-scrolled .site-logo img{ filter:none; }
 
   .pill-nav{
     background:rgba(24,27,28,.55); backdrop-filter:blur(14px);
@@ -412,9 +413,7 @@
       <div class="brand-chip">
         <img src="https://i.postimg.cc/76yfMp73/life.png" alt="PV Lifestyle logo" style="height:90px;">
       </div>
-      <h3 class="font-display footer-heading" style="font-size:1.6rem;color:var(--cream);margin-top:1.25rem;letter-spacing:.02em;">PV Lifestyle</h3>
-      <p class="footer-subheading" style="color:rgba(247,242,234,.6);font-size:.85rem;margin-top:.35rem;">Restaurant &amp; Bar — Mokopane</p>
-      <p style="margin-top:1rem;">PV Lifestyle brings fine dining to Mokopane in an intimate, elevated setting — fresh, thoughtfully prepared food, an exceptional drinks list, and an atmosphere built for good nights.</p>
+      <p>PV Lifestyle brings fine dining to Mokopane in an intimate, elevated setting — fresh, thoughtfully prepared food, an exceptional drinks list, and an atmosphere built for good nights and serious business.</p>
       <span class="tagline">THE IDEAL ATMOSPHERE</span>
       <div class="social-row">
         <a class="social-btn" href="https://www.instagram.com/pv.lifestyle2022/" target="_blank" rel="noopener noreferrer" aria-label="PV Lifestyle on Instagram">
@@ -426,12 +425,11 @@
     <div class="footer-col">
       <h4>Explore</h4>
       <ul>
-        <li><a href="index.html">Home</a></li>
+        <li><a href="index.html#hero">Home</a></li>
         <li><a href="events.html">Events</a></li>
-        <li><a href="experience.html">Experience</a></li>
-        <li><a href="menu.html">Menu</a></li>
-        <li><a href="mixtapes.html">Mixtapes</a></li>
-        <li><a href="visit.html">Visit Us</a></li>
+        <li><a href="index.html#experience">Experience</a></li>
+        <li><a href="index.html#menu">Menu</a></li>
+        <li><a href="conferences.html">Conferences</a></li>
       </ul>
     </div>
 
@@ -471,7 +469,7 @@
 
   <div class="container footer-bottom">
     <p>&copy; <span id="year"></span> PV Lifestyle. All rights reserved.</p>
-    <a href="#main" class="to-top" aria-label="Back to top">
+    <a href="#top" class="to-top" aria-label="Back to top">
       <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4"/></svg>
     </a>
   </div>
@@ -614,24 +612,6 @@
     renderMixtapes(items);
   });
 
-  // --- FOOTER ---
-  onValue(ref(db, 'content/footer'), (snap) => {
-    const data = snap.val();
-    if (data) {
-      updateText('.footer-heading', data.heading);
-      updateText('.footer-subheading', data.subheading);
-      updateText('.footer-brand > p:last-of-type', data.brandText);
-      updateText('.footer-brand .tagline', data.tagline);
-    }
-  });
-  onValue(ref(db, 'content/footer/images'), (snap) => {
-    const data = snap.val();
-    if (data) {
-      const items = Object.values(data).sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
-      const logo = document.querySelector('.footer-brand .brand-chip img');
-      if (logo && items[0] && items[0].url) logo.src = items[0].url;
-    }
-  });
 </script>
 </body>
 </html>
