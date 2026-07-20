@@ -130,11 +130,10 @@
   }
   .site-logo img{ 
     height:clamp(68.4px, 12.96vw, 88.2px); width:auto; 
-    filter: brightness(0) invert(1);
     transition: filter .35s ease;
   }
   .site-header.is-scrolled .site-logo img{
-    filter: brightness(0) invert(1);
+    filter: none;
   }
 
   .pill-nav{
@@ -748,7 +747,7 @@
   @media (max-width:560px){ .footer-top{ grid-template-columns:1fr; gap:1.5rem; } }
 
   .footer-brand .brand-chip{ background:none; padding:0; box-shadow:none; border-radius:0; }
-  .footer-brand .brand-chip img{ filter:brightness(0) invert(1); }
+  .footer-brand .brand-chip img{ filter:none; }
   .footer-brand p{ color:rgba(247,242,234,.68); font-size:clamp(.8rem, 1.8vw, .95rem); line-height:1.6; margin-top:1.25rem; max-width:26rem; }
   .footer-brand .tagline{ font-family:'Bebas Neue',sans-serif; letter-spacing:.06em; color:var(--orange-light); font-size:clamp(.7rem, 1.5vw, .85rem); margin-top:1.5rem; }
 
